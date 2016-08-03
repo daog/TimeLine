@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <HorizontalScrollView  
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent">  --> 
+ <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    
+	android:layout_width="200dp" 
+	android:layout_height="fill_parent"> 
+	<LinearLayout 
+	    android:id="@+id/id_content1"
+	    android:layout_width="200dp"
+	    android:layout_height="match_parent"
+	    android:background="@color/week_green"
+	    android:layout_marginLeft="5dp"
+	    android:orientation="vertical">
+	    
+	    <TextView android:id="@+id/id_topic" 
+			    android:layout_width="fill_parent"
+				android:layout_height="0dp" 
+				android:layout_weight="2"
+				android:gravity="center_horizontal|top"
+				android:textColor="#FF000000"
+				android:singleLine="false"
+				android:maxEms="14"
+				android:ellipsize="end"
+				android:textSize="12sp"
+				android:text="会议主题1" />
+	    
+	    <TextView android:id="@+id/id_orgnizer" 
+			    android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" 
+				android:gravity="center_horizontal|bottom"
+				android:textColor="#FF000000"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:textSize="10sp" 
+				android:text="举办方1"/>
+	    
+	    <TextView android:id="@+id/id_meetId" 
+			    android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" 
+				android:gravity="center_horizontal|bottom"
+				android:textColor="#FF000000"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:textSize="12sp" 
+				android:visibility="gone"
+				android:text=""/>
+	
+	</LinearLayout>            
+	<ImageView
+                android:id="@+id/id_StaImg"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/icon_event_pos" />
+	
+	<!-- <LinearLayout 
+	    android:id="@+id/id_content2"
+	    android:layout_width="200dp"
+	    android:layout_height="match_parent"
+	    android:background="@color/listitem_green"
+	    android:layout_marginLeft="5dp"
+	    android:orientation="vertical">
+	    
+	    <TextView android:id="@+id/topic2" 
+			    android:layout_width="fill_parent"
+				android:layout_height="0dp" 
+				android:layout_weight="2"
+				android:gravity="center_horizontal|top"
+				android:textColor="#FF000000"
+				android:singleLine="false"
+				android:maxEms="14"
+				android:ellipsize="end"
+				android:textSize="16sp" 
+				android:text="会议主题2"/>
+	    
+	    <TextView android:id="@+id/orgnizer2" 
+			    android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" 
+				android:gravity="center_horizontal|bottom"
+				android:textColor="#FF000000"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:textSize="12sp" 
+				android:text="举办方2"/>
+	 -->
+<!-- </LinearLayout> -->
+<!-- </HorizontalScrollView> -->
+</RelativeLayout>

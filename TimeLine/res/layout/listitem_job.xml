@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    android:orientation="vertical" >
+         <RelativeLayout
+            style="@style/widget_listview_Item"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/listitem_name"
+                style="@style/widget_listview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/image_marginLeft"
+                android:padding="4dp"
+                android:text="科室"
+                android:textSize="@dimen/text_size_15" />
+
+            <RelativeLayout
+                android:id="@+id/my_info_layout_itemdesc"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/selectima"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginLeft"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_seclect" 
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+</LinearLayout>

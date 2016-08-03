@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <Button
+        android:id="@+id/id_close"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/icon_popupclose" >
+    </Button>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/id_topicImg"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/icon_sub" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/id_topicText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:ellipsize="end"
+                    android:maxEms="14"
+                    android:singleLine="false"
+                    android:text="2016年第68届美国神经学会年会"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/id_detailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxEms="20"
+                    android:singleLine="false"
+                    android:text="2015年美国神经学会年会上公布了大量的新临床研究和学科进展，美国神经病学会科学委员会副主席、哈佛医学院的神经病学副教授Natalia Rost博士强调有3个研究不可错过，最具开创性意义，在大会上，Natalia Rost博士和来自全球各国专家一起深入研究和探讨。"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="12" >
+
+            <ImageView
+                android:id="@+id/id_orgnizerImg"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/icon_pastmeeting" />
+
+            <TextView
+                android:id="@+id/id_orgnizerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxEms="14"
+                android:singleLine="false"
+                android:text="美国神经内科学会"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="12" >
+
+            <ImageView
+                android:id="@+id/id_timeImg"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/icon_event_time" />
+
+            <TextView
+                android:id="@+id/id_timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxEms="14"
+                android:singleLine="false"
+                android:text="4月17日 10:00 － 14:00"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="12" >
+
+            <ImageView
+                android:id="@+id/id_addressImg"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/icon_event_pos" />
+
+            <TextView
+                android:id="@+id/id_addressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxEms="14"
+                android:singleLine="false"
+                android:text="洛杉矶"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:background="#999999" />
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" >
+
+            <LinearLayout
+                android:id="@+id/id_enrollLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_enrollBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/meeting_up"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_enrollTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="报名" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_viewLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_viewBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/icon_viewinfo"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_viewTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="查看" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_undeterminedLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_undeterminedBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/icon_indeterminate"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_undeterminedTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="待定" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_refuseLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_refuseBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/icon_refuse"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_refuseTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="拒绝" >
+                </TextView>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/id_deleteLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/icon_meeeting_refyes"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_deleteTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="删除" >
+                </TextView>
+            </LinearLayout>
+            
+            
+         <LinearLayout
+             	android:id="@+id/id_editLl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/id_editBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/icon_ed"
+                    android:gravity="center_horizontal|center_vertical" >
+                </Button>
+
+                <TextView
+                    android:id="@+id/id_editTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="编辑" >
+                </TextView>
+            </LinearLayout>       
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

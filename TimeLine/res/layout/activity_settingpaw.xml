@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lighter_gray"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/meeting_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/normal_header" />
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="20.0dip"
+        android:background="@color/white"
+        android:hint=" 请输入密码"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18" />
+
+    <EditText
+        android:id="@+id/login_password_again"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="25.0dip"
+        android:background="@color/white"
+        android:hint=" 请再次输入密码"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18" />
+
+    <RelativeLayout
+        android:id="@+id/login_header"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="25.0dip"
+        android:background="@color/red" >
+
+        <EditText
+            android:id="@+id/send_number"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:hint=" 验证码"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18" />
+        
+      <TextView
+        android:id="@+id/get_yanz"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_8"
+        android:clickable="true"
+        android:onClick="Btn_GetVer"
+        android:background="@drawable/icon_setpwd"
+        android:textStyle="bold" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:layout_marginTop="25.0dip"
+        android:background="@drawable/selector_red_button"
+        android:text="设置密码"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
+
+</LinearLayout>

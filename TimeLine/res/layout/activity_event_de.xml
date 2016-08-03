@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/event_header"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/red" >
+
+        <ImageView
+            android:id="@+id/event_head_cancel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/image_marginLeft"
+            android:scaleType="matrix"
+            android:clickable="true"
+            android:onClick="btnBack"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/event_head_title"
+            style="@style/main_head_title"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5.0dip"
+            android:layout_toRightOf="@id/event_head_cancel"
+            android:text="详情"
+            android:textSize="@dimen/text_size_17" />
+
+        <TextView
+            android:id="@+id/event_head_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5.0dip"
+            android:textColor="@color/selector_text_press_color"
+            android:clickable="true"
+            android:onClick="btnEdit"
+            android:text="修改" />
+    </RelativeLayout>
+
+
+
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/event_repetition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true" >
+
+            <ImageView
+                android:id="@+id/img_tools_collect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/image_marginLeft"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_event_time" />
+        <TextView
+            android:id="@+id/event_begintime"
+            style="@style/widget_listview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+             android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/img_tools_collect"
+             android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+            android:text="5月3号  星期二  12:00"
+            android:textSize="@dimen/text_size_15" />
+
+        <TextView
+            android:id="@+id/event_endtime"
+            style="@style/widget_listview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:layout_toRightOf="@id/img_tools_collect"
+             android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+            android:layout_below="@id/event_begintime"
+            android:layout_marginTop="10dp"
+            android:text="5月3号  星期二  17:00"
+            android:textSize="@dimen/text_size_15" />
+        </RelativeLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="45dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/event_repeat_modeval"
+                    style="@style/widget_listview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="4dp"
+                    android:text="不重复"
+                    android:textSize="@dimen/text_size_13" />
+            </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/event_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/img_tools_collect1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/image_marginLeft"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_event_pos" />
+
+            <RelativeLayout
+                android:id="@+id/layout_memu_tools_nfc_itemdesc"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:layout_toRightOf="@id/img_tools_collect1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/event_addtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:padding="4dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="北京"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/event_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/img_tools_collect2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/image_marginLeft"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_event_aler" />
+
+            <RelativeLayout
+                android:id="@+id/layout_memu_tools_nfc_itemdesc2"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/img_tools_collect2"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/event_alertval"
+                    style="@style/widget_listview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="4dp"
+                    android:text="提前30分钟提醒"
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/event_remark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" >
+
+            <ImageView
+                android:id="@+id/img_tools_collect3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/image_marginLeft"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_event_txt" />
+
+            <RelativeLayout
+                android:id="@+id/layout_memu_tools_nfc_itemdesc3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:layout_toRightOf="@id/img_tools_collect3"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/event_remarkval"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:padding="4dp"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
