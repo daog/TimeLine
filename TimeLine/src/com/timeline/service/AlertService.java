@@ -58,7 +58,7 @@ public class AlertService extends Service{
 								Date beforeDate = DateTimeHelper.StringToDate(info.getAlertbeforetime());
 								Date rightDate =DateTimeHelper.StringToDate(date);
 							 int sum =	(int) (Math.abs(beforeDate.getTime() - rightDate.getTime())/(1000*60));
-								if (sum<=1) {
+								if (sum<1) {
 									Notification n = new Notification(
 											R.drawable.report, "日程安排 ",
 											System.currentTimeMillis());
@@ -66,6 +66,10 @@ public class AlertService extends Service{
 									n.setLatestEventInfo(getBaseContext(),
 											info.getSubject(),
 											info.getDescribe(), null);
+									n.defaults |= Notification.DEFAULT_VIBRATE; 
+									n.defaults |= Notification.DEFAULT_SOUND;
+									long[] vibrate = {0,100,200,300}; 
+									n.vibrate = vibrate ;
 									nm.notify(1, n);
 									String repeatStr = info.getRepeate();
 									

@@ -15,15 +15,13 @@
 
         <ImageView
             android:id="@+id/event_head_cancel"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/image_marginLeft"
-            android:scaleType="matrix"
+            android:scaleType="center"
             android:clickable="true"
             android:onClick="btnBack"
-            android:src="@drawable/back" />
+            android:src="@drawable/icon_ev_close" />
 
         <TextView
             android:id="@+id/event_head_title"

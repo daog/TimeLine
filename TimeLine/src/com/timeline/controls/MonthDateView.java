@@ -37,7 +37,7 @@ public class MonthDateView extends View {
 	private Paint mPaint;
 	private int mDayColor = Color.parseColor("#000000");
 	private int mSelectDayColor = Color.parseColor("#ffffff");
-	private int mSelectBGColor = Color.parseColor("#0000ff");
+	private int mSelectBGColor = Color.parseColor("#3b5fc3");
 	private int mCurrentColor = Color.parseColor("#ff0000");
 	private int mCurrYear,mCurrMonth,mCurrDay;
 	private int mSelYear,mSelMonth,mSelDay;
@@ -113,7 +113,7 @@ public class MonthDateView extends View {
 				mPaint.setColor(mSelectBGColor);
 				float radius = (float)((mPaint.measureText("22")/2 + mPaint.measureText("廿九"))/2*1.1);
 
-				canvas.drawCircle(startCircBgX, startCircBgY, radius, mPaint);
+				canvas.drawCircle(startCircBgX+5, startCircBgY, radius+3, mPaint);
 				
 				weekRow = row + 1;
 			}
@@ -129,8 +129,15 @@ public class MonthDateView extends View {
 			}else{
 				mPaint.setColor(mDayColor);
 			}
-			canvas.drawText(dayString, startX, startY, mPaint);
-			canvas.drawText(lunarDayStr, lunarStartX, lunarStartY, mPaint);
+			mPaint.setTextSize(45);
+			if (dayString.length()==1) {
+				canvas.drawText(dayString, startX, startY+5, mPaint);
+			}else {
+				canvas.drawText(dayString, startX-5, startY+5, mPaint);
+			}
+			
+			mPaint.setTextSize(30);
+			canvas.drawText(lunarDayStr, lunarStartX+5, lunarStartY+8, mPaint);
 			if(tv_month != null){
 				tv_month.setText( getmSelMonthText(mSelYear, mSelMonth));
 			}
@@ -196,7 +203,7 @@ public class MonthDateView extends View {
 				if (mi.getAlertbeforetime()!=null) {
 					mPaint.setColor(getResources().getColor(R.color.week_red));
 				} else {
-					mPaint.setColor(Color.GREEN);
+					mPaint.setColor(getResources().getColor(R.color.tasking));
 				}
 				
 				float circleX = (float) (mColumnSize * column +	i * mColumnSize/(drawDayMeetingInfos.size()+1));

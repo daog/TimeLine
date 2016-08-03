@@ -58,6 +58,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	private ImageButton btnSeach;
 	private ImageButton btnMyInfo;
 	private ImageButton btnadd;
+	private RelativeLayout rlhead;
 	
 	private VolleyListenerInterface loginvolleyListener;
 	private VolleyListenerInterface baseInfovolleyListener;
@@ -176,6 +178,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		btnSeach = (ImageButton)findViewById(R.id.home_head_morebutton);
 		btnMyInfo =(ImageButton)findViewById(R.id.img_head);
 		btnadd = (ImageButton)findViewById(R.id.home_add);
+		rlhead = (RelativeLayout)findViewById(R.id.home_head);
 		btnSeach.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -522,21 +525,25 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			case R.id.indicator_day:
 				mTabIndicators.get(0).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(0,false);
+				rlhead.setVisibility(View.VISIBLE);
 				refreshData(v.getId());
 				break;
 			case R.id.indicator_week:
 				mTabIndicators.get(1).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(1,false);
+				rlhead.setVisibility(View.VISIBLE);
 				refreshData(v.getId());
 				break;
 			case R.id.indicator_month:
 				mTabIndicators.get(2).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(2,false);
+				rlhead.setVisibility(View.GONE);
 				refreshData(v.getId());
 				break;
 			case R.id.indicator_meeting:
 				mTabIndicators.get(3).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(3,false);
+				rlhead.setVisibility(View.GONE);
 				refreshData(v.getId());
 				break;	
 			}
