@@ -11,8 +11,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -72,7 +74,7 @@ public class AppContext  extends Application{
 	public Handler mDayTagGetHandler;
 	
 	public Handler mMontHandler;
-	public List<Handler> mWeekHandlers = new ArrayList<Handler>();
+	public HashMap<Integer,Handler> mWeekHandlers = new HashMap<Integer,Handler>();
 	//VolleyQueue
 	public RequestQueue mQueue ;
 	

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -563,11 +565,24 @@ public class Main extends BaseActivity implements FragmentCallBack{
     			HttpFactory.getMeetingjoin_list(daydate, dayvolleyListener);
     			break;
     		case R.id.indicator_week:
-    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
-    				Message msgWeek = Message.obtain();
-    				msgWeek.what = 0;
-    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
-    			}
+    			HashMap handlers = AppContext.getInstance().mWeekHandlers;
+    			Iterator iter = handlers.entrySet().iterator();
+				while (iter.hasNext()) {
+					HashMap.Entry entry = (HashMap.Entry) iter.next();
+					//Object key = entry.getKey();
+					Handler handler = (Handler)entry.getValue();
+				 
+				 	Message msgWeek = Message.obtain();
+				 	msgWeek.what = 0;
+				 	handler.sendMessage(msgWeek);
+				}
+    			
+    			
+//    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
+//    				Message msgWeek = Message.obtain();
+//    				msgWeek.what = 0;
+//    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
+//    			}
     			break;
     		case R.id.indicator_month:
     			Message msg = Message.obtain();

@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -143,14 +145,18 @@ public class WeekFragment extends Fragment  {
 		Log.e("Position", "pos"+mPageNumber);
 		currentWeekDateStrs =CalendarUtils.getInstance().getSelectedWeek(mPageNumber,WeekDateStrs);
 		
+		if(AppContext.getInstance().mWeekHandlers.get(mPageNumber) != null){
+			AppContext.getInstance().mWeekHandlers.remove(mPageNumber);
+		}
+		AppContext.getInstance().mWeekHandlers.put(mPageNumber, mWeekdrawHandler);
+		
+		
 		String i  = "2";
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
 		weekFragment = (View) inflater.inflate(R.layout.fragment_week, null);
 
 		initData(weekFragment);
@@ -258,11 +264,17 @@ public class WeekFragment extends Fragment  {
 					UIHelper.ToastMessage(getActivity(), myJsonObject.getString("re_info"));
 					
 					//刷新加载页数据
-					for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
-	    				Message msgWeek = Message.obtain();
-	    				msgWeek.what = 0;
-	    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
-	    			}
+					HashMap handlers = AppContext.getInstance().mWeekHandlers;
+	    			Iterator iter = handlers.entrySet().iterator();
+					while (iter.hasNext()) {
+						HashMap.Entry entry = (HashMap.Entry) iter.next();
+						//Object key = entry.getKey();
+						Handler handler = (Handler)entry.getValue();
+					 
+					 	Message msgWeek = Message.obtain();
+					 	msgWeek.what = 0;
+					 	handler.sendMessage(msgWeek);
+					}
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
