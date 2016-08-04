@@ -149,7 +149,12 @@ public class WeekFragment extends Fragment  {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
+		if(AppContext.getInstance().mWeekHandlers.size() < 3){
+			AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
+		}
+		else{
+			AppContext.getInstance().mWeekHandlers.set(0, mWeekdrawHandler);
+		}
 		weekFragment = (View) inflater.inflate(R.layout.fragment_week, null);
 
 		initData(weekFragment);
