@@ -142,19 +142,15 @@ public class WeekFragment extends Fragment  {
 		List<String> WeekDateStrs = Main.getCurrentWeekDateStrs();
 		Log.e("Position", "pos"+mPageNumber);
 		currentWeekDateStrs =CalendarUtils.getInstance().getSelectedWeek(mPageNumber,WeekDateStrs);
-
+		
 		String i  = "2";
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		if(AppContext.getInstance().mWeekHandlers.size() < 3){
-			AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
-		}
-		else{
-			AppContext.getInstance().mWeekHandlers.set(0, mWeekdrawHandler);
-		}
+		
+		AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
 		weekFragment = (View) inflater.inflate(R.layout.fragment_week, null);
 
 		initData(weekFragment);
@@ -260,6 +256,13 @@ public class WeekFragment extends Fragment  {
 						HttpFactory.getMeetingjoin_list_period(startDate, endDate, periodvolleyListener);
 					}
 					UIHelper.ToastMessage(getActivity(), myJsonObject.getString("re_info"));
+					
+					//刷新加载页数据
+					for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
+	    				Message msgWeek = Message.obtain();
+	    				msgWeek.what = 0;
+	    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
+	    			}
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
