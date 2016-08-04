@@ -83,7 +83,9 @@ public class Register1Ac  extends BaseActivity{
 			}
 		});
 	}
-	   
+		public void Btn_Cancel(View v) {
+			this.finish();
+		}
 	  public boolean isMobileNO(String mobiles){
 
 		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");

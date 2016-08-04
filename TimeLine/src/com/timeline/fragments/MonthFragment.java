@@ -486,7 +486,14 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
 		sponsorTv.setText(meetingInfo.getSponsor());
-		dateTimeTv.setText(meetingInfo.getIncludeDayStr() + " " + DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getStart_time())) + " - " + DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getEnd_time())));
+		if (meetingInfo.getStart_date()!=null&&meetingInfo.getStart_time()!=null&&
+				meetingInfo.getEnd_date()!=null&&meetingInfo.getEnd_time()!=null) {
+			dateTimeTv.setText(DateTimeHelper.Str2Date(meetingInfo.getStart_date()) + " " +
+					DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getStart_time())) + "至" 
+							+DateTimeHelper.Str2Date(meetingInfo.getEnd_date())+" "+
+							DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getEnd_time())));
+		}
+
 		addressTv.setText(meetingInfo.getAddress());
 		
 		

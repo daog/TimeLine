@@ -57,8 +57,8 @@ public class AlertService extends Service{
 							if (info.getAlertbeforetime()!=null) {
 								Date beforeDate = DateTimeHelper.StringToDate(info.getAlertbeforetime());
 								Date rightDate =DateTimeHelper.StringToDate(date);
-							 int sum =	(int) (Math.abs(beforeDate.getTime() - rightDate.getTime())/(1000*60));
-								if (sum<1) {
+							 int sum =	(int) (Math.abs(beforeDate.getTime() - rightDate.getTime())/(1000));
+								if (sum<10) {
 									Notification n = new Notification(
 											R.drawable.report, "日程安排 ",
 											System.currentTimeMillis());

@@ -18,6 +18,7 @@ import com.timeline.interf.VolleyListenerInterface;
 import com.timeline.main.R;
 import com.timeline.webapi.HttpFactory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -299,6 +300,7 @@ public class MonthDateView extends View {
 	/**
 	 * 下一个月 点击事件
 	 */
+	@SuppressLint("NewApi")
 	public void onRightClick(){
 		int year = mSelYear;
 		int month = mSelMonth;

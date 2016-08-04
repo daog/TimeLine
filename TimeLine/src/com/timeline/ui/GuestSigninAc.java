@@ -63,8 +63,8 @@ public class GuestSigninAc extends BaseActivity{
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			Intent in = new Intent(GuestSigninAc.this, Test.class);
-			startActivity(in);
+//			Intent in = new Intent(GuestSigninAc.this, Test.class);
+//			startActivity(in);
 			HttpFactory.MeetingSignin(meetid, SignvolleyListener);
 		}
 	});

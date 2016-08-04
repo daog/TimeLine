@@ -10,6 +10,7 @@ import java.util.List;
 import com.timeline.calendar.CalendarUtils;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.ZoomOutPageTransformer;
+import com.timeline.interf.FragmentCallBack;
 import com.timeline.main.R;
 import com.timeline.ui.Main;
 import com.timeline.widget.DirectionalViewPager;
@@ -32,12 +33,14 @@ public class WeekPageFragment extends Fragment {
 	
 	private int lastitem;
 	
+	FragmentCallBack fragmentCallBack = null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.fragment_week_page, null);
 		//initValues();
+		fragmentCallBack = (Main)getActivity();
 		initViews(view);
 		initData();
 		return view;
@@ -61,7 +64,8 @@ public class WeekPageFragment extends Fragment {
 
 			@Override
 			public void onPageSelected(int position) {
-
+				List<String> DateStrs =	CalendarUtils.getInstance().getSelectedWeek(position, currentWeekDateStrs);
+				fragmentCallBack.callbackFun3(DateStrs.get(0)+"-"+DateStrs.get(6));
 			}
 
 			@Override

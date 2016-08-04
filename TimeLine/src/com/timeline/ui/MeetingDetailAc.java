@@ -283,13 +283,21 @@ public class MeetingDetailAc extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (collectStatus.equals("2")) {
-					HttpFactory.SetMeetingCollect(mid, "1", collectvolleyListener);
-					collectStatus = "1";
+				if (collectStatus !=null) {
+					// TODO Auto-generated method stub
+					if (collectStatus.equals("2")) {
+						HttpFactory.SetMeetingCollect(mid, "1",
+								collectvolleyListener);
+						collectStatus = "1";
+					} else {
+						HttpFactory.SetMeetingCollect(mid, "2",
+								collectvolleyListener);
+						collectStatus = "2";
+					}
 				}else {
-					HttpFactory.SetMeetingCollect(mid, "2", collectvolleyListener);
-					collectStatus = "2";
+					HttpFactory.SetMeetingCollect(mid, "1",
+							collectvolleyListener);
+					collectStatus = "1";
 				}
 
 			}

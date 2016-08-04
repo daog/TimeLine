@@ -55,6 +55,7 @@ import com.timeline.common.DateTimeHelper;
 import com.timeline.common.JsonToEntityUtils;
 import com.timeline.common.StringUtils;
 import com.timeline.common.UIHelper;
+import com.timeline.fragments.MonthFragment.poponDismissListener;
 import com.timeline.interf.FragmentCallBack;
 import com.timeline.interf.VolleyListenerInterface;
 import com.timeline.main.R;
@@ -94,8 +95,7 @@ public class WeekFragment extends Fragment  {
 
 	//会议参与状态设置
 	private VolleyListenerInterface hoinStatusvolleyListener;
-	
-	FragmentCallBack fragmentCallBack = null;
+
 	/**
 	 * 绘制事件区域
 	 * */
@@ -138,7 +138,7 @@ public class WeekFragment extends Fragment  {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		fragmentCallBack = (Main)getActivity();
+		
 		//currentWeekDateStrs = getCurrentWeekDateStr();
 		mPageNumber = getArguments().getInt(ARG_PAGE);
 		List<String> WeekDateStrs = Main.getCurrentWeekDateStrs();
@@ -213,7 +213,7 @@ public class WeekFragment extends Fragment  {
 				try {
 					JSONObject myJsonObject = new JSONObject(result);
 					String rest = myJsonObject.getString("re_st");
-					fragmentCallBack.callbackFun3(currentWeekDateStrs.get(1));
+	
 					if (rest.equals("success")) {		
 						Message msg = Message.obtain();
 						MeetingInfo[] meetings
@@ -238,7 +238,6 @@ public class WeekFragment extends Fragment  {
 			@Override
 			public void onMyError(VolleyError error) {
 				// TODO Auto-generated method stub
-				fragmentCallBack.callbackFun3(currentWeekDateStrs.get(1));
 				periodMeetings.clear();
 				for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
 					periodMeetings.add(ele);
@@ -621,7 +620,8 @@ public class WeekFragment extends Fragment  {
 		
 		popupWindow = new PopupWindow(contentView,
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
-
+		 // 设置popWindow的显示和消失动画
+			popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
 		popupWindow.setTouchable(true);
 
 		popupWindow.setTouchInterceptor(new OnTouchListener() {
@@ -642,13 +642,37 @@ public class WeekFragment extends Fragment  {
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
 				R.color.white));
 
-		int[] location = new int[2];  
-        view.getLocationOnScreen(location);  
-          
-        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1]+view.getHeight());  
+		backgroundAlpha(0.5f);  
+		 //添加pop窗口关闭事件  
+		popupWindow.setOnDismissListener(new poponDismissListener());            
+		popupWindow.showAtLocation(getActivity().getWindow().getDecorView().findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
+	}  
+	/**
+	 * 设置添加屏幕的背景透明度
+	 * @param bgAlpha
+	 */
+	public void backgroundAlpha(float bgAlpha)
+	{
+		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+       lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
 	}
-
 	
+	/**
+	 * 添加新笔记时弹出的popWin关闭的事件，主要是为了将背景透明度改回来
+	 * @author cg
+	 *
+	 */
+	class poponDismissListener implements PopupWindow.OnDismissListener{
+
+		@Override
+		public void onDismiss() {
+			// TODO Auto-generated method stub
+			//Log.v("List_noteTypeActivity:", "我是关闭事件");
+			backgroundAlpha(1f);
+		}
+		
+	}
 	public class PopupWindowBtnClickListener implements OnClickListener{
 
 		@Override

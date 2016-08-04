@@ -90,8 +90,9 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	String daydate;
 	private VolleyListenerInterface dayvolleyListener;//当前日期会议搜索监听
 	
+	String dayhead;
 	//week控件
-	
+	String weekhead;
 	/**
 	 * 当前选择的一周，每天的日期字符串列表
 	 */
@@ -408,8 +409,12 @@ public class Main extends BaseActivity implements FragmentCallBack{
     	if (AppContext.getInstance().getIslogin()) {
     			HttpFactory.getMeetingjoin_list(daydate, dayvolleyListener);
     	}else {
+//			Message msg = Message.obtain();
+//			msg.what = 1;
+//			AppContext.getInstance().mDayTagGetHandler.sendMessage(msg);
 			Message msg = Message.obtain();
 			msg.what = 1;
+			msg.obj = daydate;
 			AppContext.getInstance().mDayTagGetHandler.sendMessage(msg);
 		}
 	}
@@ -529,12 +534,14 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				mTabIndicators.get(0).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(0,false);
 				rlhead.setVisibility(View.VISIBLE);
+				headView.setText(dayhead);
 				refreshData(v.getId());
 				break;
 			case R.id.indicator_week:
 				mTabIndicators.get(1).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(1,false);
 				rlhead.setVisibility(View.VISIBLE);
+				headView.setText(weekhead);
 				refreshData(v.getId());
 				break;
 			case R.id.indicator_month:
@@ -576,13 +583,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				 	msgWeek.what = 0;
 				 	handler.sendMessage(msgWeek);
 				}
-    			
-    			
-//    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
-//    				Message msgWeek = Message.obtain();
-//    				msgWeek.what = 0;
-//    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
-//    			}
+
     			break;
     		case R.id.indicator_month:
     			Message msg = Message.obtain();
@@ -603,11 +604,22 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				AppContext.getInstance().mDayTagGetHandler.sendMessage(msg);
     			break;
     		case R.id.indicator_week:
-    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
-    				Message msgWeek = Message.obtain();
-    				msgWeek.what = 0;
-    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
-    			}
+    			HashMap handlers = AppContext.getInstance().mWeekHandlers;
+    			Iterator iter = handlers.entrySet().iterator();
+				while (iter.hasNext()) {
+					HashMap.Entry entry = (HashMap.Entry) iter.next();
+					//Object key = entry.getKey();
+					Handler handler = (Handler)entry.getValue();
+				 
+				 	Message msgWeek = Message.obtain();
+				 	msgWeek.what = 0;
+				 	handler.sendMessage(msgWeek);
+				}
+//    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
+//    				Message msgWeek = Message.obtain();
+//    				msgWeek.what = 0;
+//    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
+//    			}
     			break;
     		case R.id.indicator_month:
     			Message msgMon = Message.obtain();
@@ -640,7 +652,8 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		date = str[0]+"-"+month+"-"+day;
 
 		daydate = date;
-		headView.setText(Numeric2ChineseStr.getmSelMonthText(Integer.valueOf(str[1].toString())));
+		dayhead = (String) Numeric2ChineseStr.getmSelMonthText(Integer.valueOf(str[1].toString()));
+		headView.setText(dayhead);
 		HttpFactory.getMeetingjoin_list(date, dayvolleyListener);
 	}
 
@@ -654,7 +667,8 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	public void callbackFun3(String re) {
 		// TODO Auto-generated method stub
 		String[] str = re.split("-");
-		headView.setText(Numeric2ChineseStr.getmSelMonthText(Integer.valueOf(str[1])));
+		weekhead = str[1]+"."+str[2]+"-"+str[4]+"."+str[5];
+		headView.setText(weekhead);
 	}
 	Intent intent;
 	ServiceConnection synCon;

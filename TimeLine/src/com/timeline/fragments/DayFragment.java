@@ -479,7 +479,7 @@ public class DayFragment extends Fragment {
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
 		sponsorTv.setText(meetingInfo.getSponsor());
-		dateTimeTv.setText(meetingInfo.getIncludeDayStr() + " " + DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getStart_time())) + " - " + DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getEnd_time())));
+		dateTimeTv.setText(DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getStart_time())) + " - " + DateTimeHelper.int2Time(Integer.valueOf(meetingInfo.getEnd_time())));
 		addressTv.setText(meetingInfo.getAddress());
 		
 		
