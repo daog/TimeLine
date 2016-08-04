@@ -39,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.provider.ContactsContract.Contacts.Data;
@@ -562,9 +563,11 @@ public class Main extends BaseActivity implements FragmentCallBack{
     			HttpFactory.getMeetingjoin_list(daydate, dayvolleyListener);
     			break;
     		case R.id.indicator_week:
-    			Message msgWeek = Message.obtain();
-				msgWeek.what = 0;
-    			AppContext.getInstance().mWeekHandler.sendMessage(msgWeek);
+    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
+    				Message msgWeek = Message.obtain();
+    				msgWeek.what = 0;
+    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
+    			}
     			break;
     		case R.id.indicator_month:
     			Message msg = Message.obtain();
@@ -585,7 +588,11 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				AppContext.getInstance().mDayTagGetHandler.sendMessage(msg);
     			break;
     		case R.id.indicator_week:
-
+    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
+    				Message msgWeek = Message.obtain();
+    				msgWeek.what = 0;
+    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
+    			}
     			break;
     		case R.id.indicator_month:
     			Message msgMon = Message.obtain();

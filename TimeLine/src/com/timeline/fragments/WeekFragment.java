@@ -106,7 +106,10 @@ public class WeekFragment extends Fragment  {
 					//currentWeekDateStrs = getCurrentWeekDateStr();
 //					List<String> WeekDateStrs = Main.getCurrentWeekDateStrs();
 //					currentWeekDateStrs = CalendarUtils.getInstance().getSelectedWeek(mPageNumber,WeekDateStrs);
-					setAllChildren();
+//					Thread.sleep(100);
+					if(currentWeekDateStrs != null && currentWeekDateStrs.size() > 0){
+						setAllChildren();
+					}
 				}catch (Exception e) {
 					// TODO: handle exceptionshafangfa
 				}
@@ -146,7 +149,7 @@ public class WeekFragment extends Fragment  {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		AppContext.getInstance().mWeekHandler = mWeekdrawHandler;
+		AppContext.getInstance().mWeekHandlers.add(mWeekdrawHandler);
 		weekFragment = (View) inflater.inflate(R.layout.fragment_week, null);
 
 		initData(weekFragment);
@@ -157,6 +160,16 @@ public class WeekFragment extends Fragment  {
 
 	
 	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		// TODO Auto-generated method stub
+		super.setUserVisibleHint(isVisibleToUser);
+		
+		if(currentWeekDateStrs != null && currentWeekDateStrs.size() > 0){
+			setAllChildren();
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();

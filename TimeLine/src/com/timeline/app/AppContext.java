@@ -72,7 +72,7 @@ public class AppContext  extends Application{
 	public Handler mDayTagGetHandler;
 	
 	public Handler mMontHandler;
-	public Handler mWeekHandler;
+	public List<Handler> mWeekHandlers = new ArrayList<Handler>();
 	//VolleyQueue
 	public RequestQueue mQueue ;
 	
