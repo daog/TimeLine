@@ -344,7 +344,8 @@ public class WeekFragment extends Fragment  {
 				weekDayTv.setTextColor(Color.RED);
 			}
 
-			HorizontalScrollView hsv = new HorizontalScrollView(getActivity());
+			//HorizontalScrollView hsv = new HorizontalScrollView(getActivity());
+			HorizontalScrollView hsv = new HorizontalScrollView(AppContext.getInstance());
 
 			hsv.setHorizontalScrollBarEnabled(false); 
 			hsv.setOnTouchListener(new OnTouchListener() {
@@ -361,7 +362,7 @@ public class WeekFragment extends Fragment  {
 					ViewGroup.LayoutParams.MATCH_PARENT,
 					ViewGroup.LayoutParams.MATCH_PARENT);
 
-			final LinearLayout allContents = new LinearLayout(getActivity());
+			final LinearLayout allContents = new LinearLayout(AppContext.getInstance());
 			// 定义布局管理器的参数
 			LinearLayout.LayoutParams allContentsParam = new LinearLayout.LayoutParams(
 					ViewGroup.LayoutParams.MATCH_PARENT,
