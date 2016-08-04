@@ -73,7 +73,7 @@ public class WeekFragment extends Fragment  {
 	// 一周的活动
 	private List<View> days = new ArrayList<View>();
 	//当前选择的一周，每天的日期字符串列表
-	private static List<String> currentWeekDateStrs = new ArrayList<String>();
+	private List<String> currentWeekDateStrs = new ArrayList<String>();
 
 	//一段时期内会议搜索监听
 	private VolleyListenerInterface periodvolleyListener;
@@ -103,7 +103,9 @@ public class WeekFragment extends Fragment  {
 			case 0:
 				//登录好后进行请求
 				try {
-					currentWeekDateStrs = getCurrentWeekDateStr();
+					//currentWeekDateStrs = getCurrentWeekDateStr();
+//					List<String> WeekDateStrs = Main.getCurrentWeekDateStrs();
+//					currentWeekDateStrs = CalendarUtils.getInstance().getSelectedWeek(mPageNumber,WeekDateStrs);
 					setAllChildren();
 				}catch (Exception e) {
 					// TODO: handle exceptionshafangfa
@@ -206,8 +208,7 @@ public class WeekFragment extends Fragment  {
 						for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
 							periodMeetings.add(ele);
 						}
-						
-					//	generateDayViews();
+						generateDayViews();
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -223,7 +224,7 @@ public class WeekFragment extends Fragment  {
 					periodMeetings.add(ele);
 				}
 				
-			//	generateDayViews();
+				generateDayViews();
 			}
 			
 		};

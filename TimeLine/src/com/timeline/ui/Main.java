@@ -564,7 +564,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
     		case R.id.indicator_week:
     			Message msgWeek = Message.obtain();
 				msgWeek.what = 0;
-    		//	AppContext.getInstance().mWeekHandler.sendMessage(msgWeek);
+    			AppContext.getInstance().mWeekHandler.sendMessage(msgWeek);
     			break;
     		case R.id.indicator_month:
     			Message msg = Message.obtain();
