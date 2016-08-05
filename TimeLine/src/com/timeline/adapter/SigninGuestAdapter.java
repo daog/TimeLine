@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.timeline.bean.SigninPerson;
@@ -25,6 +26,7 @@ public class SigninGuestAdapter extends BaseAdapter {
 		public TextView name;
 		public TextView no;
 		public CircleImageView image;
+		public ImageView Noimg;
 	}
 
 	/**
@@ -78,6 +80,8 @@ public class SigninGuestAdapter extends BaseAdapter {
 					.findViewById(R.id.item_signin_no);
 			listItemView.image = (CircleImageView)convertView
 					.findViewById(R.id.item_signin_ima);
+			listItemView.Noimg= (ImageView)convertView
+					.findViewById(R.id.sort_ima);
 			// 设置控件集到convertView
 			convertView.setTag(listItemView);
 		} else {
@@ -87,14 +91,18 @@ public class SigninGuestAdapter extends BaseAdapter {
 		// 设置文字和图片
 		SigninPerson gu = listItems.get(position);
 		if (position ==0) {
-			listItemView.no.setTextColor(context.getResources().getColor(R.color.yellow));
+			listItemView.no.setTextColor(context.getResources().getColor(R.color.first));
+			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no1));
 		}else if(position ==1){
-			listItemView.no.setTextColor(context.getResources().getColor(R.color.red));
+			listItemView.no.setTextColor(context.getResources().getColor(R.color.second));
+			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no2));
 		}
 		else if(position ==2){
-			listItemView.no.setTextColor(context.getResources().getColor(R.color.green));
+			listItemView.no.setTextColor(context.getResources().getColor(R.color.third));
+			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no3));
 		}else {
 			listItemView.no.setTextColor(context.getResources().getColor(R.color.black));
+			listItemView.Noimg.setVisibility(View.GONE);
 		}
 		listItemView.name.setText(gu.getName());
 		listItemView.name.setTag(gu);// 设置隐藏参数(实体类)

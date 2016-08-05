@@ -21,11 +21,12 @@
 
             <ImageButton
                 android:id="@+id/my_head_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginTop="10.0dip"
+                android:scaleType="fitStart"
                 android:background="@color/full_transparent"
                 android:src="@drawable/back" />
 

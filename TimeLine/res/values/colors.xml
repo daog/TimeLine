@@ -16,6 +16,10 @@
 	<color name="grayslate">#708090</color>
 	<color name="lightblue">#0083FF</color>
 	
+	<color name="first">#f9c100</color>
+	<color name="second">#d1dde9</color>
+	<color name="third">#ddb878</color>
+	
     <color name="full_transparent">#00000000</color>
     <color name="half_transparent">#b8000000</color>
     
