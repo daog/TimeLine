@@ -27,6 +27,7 @@ public class Register2Ac extends BaseActivity{
 	private EditText passwordTxt;
 	private EditText agpasswordTxt;
 	private Button okBtn;
+	private ImageButton cancelBtn;
 	
 	private String psw;
 	private String pswag;
@@ -71,10 +72,21 @@ public class Register2Ac extends BaseActivity{
 	   private void initView() {
 		   backBtn =(ImageButton)findViewById(R.id.main_head_logo);
 		   headTxt = (TextView)findViewById(R.id.main_head_title);
+		   headTxt.setText("зЂВс");
 		   yanzhengTxt = (EditText)findViewById(R.id.send_number);
 		   passwordTxt = (EditText)findViewById(R.id.register_password);
 		   agpasswordTxt = (EditText)findViewById(R.id.register_password_again);
+		   cancelBtn = (ImageButton)findViewById(R.id.main_head_logo);
+		   cancelBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		   });
 		   okBtn = (Button)findViewById(R.id.sms_btn_ok);
+		   
 		   okBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override

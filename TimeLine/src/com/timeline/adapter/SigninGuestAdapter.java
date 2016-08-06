@@ -92,13 +92,16 @@ public class SigninGuestAdapter extends BaseAdapter {
 		SigninPerson gu = listItems.get(position);
 		if (position ==0) {
 			listItemView.no.setTextColor(context.getResources().getColor(R.color.first));
+			listItemView.Noimg.setVisibility(View.VISIBLE);
 			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no1));
 		}else if(position ==1){
 			listItemView.no.setTextColor(context.getResources().getColor(R.color.second));
+			listItemView.Noimg.setVisibility(View.VISIBLE);
 			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no2));
 		}
 		else if(position ==2){
 			listItemView.no.setTextColor(context.getResources().getColor(R.color.third));
+			listItemView.Noimg.setVisibility(View.VISIBLE);
 			listItemView.Noimg.setImageDrawable(context.getResources().getDrawable(R.drawable.no3));
 		}else {
 			listItemView.no.setTextColor(context.getResources().getColor(R.color.black));
