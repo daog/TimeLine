@@ -197,7 +197,12 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				if (AppContext.getInstance().jonbase!=null) {
+				if (AppContext.getInstance().getIslogin()) {
+					if (AppContext.getInstance().jonbase!=null) {
+						UIHelper.showMySign(Main.this);
+					}
+					
+				}else {
 					UIHelper.showMySign(Main.this);
 				}
 				
