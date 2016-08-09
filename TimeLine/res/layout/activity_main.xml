@@ -15,7 +15,7 @@
 
         <ImageButton
             android:id="@+id/img_head"
-            android:layout_width="25dp"
+            android:layout_width="60dp"
             android:layout_height="25dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -23,7 +23,7 @@
             android:layout_marginLeft="10dip"
             android:background="@color/full_transparent"
             android:contentDescription="head"
-            android:scaleType="fitXY"
+            android:scaleType="fitStart"
             android:src="@drawable/icon_main_head" />
 
         <TextView
@@ -36,11 +36,10 @@
 
         <ImageButton
             android:id="@+id/home_head_morebutton"
-            android:layout_width="25dp"
+            android:layout_width="50dp"
             android:layout_height="25dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
             android:background="@color/full_transparent"
             android:contentDescription="more"
             android:src="@drawable/icon_home_search" />

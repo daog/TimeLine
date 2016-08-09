@@ -157,6 +157,18 @@ public class AppContext  extends Application{
 		editor.commit();
 	}
 	/**
+	 * 保存退出所在页
+	 */
+	public void savePage(int index ) {
+		Editor editor = sp.edit();
+		editor.putInt("index", index);
+		editor.commit();
+	}
+	
+	public int getPage() {
+		return sp.getInt("index", 0);
+	}
+	/**
 	 * 用户是否登录
 	 * @return
 	 */

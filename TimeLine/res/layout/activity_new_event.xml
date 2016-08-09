@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/event_head_cancel"
             android:layout_width="60dp"
-            android:layout_height="25dp"
+            android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:scaleType="center"
             android:clickable="true"
@@ -33,11 +33,12 @@
 
         <TextView
             android:id="@+id/event_head_save"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5.0dip"
+             android:gravity="center_vertical|right"
             android:textColor="@color/selector_text_press_color"
             android:clickable="true"
             android:onClick="btnSave"

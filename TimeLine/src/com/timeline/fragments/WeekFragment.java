@@ -39,6 +39,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -544,6 +545,7 @@ public class WeekFragment extends Fragment  {
 		TextView dateTimeTv = (TextView)contentView.findViewById(R.id.id_timeText);
 		TextView addressTv = (TextView)contentView.findViewById(R.id.id_addressText);
 		
+		
 		LinearLayout llenroll = (LinearLayout)contentView.findViewById(R.id.id_enrollLl);
 		LinearLayout llundetermined = (LinearLayout)contentView.findViewById(R.id.id_undeterminedLl);
 		LinearLayout llview = (LinearLayout)contentView.findViewById(R.id.id_viewLl);
@@ -559,13 +561,15 @@ public class WeekFragment extends Fragment  {
 		Button editBtn = (Button)contentView.findViewById(R.id.id_editBtn);
 		Button deletBtn = (Button)contentView.findViewById(R.id.id_deleteBtn);
 		
-		Button closeBtn = (Button)contentView.findViewById(R.id.id_close);
+		ImageButton closeBtn = (ImageButton)contentView.findViewById(R.id.id_close);
 		closeBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		TextView enrollTv = (TextView)contentView.findViewById(R.id.id_enrollTv);//报名
 		TextView viewTv = (TextView)contentView.findViewById(R.id.id_viewTv);//查看
 		TextView undeterminedTv = (TextView)contentView.findViewById(R.id.id_undeterminedTv);//待定
 		TextView refuseTv = (TextView)contentView.findViewById(R.id.id_refuseTv);//拒绝
+		TextView deleteTv = (TextView)contentView.findViewById(R.id.id_deleteTv);//删除
+		TextView editTv = (TextView)contentView.findViewById(R.id.id_editTv);//编辑
 		
 		MeetingInfo meetingInfo = (MeetingInfo)view.getTag();
 		if(meetingInfo == null){
@@ -595,6 +599,18 @@ public class WeekFragment extends Fragment  {
 			llenroll.setVisibility(View.GONE);
 			llundetermined.setVisibility(View.GONE);
 			llrefuse.setVisibility(View.GONE);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			//此处相当于布局文件中的Android:layout_gravity属性  
+			lp.gravity = Gravity.LEFT;  
+			lp.leftMargin = 80;
+			deletBtn.setLayoutParams(lp);  
+			deleteTv.setLayoutParams(lp);  
+			
+			LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			lp1.gravity = Gravity.RIGHT;  
+			lp1.rightMargin = 80;
+			editBtn.setLayoutParams(lp1);  
+			editTv.setLayoutParams(lp1);
 		}
 
 		enrollBtn.setTag(meetingInfo);
@@ -603,6 +619,12 @@ public class WeekFragment extends Fragment  {
 		refuseBtn.setTag(meetingInfo);
 		editBtn.setTag(meetingInfo);
 		deletBtn.setTag(meetingInfo);
+		 llenroll.setTag(meetingInfo);
+		 llundetermined.setTag(meetingInfo);
+		 llview.setTag(meetingInfo);
+		 llrefuse.setTag(meetingInfo);
+		 lledit.setTag(meetingInfo);
+		 lldelete.setTag(meetingInfo);
 		
 		enrollBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		viewBtn.setOnClickListener(new PopupWindowBtnClickListener());
@@ -610,6 +632,14 @@ public class WeekFragment extends Fragment  {
 		refuseBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		editBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		deletBtn.setOnClickListener(new PopupWindowBtnClickListener());
+		
+		
+		 llenroll.setOnClickListener(new PopupWindowBtnClickListener());
+		 llundetermined.setOnClickListener(new PopupWindowBtnClickListener());
+		 llview.setOnClickListener(new PopupWindowBtnClickListener());
+		 llrefuse.setOnClickListener(new PopupWindowBtnClickListener());
+		 lledit.setOnClickListener(new PopupWindowBtnClickListener());
+		 lldelete.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
@@ -680,26 +710,48 @@ public class WeekFragment extends Fragment  {
 			popupWindow.dismiss();
 			MeetingInfo mi = (MeetingInfo)v.getTag();
 			switch(v.getId()){
+			//报名
+			case R.id.id_enrollBtn:
+				enrollMeeting(mi);
+				break;
+			//待定	
+			case R.id.id_undeterminedBtn:
+				undeterminedMeeting(mi);
+				break;
+			//查看
+			case R.id.id_viewBtn:
+				viewMeeting(mi);
+				break;
+			//拒绝
+			case R.id.id_refuseBtn:
+				refuseMeeting(mi);
+				break;
+			case R.id.id_deleteBtn:
+				deleteMeeting(mi);
+				break;
+			case R.id.id_editBtn:
+				editMeeting(mi);
+				break;
 				//报名
-				case R.id.id_enrollBtn:
+				case R.id.id_enrollLl:
 					enrollMeeting(mi);
 					break;
 				//待定	
-				case R.id.id_undeterminedBtn:
+				case R.id.id_undeterminedLl:
 					undeterminedMeeting(mi);
 					break;
 				//查看
-				case R.id.id_viewBtn:
+				case R.id.id_viewLl:
 					viewMeeting(mi);
 					break;
 				//拒绝
-				case R.id.id_refuseBtn:
+				case R.id.id_refuseLl:
 					refuseMeeting(mi);
 					break;
-				case R.id.id_deleteBtn:
+				case R.id.id_deleteLl:
 					deleteMeeting(mi);
 					break;
-				case R.id.id_editBtn:
+				case R.id.id_editLl:
 					editMeeting(mi);
 					break;
 					

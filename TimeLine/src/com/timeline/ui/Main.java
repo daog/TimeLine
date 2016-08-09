@@ -75,6 +75,10 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	
 	private int currIndex = 0;// 当前页卡编号
 	private PagerAdapter mAdapter;
+	ChangeColorIconWithText day;
+	ChangeColorIconWithText week;
+	ChangeColorIconWithText month;
+	ChangeColorIconWithText meeting;
 	
 	private List<ChangeColorIconWithText> mTabIndicators = new ArrayList<ChangeColorIconWithText>();
 	private ImageButton btnSeach;
@@ -124,7 +128,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+        currIndex = AppContext.getInstance().getPage();
       //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
@@ -170,8 +174,15 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			}
 
 		};
-		instance = this;
+		instance = this;	
         BinderService();
+        if (currIndex == 1) {
+        	week.performClick();
+		}else if (currIndex == 2) {
+			month.performClick();
+		}else if (currIndex == 3) {
+			meeting.performClick();
+		}
     }
     
 	/*
@@ -224,6 +235,9 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				try {
 					JSONObject myJsonObject = new JSONObject(result);
 					String rest = myJsonObject.getString("re_st");
+					refreshData(R.id.indicator_week);
+					refreshData(R.id.indicator_month);
+					refreshData(R.id.indicator_meeting);
 					if (rest.equals("success")) {
 						User us = JsonToEntityUtils.jsontoUser( myJsonObject.getString("re_info"));
 						AppContext.setUser(us);
@@ -264,7 +278,8 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		//day
 		daydate = DateTimeHelper.getDateNow();
 		String[] str = daydate.split("-");
-		headView.setText(Numeric2ChineseStr.foematInteger(Integer.valueOf(str[1].toString()))+"月");
+		dayhead = Numeric2ChineseStr.foematInteger(Integer.valueOf(str[1].toString()))+"月";
+		headView.setText(dayhead);
 		dayvolleyListener = new VolleyListenerInterface(Main.this){
 			@Override
 			public void onMySuccess(String result) {
@@ -310,8 +325,11 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			
 		};
 		//week
-		currentWeekDateStrs = getCurrentWeekDateStr();
 		
+		currentWeekDateStrs = getCurrentWeekDateStr();
+		String Sweek = currentWeekDateStrs.get(0)+"-"+currentWeekDateStrs.get(6);
+		String[] Wstr = Sweek.split("-");
+		weekhead = Wstr[0]+"."+Wstr[1]+"."+Wstr[2]+"-"+Wstr[4]+"."+Wstr[5];
 		
 		//month
 		
@@ -409,8 +427,14 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			
 			return dateStrs;
 		}
-	  
-	  
+		
+	@Override  
+	protected void onStop() {
+		super.onStop();
+		AppContext.getInstance().savePage(currIndex);
+	}  
+		
+		
     @Override
 	  protected void onResume() {
 		super.onResume();
@@ -485,7 +509,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		};
 		
 		mViewPager.setAdapter(mAdapter);		
-		mViewPager.setCurrentItem(currIndex);
+		mViewPager.setCurrentItem(currIndex,false);
 
     }
 
@@ -493,13 +517,13 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		// TODO Auto-generated method stub
 		mViewPager = (ViewPager)findViewById(R.id.id_viewpager);
 		
-		ChangeColorIconWithText day = (ChangeColorIconWithText)findViewById(R.id.indicator_day);
+		 day = (ChangeColorIconWithText)findViewById(R.id.indicator_day);
 		mTabIndicators.add(day);
-		ChangeColorIconWithText week = (ChangeColorIconWithText)findViewById(R.id.indicator_week);
+		 week = (ChangeColorIconWithText)findViewById(R.id.indicator_week);
 		mTabIndicators.add(week);
-		ChangeColorIconWithText month = (ChangeColorIconWithText)findViewById(R.id.indicator_month);
+		 month = (ChangeColorIconWithText)findViewById(R.id.indicator_month);
 		mTabIndicators.add(month);
-		ChangeColorIconWithText meeting = (ChangeColorIconWithText)findViewById(R.id.indicator_meeting);
+		 meeting = (ChangeColorIconWithText)findViewById(R.id.indicator_meeting);
 		mTabIndicators.add(meeting);
 		
 		day.setOnClickListener(new IndicatorClickListener());
@@ -544,6 +568,8 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				rlhead.setVisibility(View.VISIBLE);
 				headView.setText(dayhead);
 				refreshData(v.getId());
+				currIndex = 0;
+				AppContext.getInstance().savePage(currIndex);
 				break;
 			case R.id.indicator_week:
 				mTabIndicators.get(1).SetIconAlpha(1.0f);
@@ -551,18 +577,24 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				rlhead.setVisibility(View.VISIBLE);
 				headView.setText(weekhead);
 				refreshData(v.getId());
+				currIndex = 1;
+				AppContext.getInstance().savePage(currIndex);
 				break;
 			case R.id.indicator_month:
 				mTabIndicators.get(2).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(2,false);
 				rlhead.setVisibility(View.GONE);
 				refreshData(v.getId());
+				currIndex = 2;
+				AppContext.getInstance().savePage(currIndex);
 				break;
 			case R.id.indicator_meeting:
 				mTabIndicators.get(3).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(3,false);
 				rlhead.setVisibility(View.GONE);
 				refreshData(v.getId());
+				currIndex = 3;
+				AppContext.getInstance().savePage(currIndex);
 				break;	
 			}
 		}
@@ -571,7 +603,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
      *数据实时刷新
      * @param Id
      */
-    private void refreshData(int Id)
+    public void refreshData(int Id)
     {
     	if (AppContext.getInstance().getIslogin()) {
     		switch(Id)
@@ -675,7 +707,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	public void callbackFun3(String re) {
 		// TODO Auto-generated method stub
 		String[] str = re.split("-");
-		weekhead = str[1]+"."+str[2]+"-"+str[4]+"."+str[5];
+		weekhead = str[0]+"."+str[1]+"."+str[2]+"-"+str[4]+"."+str[5];
 		headView.setText(weekhead);
 	}
 	Intent intent;

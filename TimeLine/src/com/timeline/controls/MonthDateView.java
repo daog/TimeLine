@@ -51,6 +51,8 @@ public class MonthDateView extends View {
 	private int mCircleRadius = 6;
 	private DateClick dateClick;
 	private int mCircleColor = R.color.blue;;
+	private int widthMeasure, heightMeasure;
+	
 	//private List<DayMeetingNumAndState> dayMeetingNumAndStateList;
 	private List<MeetingInfo> monthMeetingInfoList;
 	
@@ -70,7 +72,9 @@ public class MonthDateView extends View {
 	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		widthMeasure = widthMeasureSpec; 
+		heightMeasure = heightMeasureSpec;
+		super.onMeasure(widthMeasure, heightMeasure);
 	}
 	
 	@Override
@@ -142,7 +146,6 @@ public class MonthDateView extends View {
 			if(tv_month != null){
 				tv_month.setText( getmSelMonthText(mSelYear, mSelMonth));
 			}
-			
 //			if(tv_week != null){
 //				tv_week.setText("第" + weekRow  +"周");
 //			}

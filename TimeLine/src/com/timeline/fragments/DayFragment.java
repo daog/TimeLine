@@ -23,6 +23,7 @@ import com.timeline.fragments.WeekFragment.PopupWindowBtnClickListener;
 import com.timeline.interf.VolleyListenerInterface;
 import com.timeline.main.R;
 import com.timeline.sqlite.InfoHelper;
+import com.timeline.ui.Main;
 import com.timeline.webapi.HttpFactory;
 import com.timeline.widget.MyDialog;
 
@@ -46,6 +47,7 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -328,11 +330,7 @@ public class DayFragment extends Fragment {
 							public void onClick(View v) {
 								// TODO Auto-generated
 								// method stub
-								if (info.getAlertbeforetime() !=null) {
-									UIHelper.showEventDe(getActivity(), info.getId());
-								}else {
 									showPopupWindow(v);
-								}
 								
 							}
 						});
@@ -421,13 +419,15 @@ public class DayFragment extends Fragment {
 		Button editBtn = (Button)contentView.findViewById(R.id.id_editBtn);
 		Button deletBtn = (Button)contentView.findViewById(R.id.id_deleteBtn);
 		
-		Button closeBtn = (Button)contentView.findViewById(R.id.id_close);
+		ImageButton closeBtn = (ImageButton)contentView.findViewById(R.id.id_close);
 		closeBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		TextView enrollTv = (TextView)contentView.findViewById(R.id.id_enrollTv);//报名
 		TextView viewTv = (TextView)contentView.findViewById(R.id.id_viewTv);//查看
 		TextView undeterminedTv = (TextView)contentView.findViewById(R.id.id_undeterminedTv);//待定
 		TextView refuseTv = (TextView)contentView.findViewById(R.id.id_refuseTv);//拒绝
+		TextView deleteTv = (TextView)contentView.findViewById(R.id.id_deleteTv);//删除
+		TextView editTv = (TextView)contentView.findViewById(R.id.id_editTv);//编辑
 		
 		MeetingInfo meetingInfo = (MeetingInfo)view.getTag();
 		if(meetingInfo == null){
@@ -460,6 +460,18 @@ public class DayFragment extends Fragment {
 			llenroll.setVisibility(View.GONE);
 			llundetermined.setVisibility(View.GONE);
 			llrefuse.setVisibility(View.GONE);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			//此处相当于布局文件中的Android:layout_gravity属性  
+			lp.gravity = Gravity.LEFT;  
+			lp.leftMargin = 80;
+			deletBtn.setLayoutParams(lp);  
+			deleteTv.setLayoutParams(lp);  
+			
+			LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			lp1.gravity = Gravity.RIGHT;  
+			lp1.rightMargin = 80;
+			editBtn.setLayoutParams(lp1);  
+			editTv.setLayoutParams(lp1);
 		}
 
 		enrollBtn.setTag(meetingInfo);
@@ -468,6 +480,12 @@ public class DayFragment extends Fragment {
 		refuseBtn.setTag(meetingInfo);
 		editBtn.setTag(meetingInfo);
 		deletBtn.setTag(meetingInfo);
+		 llenroll.setTag(meetingInfo);
+		 llundetermined.setTag(meetingInfo);
+		 llview.setTag(meetingInfo);
+		 llrefuse.setTag(meetingInfo);
+		 lledit.setTag(meetingInfo);
+		 lldelete.setTag(meetingInfo);
 		
 		enrollBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		viewBtn.setOnClickListener(new PopupWindowBtnClickListener());
@@ -475,6 +493,13 @@ public class DayFragment extends Fragment {
 		refuseBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		editBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		deletBtn.setOnClickListener(new PopupWindowBtnClickListener());
+		
+		 llenroll.setOnClickListener(new PopupWindowBtnClickListener());
+		 llundetermined.setOnClickListener(new PopupWindowBtnClickListener());
+		 llview.setOnClickListener(new PopupWindowBtnClickListener());
+		 llrefuse.setOnClickListener(new PopupWindowBtnClickListener());
+		 lledit.setOnClickListener(new PopupWindowBtnClickListener());
+		 lldelete.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
@@ -569,7 +594,28 @@ public class DayFragment extends Fragment {
 				case R.id.id_editBtn:
 					editMeeting(mi);
 					break;
-					
+					//报名
+				case R.id.id_enrollLl:
+					enrollMeeting(mi);
+					break;
+				//待定	
+				case R.id.id_undeterminedLl:
+					undeterminedMeeting(mi);
+					break;
+				//查看
+				case R.id.id_viewLl:
+					viewMeeting(mi);
+					break;
+				//拒绝
+				case R.id.id_refuseLl:
+					refuseMeeting(mi);
+					break;
+				case R.id.id_deleteLl:
+					deleteMeeting(mi);
+					break;
+				case R.id.id_editLl:
+					editMeeting(mi);
+					break;	
 				case R.id.id_close:
 					if(null != popupWindow && popupWindow.isShowing()){  
 						popupWindow.dismiss();  
@@ -605,6 +651,7 @@ public class DayFragment extends Fragment {
 							// TODO Auto-generated method stub
 							InfoHelper ih = new InfoHelper();
 							ih.deleteInfo(getActivity(), mi);
+							Main.instance.refreshData(R.id.indicator_day);
 							dialog.dismiss();
 						}
 					}).show();

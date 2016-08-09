@@ -42,6 +42,7 @@ public class EventAddAc extends BaseActivity{
 	private SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");
 	private SimpleDateFormat tformat=new SimpleDateFormat("HH:mm:ss");
 	
+	private TextView headView;
 	private TextView beginText;
 	private TextView endText;
 	
@@ -141,6 +142,15 @@ public class EventAddAc extends BaseActivity{
     	remarkEd = (EditText)findViewById(R.id.event_remarkval);
     	close = (ImageView)findViewById(R.id.event_head_cancel);
     	alertValTv = (TextView)findViewById(R.id.event_alertval);
+    	headView = (TextView)findViewById(R.id.event_head_title);
+    	headView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
     	alertValTv.setOnClickListener(new AlertValClickListener());
     	close.setOnClickListener(new OnClickListener() {
 			
@@ -402,6 +412,7 @@ public class EventAddAc extends BaseActivity{
         	beginDate = date;
         	Date nowDate = DateTimeHelper.GetDateTimeNow();
         	if(beginDate.before(nowDate)){
+        		beginDate = null;
         		UIHelper.ToastMessage(EventAddAc.this, "开始时间不能早于当前时间！");
         		return;
         	}
@@ -413,7 +424,7 @@ public class EventAddAc extends BaseActivity{
         	String[] times = time.split(":");
         	int Itime = Integer.valueOf(times[0])*3600+Integer.valueOf(times[1])*60+Integer.valueOf(times[2]);
         	info.setStart_time(String.valueOf(Itime));
-        	alertbetime = date;
+        	alertbetime = date; 
         }
 
         // Optional cancel listener
@@ -432,6 +443,7 @@ public class EventAddAc extends BaseActivity{
         	Date nowDate = DateTimeHelper.GetDateTimeNow();
         	if(endDate.before(nowDate)){
         		UIHelper.ToastMessage(EventAddAc.this, "开始时间不能早于当前时间！");
+        		endDate =null;
         		return;
         	}
         	

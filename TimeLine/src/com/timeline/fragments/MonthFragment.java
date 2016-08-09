@@ -64,6 +64,7 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -81,6 +82,8 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	private TextView tv_month;
 	private TextView tv_dateText;
 	private MonthDateView monthDateView;
+	private LinearLayout llLayout;
+	private int datewhith,dateheight;
 	
 	private ListView lv_monthContent;
 	
@@ -230,7 +233,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		monthDateView = (MonthDateView) view.findViewById(R.id.monthDateView);
 		tv_month = (TextView) view.findViewById(R.id.id_monthtext);
 		lv_monthContent = (ListView)view.findViewById(R.id.id_contentlist_month);
-		
+		llLayout = (LinearLayout)view.findViewById(R.id.ll_DateView);
 		tv_dateText = (TextView)view.findViewById(R.id.id_dateText);
 		
 		monthDateView.setTextView(tv_month);
@@ -251,7 +254,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		});
 		initValues();
 		RefreshMonthContentList(); 
-		
+
 		return view;
 	}
 
@@ -336,11 +339,8 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 				if (info == null) {
 					return;
 				}
-				if (info.getAlertbeforetime() == null) {
-					showPopupWindow(info);
-				}else {
-					UIHelper.showEventDe(getActivity(),info.getId());
-				}
+				showPopupWindow(info);
+
 			}
 		});
 	}
@@ -428,13 +428,15 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		Button editBtn = (Button)contentView.findViewById(R.id.id_editBtn);
 		Button deletBtn = (Button)contentView.findViewById(R.id.id_deleteBtn);
 		
-		Button closeBtn = (Button)contentView.findViewById(R.id.id_close);
+		ImageButton closeBtn = (ImageButton)contentView.findViewById(R.id.id_close);
 		closeBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		TextView enrollTv = (TextView)contentView.findViewById(R.id.id_enrollTv);//报名
 		TextView viewTv = (TextView)contentView.findViewById(R.id.id_viewTv);//查看
 		TextView undeterminedTv = (TextView)contentView.findViewById(R.id.id_undeterminedTv);//待定
 		TextView refuseTv = (TextView)contentView.findViewById(R.id.id_refuseTv);//拒绝
+		TextView deleteTv = (TextView)contentView.findViewById(R.id.id_deleteTv);//删除
+		TextView editTv = (TextView)contentView.findViewById(R.id.id_editTv);//编辑
 		
 		MeetingInfo meetingInfo = info;
 		if(meetingInfo == null){
@@ -467,6 +469,20 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 			llenroll.setVisibility(View.GONE);
 			llundetermined.setVisibility(View.GONE);
 			llrefuse.setVisibility(View.GONE);
+			
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			//此处相当于布局文件中的Android:layout_gravity属性  
+			//此处相当于布局文件中的Android:layout_gravity属性  
+			lp.gravity = Gravity.LEFT;  
+			lp.leftMargin = 80;
+			deletBtn.setLayoutParams(lp);  
+			deleteTv.setLayoutParams(lp);  
+			
+			LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			lp1.gravity = Gravity.RIGHT;  
+			lp1.rightMargin = 80;
+			editBtn.setLayoutParams(lp1);  
+			editTv.setLayoutParams(lp1);
 		}
 
 		enrollBtn.setTag(meetingInfo);
@@ -475,6 +491,12 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		refuseBtn.setTag(meetingInfo);
 		editBtn.setTag(meetingInfo);
 		deletBtn.setTag(meetingInfo);
+		 llenroll.setTag(meetingInfo);
+		 llundetermined.setTag(meetingInfo);
+		 llview.setTag(meetingInfo);
+		 llrefuse.setTag(meetingInfo);
+		 lledit.setTag(meetingInfo);
+		 lldelete.setTag(meetingInfo);
 		
 		enrollBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		viewBtn.setOnClickListener(new PopupWindowBtnClickListener());
@@ -482,6 +504,13 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		refuseBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		editBtn.setOnClickListener(new PopupWindowBtnClickListener());
 		deletBtn.setOnClickListener(new PopupWindowBtnClickListener());
+		
+		 llenroll.setOnClickListener(new PopupWindowBtnClickListener());
+		 llundetermined.setOnClickListener(new PopupWindowBtnClickListener());
+		 llview.setOnClickListener(new PopupWindowBtnClickListener());
+		 llrefuse.setOnClickListener(new PopupWindowBtnClickListener());
+		 lledit.setOnClickListener(new PopupWindowBtnClickListener());
+		 lldelete.setOnClickListener(new PopupWindowBtnClickListener());
 		
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
@@ -580,7 +609,28 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 				case R.id.id_editBtn:
 					editMeeting(mi);
 					break;
-					
+					//报名
+					case R.id.id_enrollLl:
+						enrollMeeting(mi);
+						break;
+					//待定	
+					case R.id.id_undeterminedLl:
+						undeterminedMeeting(mi);
+						break;
+					//查看
+					case R.id.id_viewLl:
+						viewMeeting(mi);
+						break;
+					//拒绝
+					case R.id.id_refuseLl:
+						refuseMeeting(mi);
+						break;
+					case R.id.id_deleteLl:
+						deleteMeeting(mi);
+						break;
+					case R.id.id_editLl:
+						editMeeting(mi);
+						break;	
 				case R.id.id_close:
 					if(null != popupWindow && popupWindow.isShowing()){  
 						popupWindow.dismiss();  
@@ -616,6 +666,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 							// TODO Auto-generated method stub
 							InfoHelper ih = new InfoHelper();
 							ih.deleteInfo(getActivity(), mi);
+							mMonthdrawHandler.sendEmptyMessage(1);
 							dialog.dismiss();
 						}
 					}).show();
