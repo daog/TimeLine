@@ -136,13 +136,13 @@ public class MonthDateView extends View {
 			}
 			mPaint.setTextSize(45);
 			if (dayString.length()==1) {
-				canvas.drawText(dayString, startX, startY+5, mPaint);
+				canvas.drawText(dayString, startX, startY+10, mPaint);
 			}else {
-				canvas.drawText(dayString, startX-5, startY+5, mPaint);
+				canvas.drawText(dayString, startX-5, startY+10, mPaint);
 			}
 			
-			mPaint.setTextSize(30);
-			canvas.drawText(lunarDayStr, lunarStartX+5, lunarStartY+8, mPaint);
+			mPaint.setTextSize(26);
+			canvas.drawText(lunarDayStr, lunarStartX+5, lunarStartY+15, mPaint);
 			if(tv_month != null){
 				tv_month.setText( getmSelMonthText(mSelYear, mSelMonth));
 			}

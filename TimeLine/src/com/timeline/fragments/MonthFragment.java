@@ -15,7 +15,9 @@ import org.json.JSONObject;
 
 import com.android.volley.VolleyError;
 import com.timeline.common.DateTimeHelper;
+import com.timeline.common.DensityUtil;
 import com.timeline.common.JsonToEntityUtils;
+import com.timeline.common.StringUtils;
 import com.timeline.common.UIHelper;
 import com.timeline.controls.MonthDateView;
 import com.timeline.controls.MonthDateView.DateClick;
@@ -470,19 +472,27 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 			llundetermined.setVisibility(View.GONE);
 			llrefuse.setVisibility(View.GONE);
 			
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(DensityUtil.dip2px(getActivity(), 25),DensityUtil.dip2px(getActivity(), 25));  
 			//此处相当于布局文件中的Android:layout_gravity属性  
 			//此处相当于布局文件中的Android:layout_gravity属性  
 			lp.gravity = Gravity.LEFT;  
 			lp.leftMargin = 80;
 			deletBtn.setLayoutParams(lp);  
-			deleteTv.setLayoutParams(lp);  
+			LinearLayout.LayoutParams lpT = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT); 
+			lpT.gravity = Gravity.LEFT;  
+			lpT.leftMargin = 80;
+			lpT.topMargin = DensityUtil.dip2px(getActivity(), 3);
+			deleteTv.setLayoutParams(lpT);  
 			
-			LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(DensityUtil.dip2px(getActivity(), 25),DensityUtil.dip2px(getActivity(), 25));  
 			lp1.gravity = Gravity.RIGHT;  
 			lp1.rightMargin = 80;
 			editBtn.setLayoutParams(lp1);  
-			editTv.setLayoutParams(lp1);
+			LinearLayout.LayoutParams lpT1 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT); 
+			lpT1.gravity = Gravity.RIGHT;  
+			lpT1.rightMargin = 80;
+			lpT1.topMargin = DensityUtil.dip2px(getActivity(), 3);
+			editTv.setLayoutParams(lpT1);
 		}
 
 		enrollBtn.setTag(meetingInfo);
@@ -514,7 +524,11 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 		
 		subjectTv.setText(meetingInfo.getSubject());
 		detailTv.setText(meetingInfo.getDescribe());
-		sponsorTv.setText(meetingInfo.getSponsor());
+		if (StringUtils.isEmpty(meetingInfo.getSponsor())) {
+			sponsorTv.setText("个人事件");
+		}else {
+			sponsorTv.setText(meetingInfo.getSponsor());
+		}
 		if (meetingInfo.getStart_date()!=null&&meetingInfo.getStart_time()!=null&&
 				meetingInfo.getEnd_date()!=null&&meetingInfo.getEnd_time()!=null) {
 			dateTimeTv.setText(DateTimeHelper.Str2Date(meetingInfo.getStart_date()) + " " +

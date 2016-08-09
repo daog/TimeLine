@@ -1,5 +1,6 @@
 package com.timeline.adapter;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import com.timeline.main.R;
 import com.timeline.calendar.SpecialCalendar;
+import com.timeline.common.DateTimeHelper;
 import com.timeline.common.DensityUtil;
 import com.timeline.common.LunarCalendar;
 
@@ -263,6 +265,15 @@ public class DaySwipDateAdapter extends BaseAdapter {
 		if (position ==0||position == 6 ) {
 			tvCalendar.setTextColor(Color.parseColor("#db4043"));
 			tvCalendarLunar.setTextColor(Color.parseColor("#db4043"));
+		}
+		DecimalFormat df = new DecimalFormat("00");
+		String mmonth = df.format(Integer.parseInt(currentMonth));
+		String mmday = df.format(Integer.parseInt(dayNumber[position].toString()));
+		String dateStr =String.valueOf(currentYear)+"-"+mmonth
+				+"-"+mmday;
+		if (dateStr.equals(DateTimeHelper.getDateNow())) {
+			tvCalendar.setTextColor(Color.RED);
+			tvCalendarLunar.setTextColor(Color.RED);
 		}
 		return convertView;
 	}

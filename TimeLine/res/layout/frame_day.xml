@@ -8,7 +8,7 @@
         android:id="@+id/id_fragment_content"  
         android:name="com.timeline.fragments.SlipWeekFragment"  
         android:layout_width="fill_parent"  
-        android:layout_height="80dp" /> 
+        android:layout_height="70dp" /> 
 	<fragment  
         android:id="@+id/id_fragment_shedule"  
         android:name="com.timeline.fragments.DayFragment"  

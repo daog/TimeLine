@@ -363,6 +363,18 @@ public class MeetingDetailAc extends BaseActivity{
 		guestlistview.setAdapter(guestAdapter);
 	}
 	
+	
+	  public void up_Click(View v){
+		  upView.performClick();
+	  }
+	
+	  public void col_Click(View v){
+		  collectView.performClick();
+	  }
+	  
+	  public void refuse_Click(View v){
+		  refuseView.performClick();
+	  }
 	   //Web视图  
     private class HelloWebViewClient extends WebViewClient {  
         @Override 

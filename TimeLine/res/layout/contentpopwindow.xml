@@ -179,8 +179,8 @@
 
                 <Button
                     android:id="@+id/id_enrollBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/meeting_up"
                     android:gravity="center_horizontal|center_vertical" >
@@ -190,6 +190,7 @@
                     android:id="@+id/id_enrollTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="报名" >
                 </TextView>
@@ -204,8 +205,8 @@
 
                 <Button
                     android:id="@+id/id_viewBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/icon_viewinfo"
                     android:gravity="center_horizontal|center_vertical" >
@@ -215,6 +216,7 @@
                     android:id="@+id/id_viewTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="查看" >
                 </TextView>
@@ -229,8 +231,8 @@
 
                 <Button
                     android:id="@+id/id_undeterminedBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/icon_indeterminate"
                     android:gravity="center_horizontal|center_vertical" >
@@ -240,6 +242,7 @@
                     android:id="@+id/id_undeterminedTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="待定" >
                 </TextView>
@@ -254,8 +257,8 @@
 
                 <Button
                     android:id="@+id/id_refuseBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/icon_refuse"
                     android:gravity="center_horizontal|center_vertical" >
@@ -265,6 +268,7 @@
                     android:id="@+id/id_refuseTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="拒绝" >
                 </TextView>
@@ -279,8 +283,8 @@
 
                 <Button
                     android:id="@+id/id_deleteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/icon_meeeting_refyes"
                     android:gravity="center_horizontal|center_vertical" >
@@ -290,6 +294,7 @@
                     android:id="@+id/id_deleteTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="删除" >
                 </TextView>
@@ -305,8 +310,8 @@
 
                 <Button
                     android:id="@+id/id_editBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/icon_ed"
                     android:gravity="center_horizontal|center_vertical" >
@@ -316,6 +321,7 @@
                     android:id="@+id/id_editTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_horizontal"
                     android:text="编辑" >
                 </TextView>

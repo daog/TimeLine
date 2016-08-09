@@ -352,6 +352,14 @@ public class EventAddAc extends BaseActivity{
     	return 0;
     }
     
+    public void close_Click(View v){
+    	finish();
+   }
+    
+    public void save_Click(View v){
+    	btnSave(v);
+   }
+    
     public void Repeat_Click(View v){
     	 AlertDialog ad =new AlertDialog.Builder(EventAddAc.this).setTitle("选择重复项")
     			    .setSingleChoiceItems(repites,OnClick.getIndex(),OnClick).create();

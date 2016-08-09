@@ -176,13 +176,14 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		};
 		instance = this;	
         BinderService();
-        if (currIndex == 1) {
-        	week.performClick();
-		}else if (currIndex == 2) {
-			month.performClick();
-		}else if (currIndex == 3) {
-			meeting.performClick();
-		}
+        week.performClick();
+//        if (currIndex == 1) {
+//        	week.performClick();
+//		}else if (currIndex == 2) {
+//			month.performClick();
+//		}else if (currIndex == 3) {
+//			meeting.performClick();
+//		}
     }
     
 	/*
@@ -403,6 +404,21 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	  public void Signin_Click(View v){
 		  UIHelper.showGuSign(meetid,this);
 	  }
+	  
+	  public void search_Click(View v){
+		  UIHelper.showSearch(this);
+	  }
+	  public void info_Click(View v){
+			if (AppContext.getInstance().getIslogin()) {
+				if (AppContext.getInstance().jonbase!=null) {
+					UIHelper.showMySign(Main.this);
+				}
+				
+			}else {
+				UIHelper.showMySign(Main.this);
+			}
+	  }
+	  
 		/**
 		 * 获取一周内所有天的日期字符串
 		 * @return 一周内所有天的日期字符串

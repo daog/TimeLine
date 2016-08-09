@@ -155,15 +155,17 @@
               	android:gravity="center_vertical"
               	android:orientation="horizontal"
 	        	android:state_enabled="true"
-              	android:layout_weight="1">               	
-               <ImageView
-                android:id="@+id/img_join"
-    	        android:layout_width="wrap_content"
-    	        android:layout_height="wrap_content"
-    	        android:layout_alignParentLeft="true"
-    	        android:layout_centerVertical="true"
-    	        android:layout_marginLeft="20dip"
-    	        android:src="@drawable/meeting_up" />
+              	android:layout_weight="1"
+              	android:clickable="true"
+        		android:onClick="up_Click">
+
+                <ImageView
+                    android:id="@+id/img_join"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dip"
+                    android:src="@drawable/meeting_up" />
+
                 <TextView
                     android:id="@+id/meeting_join"
                     style="@style/TextPagerMenuTextStyle"
@@ -172,7 +174,6 @@
 	                android:layout_width="wrap_content"
 	    			android:layout_height="wrap_content"
             		android:text="报名"
-        			android:clickable="true"
         			android:layout_marginLeft="10dip"
             		/>                
         	 </LinearLayout>
@@ -192,11 +193,13 @@
               	android:gravity="center_vertical"
               	android:orientation="horizontal"
 	        	android:state_enabled="false"
+	        	android:clickable="true"
+        		android:onClick="col_Click"
               	android:layout_weight="1">             
          	     	               <ImageView
          	    android:id="@+id/img_get"
-    	        android:layout_width="wrap_content"
-    	        android:layout_height="wrap_content"
+    	        android:layout_width="25dp"
+                android:layout_height="25dp"
     	        android:layout_alignParentLeft="true"
     	        android:layout_centerVertical="true"
     	        android:layout_marginLeft="20dip"
@@ -209,7 +212,6 @@
 	                android:layout_width="wrap_content"
 	    			android:layout_height="wrap_content"
             		android:text="收藏"
-        			android:clickable="true"
         			android:layout_marginLeft="10dip"
             		/>   
       	
@@ -231,11 +233,13 @@
               	android:gravity="center_vertical"
               	android:orientation="horizontal"
 	        	android:state_enabled="false"
+	        	android:clickable="true"
+        		android:onClick="refuse_Click"
               	android:layout_weight="1">         	    
              <ImageView
                  android:id="@+id/img_refuse"
-    	        android:layout_width="wrap_content"
-    	        android:layout_height="wrap_content"
+    	        android:layout_width="25dp"
+                android:layout_height="25dp"
     	        android:layout_alignParentLeft="true"
     	        android:layout_centerVertical="true"
     	        android:layout_marginLeft="20dip"
@@ -248,7 +252,6 @@
 	                android:layout_width="wrap_content"
 	    			android:layout_height="wrap_content"
             		android:text="拒绝"
-        			android:clickable="true" 
         			android:layout_marginLeft="10dip" />   
 
         	 </LinearLayout>

@@ -12,7 +12,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@color/red" >
-
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="150dp"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:onClick="close_Click" >
         <ImageView
             android:id="@+id/event_head_cancel"
             android:layout_width="60dp"
@@ -30,10 +35,17 @@
             android:layout_toRightOf="@id/event_head_cancel"
             android:text="新建活动"
             android:textSize="@dimen/text_size_17" />
-
+</RelativeLayout>
+   <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="100dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:onClick="save_Click" >
         <TextView
             android:id="@+id/event_head_save"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -43,6 +55,7 @@
             android:clickable="true"
             android:onClick="btnSave"
             android:text="保存" />
+    </RelativeLayout>
     </RelativeLayout>
 <ScrollView 
     android:layout_width="fill_parent"
