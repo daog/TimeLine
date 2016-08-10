@@ -75,7 +75,9 @@ public class SettingAc  extends BaseActivity{
 
 			};
 	  }
-	  
+	  public void close_Click(View v){
+		  finish();
+	  }
 	  private void InitView(){
 			headText = (TextView)findViewById(R.id.main_head_title);
 			headText.setText("…Ë÷√”Î∞Ô÷˙");

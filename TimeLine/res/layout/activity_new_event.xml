@@ -20,10 +20,11 @@
         android:onClick="close_Click" >
         <ImageView
             android:id="@+id/event_head_cancel"
-            android:layout_width="60dp"
-            android:layout_height="18dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_centerVertical="true"
-            android:scaleType="center"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
             android:clickable="true"
             android:onClick="btnBack"
             android:src="@drawable/icon_ev_close" />
@@ -33,6 +34,7 @@
             style="@style/main_head_title"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/event_head_cancel"
+            android:layout_marginLeft="15dp"
             android:text="新建活动"
             android:textSize="@dimen/text_size_17" />
 </RelativeLayout>

@@ -59,10 +59,15 @@ public class MySigninReadyAc extends BaseActivity{
 	  }
 	  
 	  public void btn_Myinfo(View v){
+		  finish();
 		  UIHelper.showMyInfo(this,"","");
 	  }
 	  public void btn_Collect(View v){
 		  UIHelper.showHistory("collect", MySigninReadyAc.this);
+	  }
+	  
+	  public void close_Click(View v){
+		  finish();
 	  }
 	  private void InitView() {
 		  headImg = (CircleImageView)findViewById(R.id.my_head_ima);

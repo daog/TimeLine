@@ -45,7 +45,9 @@ public class InteractionAc extends BaseActivity{
         initView();
         
     }
-    
+	  public void close_Click(View v){
+		  finish();
+	  }
     private void initView(){
     	webView = (WebView)findViewById(R.id.webview);
     	 //设置WebView属性，能够执行Javascript脚本  

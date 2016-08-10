@@ -82,7 +82,9 @@ public class SettingPawAc extends BaseActivity {
 		}
 	};
 	}
-	
+	  public void close_Click(View v){
+		  finish();
+	  }
 	public void Btn_GetVer(View v) {
 		HttpFactory.getSend_SMS(SettingPawAc.this, AppContext.getInstance().getAccount(), "2", smsvolleyListener);
 	}

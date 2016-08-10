@@ -229,6 +229,10 @@ public class MeetingDetailAc extends BaseActivity{
 	
 		HttpFactory.Meeting_Detail(mid, volleyListener);
 	}
+	
+	  public void close_Click(View v){
+		  finish();
+	  }
 	/*
 	 * 初始化各栏目数据项
 	 */

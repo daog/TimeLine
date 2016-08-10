@@ -141,7 +141,9 @@ public class MyInfoAc extends BaseActivity {
 
 	};
 	}
-
+	  public void close_Click(View v){
+		  finish();
+	  }
 	private void setData() {
 		  newUser = AppContext.getUser();
 		  Bitmap bm = BitmapFactory.decodeFile(AppContext.fileName); 

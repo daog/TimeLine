@@ -47,7 +47,9 @@ public class AdviceAc extends BaseActivity {
 		}
 	};
 	}
-
+	  public void close_Click(View v){
+		  finish();
+	  }
 	private void InitView() {
 		contentText = (EditText) findViewById(R.id.text_advice);
 		btnOK = (Button) findViewById(R.id.advice_btn_ok);
