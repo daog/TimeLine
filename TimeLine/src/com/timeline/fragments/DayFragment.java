@@ -32,6 +32,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -285,22 +286,23 @@ public class DayFragment extends Fragment {
 			}
 		}
 	};
-
 	private void drawMeeting(MeetingInfo[] meetings) {
 		if (meetings.length <=0) {
 			return;
 		}
-		CompareTime(meetings);
 		WindowManager wm = (WindowManager) getActivity()
                 .getSystemService(Context.WINDOW_SERVICE);
 	    int width = wm.getDefaultDisplay().getWidth();
 	    
 	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
-		
-		for (int i = 1; i < meetings.length+1; i++) {
-			int num  = 1;
+	    
+	    List<RectF> zones = new ArrayList<RectF>();
+
 			for (final MeetingInfo info:meetings) {
-					if (info.getTimeno() == i) {
+						
+						RectF reF = new RectF();
+				
+						int num = 1;
 						int start = Integer.valueOf(info.getStart_time());
 						int end = Integer.valueOf(info.getEnd_time());
 						//添加事件1
@@ -323,6 +325,10 @@ public class DayFragment extends Fragment {
 								layWidth, dip2px(getActivity(),
 										values[1] - values[0]));
 						p.topMargin = dip2px(getActivity(), values[0]);
+						while (isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+								values[0])) {
+							num ++;
+						}
 						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
 						tv.setTag(info);
 						tv.setOnClickListener(new OnClickListener() {
@@ -332,16 +338,75 @@ public class DayFragment extends Fragment {
 								// TODO Auto-generated
 								// method stub
 									showPopupWindow(v);
+							        int left = (int) v.getX();
+							        int top = (int) v.getY();
 								
 							}
 						});
 						mEventContainer.addView(tv, p);
-						num++;
-					}
-			}
-			
+						reF.top = values[0];
+						reF.left = 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1);
+						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
+						reF.bottom = values[1];
+						zones.add(reF);
 		}
 	}
+//	private void drawMeeting(MeetingInfo[] meetings) {
+//		if (meetings.length <=0) {
+//			return;
+//		}
+//		CompareTime(meetings);
+//		WindowManager wm = (WindowManager) getActivity()
+//                .getSystemService(Context.WINDOW_SERVICE);
+//	    int width = wm.getDefaultDisplay().getWidth();
+//	    
+//	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
+//		
+//		for (int i = 1; i < meetings.length+1; i++) {
+//			int num  = 1;
+//			for (final MeetingInfo info:meetings) {
+//					if (info.getTimeno() == i) {
+//						int start = Integer.valueOf(info.getStart_time());
+//						int end = Integer.valueOf(info.getEnd_time());
+//						//添加事件1
+//						//开始时间：，结束时间：
+//						int[] values = new int[] { start/60,end/60 };
+//						System.out.println("values=====: "
+//								+ Arrays.toString(values));
+//						TextView tv = new TextView(getActivity());
+//						tv.setBackgroundColor(getResources().getColor(
+//								R.color.tasking));
+//						if (info.getAlertbeforetime()!=null) {
+//							tv.setBackgroundColor(getResources().getColor(R.color.week_red));
+//						}
+//						tv.setTextColor(Color.WHITE);
+//						tv.setText(info.getSubject());
+//						tv.setGravity(Gravity.CENTER); 
+//						tv.setTextSize(20);
+//						tv.setPadding(24, 0, 24, 0);
+//						RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
+//								layWidth, dip2px(getActivity(),
+//										values[1] - values[0]));
+//						p.topMargin = dip2px(getActivity(), values[0]);
+//						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
+//						tv.setTag(info);
+//						tv.setOnClickListener(new OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								// TODO Auto-generated
+//								// method stub
+//									showPopupWindow(v);
+//								
+//							}
+//						});
+//						mEventContainer.addView(tv, p);
+//						num++;
+//					}
+//			}
+//			
+//		}
+//	}
 	
 	
 	private void getMomentsList() {
@@ -750,4 +815,21 @@ public class DayFragment extends Fragment {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dipValue * scale + 0.5f);
 	}
+	
+	
+    private boolean isHasView( List<RectF> zones,int x ,int y) {
+
+        for (int i = 0; i < zones.size(); i++) {
+			int left = (int) zones.get(i).left;
+			int top =  (int) zones.get(i).top;
+			int right =  (int) zones.get(i).right;
+			int bottom =  (int) zones.get(i).bottom;
+			if ( y >= top && y <= bottom && x >= left
+					&& x <= right) {
+				return true;
+			}
+		}
+        return false;
+    }
+
 }
