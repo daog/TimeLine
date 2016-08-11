@@ -418,12 +418,12 @@ public class EventAddAc extends BaseActivity{
         public void onDateTimeSet(Date date)
         {
         	beginDate = date;
-        	Date nowDate = DateTimeHelper.GetDateTimeNow();
-        	if(beginDate.before(nowDate)){
-        		beginDate = null;
-        		UIHelper.ToastMessage(EventAddAc.this, "开始时间不能早于当前时间！");
-        		return;
-        	}
+//        	Date nowDate = DateTimeHelper.GetDateTimeNow();
+//        	if(beginDate.before(nowDate)){
+//        		beginDate = null;
+//        		UIHelper.ToastMessage(EventAddAc.this, "开始时间不能早于当前时间！");
+//        		return;
+//        	}
         	beginText.setText(currentFormatter.format(date));
         	String startSt = DateTimeHelper.DateToString(date,"yyyy-MM-dd");
         	String startStr = String.valueOf(DateTimeHelper.DayStringToDate(startSt).getTime()/1000);

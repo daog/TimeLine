@@ -8,7 +8,7 @@ import com.timeline.common.StringUtils;
 
 import android.R.integer;
 
-public class MeetingInfo implements Serializable {
+public class MeetingInfo implements Serializable ,Comparable {
 	private String id;
     private String subject;
     private String describe;
@@ -27,9 +27,28 @@ public class MeetingInfo implements Serializable {
 
 	private String IncludeDayStr;//会议经过的日期（例如会议开始日期是2016-07-24，结束日期是2016-07－30，则介于2016-07-24和2016-07-30之间的每一天都可能是该属性的值）
 
+	private long timelong;//时间长短
     
     
-    public MeetingInfo() {
+    public String getSponsor_name() {
+		return sponsor_name;
+	}
+
+	public void setSponsor_name(String sponsor_name) {
+		this.sponsor_name = sponsor_name;
+	}
+
+	public long getTimelong() {
+		long start=Long.valueOf(start_time);
+		long end=Long.valueOf(end_time);
+		return (end-start);
+	}
+
+	public void setTimelong(long timelong) {
+		this.timelong = timelong;
+	}
+
+	public MeetingInfo() {
     }
 
     public MeetingInfo(String id) {
@@ -258,4 +277,11 @@ public class MeetingInfo implements Serializable {
     public void setEdit_TX3(String Edit_TX3) {
         this.Edit_TX3 = Edit_TX3;
     }
+
+	@Override
+	public int compareTo(Object another) {
+		// TODO Auto-generated method stub
+		MeetingInfo in = (MeetingInfo)another;
+		return getTimelong()>in.getTimelong()?0:(getTimelong()==in.getTimelong()?-1:0);
+	}
 }

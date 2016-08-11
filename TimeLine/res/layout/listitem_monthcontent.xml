@@ -31,9 +31,9 @@
         android:layout_width="5dp"
         android:background="@color/green"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="1dp">
+        android:layout_marginBottom="3dp">
     </LinearLayout>
 	<TextView 
 	    android:id="@+id/id_contentTitle"

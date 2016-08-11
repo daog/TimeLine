@@ -297,7 +297,8 @@ public class DayFragment extends Fragment {
 	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
 	    
 	    List<RectF> zones = new ArrayList<RectF>();
-
+	    Arrays.sort(meetings);
+	    int no=0; 
 			for (final MeetingInfo info:meetings) {
 						
 						RectF reF = new RectF();
@@ -326,7 +327,8 @@ public class DayFragment extends Fragment {
 										values[1] - values[0]));
 						p.topMargin = dip2px(getActivity(), values[0]);
 						while (isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
-								values[0])) {
+								values[0])||isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+										values[1])) {
 							num ++;
 						}
 						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
@@ -338,8 +340,6 @@ public class DayFragment extends Fragment {
 								// TODO Auto-generated
 								// method stub
 									showPopupWindow(v);
-							        int left = (int) v.getX();
-							        int top = (int) v.getY();
 								
 							}
 						});
@@ -349,6 +349,7 @@ public class DayFragment extends Fragment {
 						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
 						reF.bottom = values[1];
 						zones.add(reF);
+						no++;
 		}
 	}
 //	private void drawMeeting(MeetingInfo[] meetings) {
@@ -831,5 +832,24 @@ public class DayFragment extends Fragment {
 		}
         return false;
     }
+    
+	/**
+	 * 区分所有时间的时间段，便于绘图计算间隔
+	 * @param meetings
+	 */
+	private boolean CompareEveryTime(MeetingInfo[] meetings,int no,int i){
+		int startj = Integer.valueOf(meetings[no].getStart_time());
+		int endj = Integer.valueOf(meetings[no].getEnd_time());
+			if (i !=no) {
+				int starti = Integer.valueOf(meetings[i].getStart_time());
+				int endi = Integer.valueOf(meetings[i].getEnd_time());
+				if (!(starti > endj || endi < startj)) {
+					return true;
+				}
+			}
+		return false;
+
+		
+	}
 
 }

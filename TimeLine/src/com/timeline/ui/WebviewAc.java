@@ -85,6 +85,10 @@ public class WebviewAc extends BaseActivity{
 
 
     }
+    
+	  public void close_Click(View v){
+		  finish();
+	  }
     //Web ”Õº  
         private class HelloWebViewClient extends WebViewClient {  
             @Override 
