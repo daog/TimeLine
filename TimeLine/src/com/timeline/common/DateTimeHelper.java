@@ -450,7 +450,7 @@ public class DateTimeHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sdf = new SimpleDateFormat("MMMMM", Locale.US);
+		sdf = new SimpleDateFormat("MMM", Locale.US);
 		return sdf.format(date);
 
 	}

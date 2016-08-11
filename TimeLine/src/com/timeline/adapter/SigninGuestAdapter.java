@@ -1,8 +1,20 @@
 package com.timeline.adapter;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
+import org.xutils.x;
+import org.xutils.common.util.DensityUtil;
+import org.xutils.image.ImageOptions;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.Config;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +22,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.timeline.app.AppContext;
 import com.timeline.bean.SigninPerson;
 import com.timeline.bean.guest;
+import com.timeline.common.ImageUtils;
 import com.timeline.main.R;
 import com.timeline.main.R.color;
 import com.timeline.widget.CircleImageView;
@@ -58,14 +76,14 @@ public class SigninGuestAdapter extends BaseAdapter {
 	public long getItemId(int arg0) {
 		return 0;
 	}
-
+	ListItemView listItemView = null;
 	/**
 	 * ListView Item设置
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// 自定义视图
-		ListItemView listItemView = null;
+		listItemView = null;
 
 		if (convertView == null) {
 			// 获取list_item布局文件的视图
@@ -111,7 +129,55 @@ public class SigninGuestAdapter extends BaseAdapter {
 		listItemView.name.setTag(gu);// 设置隐藏参数(实体类)
 		listItemView.no.setText(String.valueOf(position+1));
 
+		ImageRequest imageRequest = new ImageRequest(  
+				"http://event.gooddr.com/api"+gu.getAvatar(),  
+		        new Response.Listener<Bitmap>() {  
+		            @Override  
+		            public void onResponse(Bitmap response) {  
+		                  try {
+		                	  listItemView.image.setImageBitmap(response);
+		                	  listItemView.image.invalidate();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		            }  
+		        }, 0, 0, Config.RGB_565, new Response.ErrorListener() {  
+		            @Override  
+		            public void onErrorResponse(VolleyError error) {  
+		            
+		            }  
+		        });  
+
+		imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+		AppContext.getInstance().mQueue.add(imageRequest);
+
 
 		return convertView;
 	}
+	
+	    /**
+	     * 到Url去下載圖片回傳BITMAP回來
+	     * @param imgUrl
+	     * @return
+	     */
+	    private Bitmap getBitmapFromUrl(String imgUrl) {
+	                URL url;
+	                Bitmap bitmap = null;
+	                try {
+	                        url = new URL("http://event.gooddr.com/api"+imgUrl);
+	                        InputStream is = url.openConnection().getInputStream();
+	                        BufferedInputStream bis = new BufferedInputStream(is);
+	                        bitmap = BitmapFactory.decodeStream(bis);
+	                        bis.close();
+	                } catch (MalformedURLException e) {
+	                        e.printStackTrace();
+	                } catch (IOException e) {
+	                        e.printStackTrace();
+	                }
+	                return bitmap;
+	        }
+
 }

@@ -352,17 +352,15 @@ public class Main extends BaseActivity implements FragmentCallBack{
 					String res = myJsonObject.getString("re_st");
 					if (res.equals("success")) {
 						String rest = myJsonObject.getString("re_info");
-						JSONObject meetingObject = new JSONObject(rest);
 						MeetingInfo[] meetingdes = JsonToEntityUtils
-								.jsontoMeetingInfo(meetingObject
-										.getString("meeting_info"));
+								.jsontoMeetingInfo(rest);
 						nowDescribe = meetingdes[0];
 						if (nowDescribe != null) {
 							String datestr = nowDescribe.getStart_date();
-							Date date = new Date(Long.valueOf(datestr));
+							Date date = new Date(Long.valueOf(datestr)*1000);
 							String month = DateTimeHelper.getMonthEn(String.valueOf(DateTimeHelper.getMonth(date)));
 							String year = String.valueOf(DateTimeHelper.getYear(date));
-							dateView.setText(DateTimeHelper.getDay(date));
+							dateView.setText(String.valueOf(DateTimeHelper.getDay(date)));
 							monthView.setText(month+"."+year);
 							subView.setText(nowDescribe.getSubject());
 							sponView.setText(nowDescribe.getSponsor());

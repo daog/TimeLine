@@ -7,30 +7,40 @@ import java.util.List;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.timeline.adapter.SigninGuestAdapter;
+import com.timeline.app.AppContext;
 import com.timeline.bean.MeetingInfo;
 import com.timeline.bean.ReturnInfo;
 import com.timeline.bean.ReturnMsg;
 import com.timeline.bean.SigninPerson;
 import com.timeline.bean.guest;
 import com.timeline.common.JsonToEntityUtils;
+import com.timeline.common.StringUtils;
 import com.timeline.common.UIHelper;
 import com.timeline.interf.VolleyListenerInterface;
 import com.timeline.main.R;
 import com.timeline.webapi.HttpFactory;
+import com.timeline.widget.CircleImageView;
 
 public class GuestSigninAc extends BaseActivity{
 	
 	private ImageView signView;
 	private ImageView readysignView;
+	private RelativeLayout rlmy;
+	private TextView siginnotxt;
+	private CircleImageView myhead;
 	
 	private ListView guestsView;
 	private SigninGuestAdapter guestAdapter;
@@ -58,6 +68,11 @@ public class GuestSigninAc extends BaseActivity{
 	  guestsView = (ListView)findViewById(R.id.signin_listview);
 	  signView = (ImageView)findViewById(R.id.signin_head_ima);
 	  readysignView = (ImageView)findViewById(R.id.signin_head_ima1);
+	  rlmy = (RelativeLayout)findViewById(R.id.re_tabpeople_job);
+	  siginnotxt = (TextView)findViewById(R.id.item_signin_no);
+	  myhead = (CircleImageView)findViewById(R.id.item_signin_ima);
+	  Bitmap bm = BitmapFactory.decodeFile(AppContext.fileName); 
+	  myhead.setImageBitmap(bm);//°ó¶¨Í¼Æ¬
 	  signView.setOnClickListener(new OnClickListener() {
 		
 		@Override
@@ -70,6 +85,10 @@ public class GuestSigninAc extends BaseActivity{
 	});
 			  
 }
+	  public void btn_close(View v)
+	  {
+		  finish();
+	  }
   private void InitData() {
 	  PersonsList = new ArrayList<SigninPerson>();
 	  guestAdapter = new SigninGuestAdapter(GuestSigninAc.this, PersonsList, R.layout.listitem_signin);
@@ -90,7 +109,18 @@ public class GuestSigninAc extends BaseActivity{
 					PersonsList = Arrays.asList(persons);
 					guestAdapter.listItems = PersonsList;
 					guestAdapter.notifyDataSetChanged();
-			}
+					String userNoString =listJsonObject.getString("user_sign_in");
+					if (!StringUtils.isEmpty(userNoString)) {
+						readysignView.setVisibility(View.VISIBLE);
+						signView.setVisibility(View.GONE);
+						signView.setImageDrawable(getResources().getDrawable(R.drawable.icon_signin_ready));
+						rlmy.setVisibility(View.VISIBLE);
+					}
+				}
+				else {
+					UIHelper.ToastMessage(GuestSigninAc.this, myJsonObject.getString("re_info"));	
+				}
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -114,6 +144,7 @@ public class GuestSigninAc extends BaseActivity{
 					readysignView.setVisibility(View.VISIBLE);
 					signView.setVisibility(View.GONE);
 					signView.setImageDrawable(getResources().getDrawable(R.drawable.icon_signin_ready));
+					HttpFactory.getMeetingSignPerson(meetid, meetingSignPervolleyListener);
 				}
 				UIHelper.ToastMessage(GuestSigninAc.this,info.getRe_info().toString());
 			} catch (Exception e) {

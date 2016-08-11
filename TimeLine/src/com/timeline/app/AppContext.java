@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.xutils.x;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.timeline.bean.JobBase;
@@ -115,6 +117,7 @@ public class AppContext  extends Application{
 		tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
 		AppContext.SetIMEI(tm.getDeviceId());
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
+		 x.Ext.init(this);
 		infohelper = new InfoHelper();
 	}
 	
