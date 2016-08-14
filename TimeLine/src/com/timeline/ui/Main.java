@@ -297,7 +297,19 @@ public class Main extends BaseActivity implements FragmentCallBack{
 
 					}
 					for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
-						if (ele.getStartDateStr("").equals(daydate)) {
+						if (DateTimeHelper.isInDate(daydate, ele.getStartDate(),
+								ele.getEndDate())){
+							if (ele.getStartDateStr("").equals(ele.getEndDateStr(""))) {								
+								ele.setDaystate(1);
+							}else {
+								if (ele.getStartDateStr("").equals(daydate)) {
+									ele.setDaystate(2);
+								}else if (ele.getEndDateStr("").equals(daydate)) {
+									ele.setDaystate(3);
+								}else {
+									ele.setDaystate(4);
+								}
+							}
 							melist.add(ele);
 						}
 						

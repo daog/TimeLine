@@ -368,10 +368,23 @@ public class DayFragment extends Fragment {
 			for (final MeetingInfo info:meetings) {
 						
 						RectF reF = new RectF();
-				
+						int start = 0;
+						int end = 0;
 						int num = 1;
-						int start = Integer.valueOf(info.getStart_time());
-						int end = Integer.valueOf(info.getEnd_time());
+						if (info.getDaystate() == 2) {
+							start = Integer.valueOf(info.getStart_time());
+							end = Integer.valueOf(24*60*60);
+						}else if (info.getDaystate() == 3) {
+							start = Integer.valueOf(0);
+							end = Integer.valueOf(info.getEnd_time());
+						}else if (info.getDaystate() == 4) {
+							start = Integer.valueOf(0);
+							end = Integer.valueOf(24*60*60);
+						}else {
+							start = Integer.valueOf(info.getStart_time());
+							end = Integer.valueOf(info.getEnd_time());
+						}
+	
 						//添加事件1
 						//开始时间：，结束时间：
 						int[] values = new int[] { start/60,end/60 };
