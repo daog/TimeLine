@@ -7,14 +7,18 @@ import java.util.Date;
 import com.timeline.interf.FragmentCallBack;
 import com.timeline.main.R;
 import com.timeline.ui.Main;
+import com.timeline.webapi.HttpFactory;
 import com.timeline.adapter.DaySwipDateAdapter;
+import com.timeline.app.AppContext;
 import com.timeline.calendar.SpecialCalendar;
+import com.timeline.common.DateTimeHelper;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnTouchListener;
@@ -103,10 +107,82 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 //		getCurrent();
 //
 //	}
+	
+	/**
+	 * 日期联动
+	 * */
+	Handler mRefreshDateHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+				//刷新日期后进行请求
+				try {
+					Date date = AppContext.CurrentSelectedDate;
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					currentDate = sdf.format(date);
+					year_c = Integer.parseInt(currentDate.split("-")[0]);
+					month_c = Integer.parseInt(currentDate.split("-")[1]);
+					day_c = Integer.parseInt(currentDate.split("-")[2]);
+					currentYear = year_c;
+					currentMonth = month_c;
+					currentDay = day_c;
+					sc = new SpecialCalendar();
+					getCalendar(year_c, month_c);
+					week_num = getWeeksOfMonth();
+					currentNum = week_num;
+					
+					 
+					Calendar cal = Calendar.getInstance();  
+					cal.setTime(AppContext.CurrentSelectedDate);  
+					selectPostion = cal.get(Calendar.DAY_OF_WEEK) - 1; 
+					if (dayOfWeek == 7) {
+						week_c = day_c / 7 + 1;
+					} else {
+						if (day_c <= (7 - dayOfWeek)) {
+							week_c = 1;
+						} else {
+							if ((day_c - (7 - dayOfWeek)) % 7 == 0) {
+								week_c = (day_c - (7 - dayOfWeek)) / 7 + 1;
+							} else {
+								week_c = (day_c - (7 - dayOfWeek)) / 7 + 2;
+							}
+						}
+					}
+					currentWeek = week_c;
+					getCurrent();
+					
+					dateAdapter = new DaySwipDateAdapter(getActivity(), getResources(), currentYear,
+							currentMonth, currentWeek, currentNum, selectPostion,
+							currentWeek == 1 ? true : false);
+					dateAdapter.setSeclection(selectPostion);
+					dayNumbers = dateAdapter.getDayNumbers();
+					gridView.setAdapter(dateAdapter);
+					
+					fragmentCallBack.callbackFun1(currentYear + "-"
+							+ currentMonth + "-"
+							+ currentDay );
+					//selectPostion = dateAdapter.getTodayPosition();
+					//gridView.setSelection(3);
+					
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Date date = new Date();
+		//Date date = new Date();
+		Date date = AppContext.CurrentSelectedDate;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 		currentDate = sdf.format(date);
 		year_c = Integer.parseInt(currentDate.split("-")[0]);
@@ -134,6 +210,9 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 		}
 		currentWeek = week_c;
 		getCurrent();
+		
+		//刷新日期
+		AppContext.getInstance().mRefreshDateHandler = mRefreshDateHandler;
 		
 	}
     @Override
@@ -278,6 +357,10 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 		if (e1.getX() - e2.getX() > 80) {
 			// 向左滑
 			addGridView();
+			
+			//将AppContext设置成最新日期
+			DateTimeHelper.AddWeeks(AppContext.CurrentSelectedDate, 1);
+			
 			currentWeek++;
 			getCurrent();
 			dateAdapter = new DaySwipDateAdapter(getActivity(), getResources(), currentYear,
@@ -304,6 +387,10 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 
 		} else if (e1.getX() - e2.getX() < -80) {
 			addGridView();
+			
+			//将AppContext设置成最新日期
+			DateTimeHelper.AddWeeks(AppContext.CurrentSelectedDate, -1);
+			
 			currentWeek--;
 			getCurrent();
 			dateAdapter = new DaySwipDateAdapter(getActivity(), getResources(), currentYear,

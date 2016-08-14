@@ -319,6 +319,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	}
 	
 	private void RefreshMonthContentList() {
+		AppContext.CurrentSelectedDate = new Date(monthDateView.getmSelYear() - 1900,monthDateView.getmSelMonth(),monthDateView.getmSelDay());
 		String dateStr = monthDateView.getmSelYear() + "-" + String.format("%02d", monthDateView.getmSelMonth() + 1) + "-" + String.format("%02d", monthDateView.getmSelDay());
 		dayMeetingInfoList = new ArrayList<MeetingInfo>();
 		for(MeetingInfo mi : monthMeetingList){

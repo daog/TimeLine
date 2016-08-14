@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -83,6 +84,10 @@ public class AppContext  extends Application{
 	public JobBase jonbase;
 	static InfoHelper infohelper ;
 	public static String fileName =Environment.getExternalStorageDirectory().getAbsolutePath()+"/TIMELINE/"+"Avatar.jpg";
+	
+	public static Date CurrentSelectedDate = new Date();//当前选择日期
+	public Handler mRefreshDateHandler;//刷新选择日期Handler
+	
 	/**
 	 * 新建活动列表列表
 	 */
