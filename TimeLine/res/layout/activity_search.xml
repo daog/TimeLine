@@ -13,7 +13,8 @@
         <EditText
             android:id="@+id/id_edSearchContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@color/white"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"

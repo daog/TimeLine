@@ -22,6 +22,18 @@ public class MeetingInfo implements Serializable ,Comparable {
     private String sponsor_name;
     private String join_st;  //会议参与状态 1已报名 2待定 3拒绝 4无操作
     
+    private int daystate = 0;//1只有一天 2在开始那天 3在结束那天 4在中间
+    
+
+
+
+	public int getDaystate() {
+		return daystate;
+	}
+
+	public void setDaystate(int daystate) {
+		this.daystate = daystate;
+	}
 
 
 

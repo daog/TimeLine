@@ -368,10 +368,23 @@ public class DayFragment extends Fragment {
 			for (final MeetingInfo info:meetings) {
 						
 						RectF reF = new RectF();
-				
+						int start = 0;
+						int end = 0;
 						int num = 1;
-						int start = Integer.valueOf(info.getStart_time());
-						int end = Integer.valueOf(info.getEnd_time());
+						if (info.getDaystate() == 2) {
+							start = Integer.valueOf(info.getStart_time());
+							end = Integer.valueOf(24*60*60);
+						}else if (info.getDaystate() == 3) {
+							start = Integer.valueOf(0);
+							end = Integer.valueOf(info.getEnd_time());
+						}else if (info.getDaystate() == 4) {
+							start = Integer.valueOf(0);
+							end = Integer.valueOf(24*60*60);
+						}else {
+							start = Integer.valueOf(info.getStart_time());
+							end = Integer.valueOf(info.getEnd_time());
+						}
+	
 						//添加事件1
 						//开始时间：，结束时间：
 						int[] values = new int[] { start/60,end/60 };
@@ -415,40 +428,6 @@ public class DayFragment extends Fragment {
 							}
 						});
 						mEventContainer.addView(content, p);
-						
-//						TextView tv = new TextView(getActivity());
-//						tv.setBackgroundColor(getResources().getColor(
-//								R.color.tasking));
-//						if (info.getAlertbeforetime()!=null) {
-//							tv.setBackgroundColor(getResources().getColor(R.color.week_red));
-//						}
-//						tv.setTextColor(Color.WHITE);
-//						tv.setText(info.getSubject());
-//						tv.setGravity(Gravity.CENTER); 
-//						tv.setTextSize(20);
-//						tv.setPadding(24, 0, 24, 0);
-//						RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
-//								layWidth, dip2px(getActivity(),
-//										values[1] - values[0]));
-//						p.topMargin = dip2px(getActivity(), values[0]);
-//						while (isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
-//								values[0])||isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
-//										values[1])) {
-//							num ++;
-//						}
-//						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
-//						tv.setTag(info);
-//						tv.setOnClickListener(new OnClickListener() {
-//
-//							@Override
-//							public void onClick(View v) {
-//								// TODO Auto-generated
-//								// method stub
-//									showPopupWindow(v);
-//								
-//							}
-//						});
-//						mEventContainer.addView(tv, p);
 						reF.top = values[0];
 						reF.left = 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1);
 						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
