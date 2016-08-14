@@ -361,6 +361,26 @@ public class DayFragment extends Fragment {
 	    int width = wm.getDefaultDisplay().getWidth();
 	    
 	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
+	    for (MeetingInfo info:meetings) {
+			int start = 0;
+			int end = 0;
+			int num = 1;
+			if (info.getDaystate() == 2) {
+				start = Integer.valueOf(info.getStart_time());
+				end = Integer.valueOf(24*60*60);
+			}else if (info.getDaystate() == 3) {
+				start = Integer.valueOf(0);
+				end = Integer.valueOf(info.getEnd_time());
+			}else if (info.getDaystate() == 4) {
+				start = Integer.valueOf(0);
+				end = Integer.valueOf(24*60*60);
+			}else {
+				start = Integer.valueOf(info.getStart_time());
+				end = Integer.valueOf(info.getEnd_time());
+			}
+			info.setStart_time(String.valueOf(start));
+			info.setEnd_time(String.valueOf(end));
+		}
 	    
 	    List<RectF> zones = new ArrayList<RectF>();
 	    Arrays.sort(meetings);
@@ -371,19 +391,19 @@ public class DayFragment extends Fragment {
 						int start = 0;
 						int end = 0;
 						int num = 1;
-						if (info.getDaystate() == 2) {
+	//					if (info.getDaystate() == 2) {
 							start = Integer.valueOf(info.getStart_time());
 							end = Integer.valueOf(24*60*60);
-						}else if (info.getDaystate() == 3) {
-							start = Integer.valueOf(0);
-							end = Integer.valueOf(info.getEnd_time());
-						}else if (info.getDaystate() == 4) {
-							start = Integer.valueOf(0);
-							end = Integer.valueOf(24*60*60);
-						}else {
-							start = Integer.valueOf(info.getStart_time());
-							end = Integer.valueOf(info.getEnd_time());
-						}
+//						}else if (info.getDaystate() == 3) {
+//							start = Integer.valueOf(0);
+//							end = Integer.valueOf(info.getEnd_time());
+//						}else if (info.getDaystate() == 4) {
+//							start = Integer.valueOf(0);
+//							end = Integer.valueOf(24*60*60);
+//						}else {
+//							start = Integer.valueOf(info.getStart_time());
+//							end = Integer.valueOf(info.getEnd_time());
+//						}
 	
 						//添加事件1
 						//开始时间：，结束时间：
