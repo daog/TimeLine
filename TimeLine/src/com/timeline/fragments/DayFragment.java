@@ -393,7 +393,7 @@ public class DayFragment extends Fragment {
 						int num = 1;
 	//					if (info.getDaystate() == 2) {
 							start = Integer.valueOf(info.getStart_time());
-							end = Integer.valueOf(24*60*60);
+							end = Integer.valueOf(info.getEnd_time());
 //						}else if (info.getDaystate() == 3) {
 //							start = Integer.valueOf(0);
 //							end = Integer.valueOf(info.getEnd_time());
