@@ -380,6 +380,7 @@ public class DayFragment extends Fragment {
 			}
 			info.setStart_time(String.valueOf(start));
 			info.setEnd_time(String.valueOf(end));
+			info.setTimelong(end-start);
 		}
 	    
 	    List<RectF> zones = new ArrayList<RectF>();

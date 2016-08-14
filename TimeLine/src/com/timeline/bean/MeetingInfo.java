@@ -289,11 +289,19 @@ public class MeetingInfo implements Serializable ,Comparable {
     public void setEdit_TX3(String Edit_TX3) {
         this.Edit_TX3 = Edit_TX3;
     }
-
-	@Override
-	public int compareTo(Object another) {
-		// TODO Auto-generated method stub
-		MeetingInfo in = (MeetingInfo)another;
-		return getTimelong()>in.getTimelong()?0:(getTimelong()==in.getTimelong()?-1:0);
-	}
+    @Override  
+    public int compareTo(Object obj) {  
+        if (obj instanceof MeetingInfo) {  
+        	MeetingInfo stu = (MeetingInfo) obj;  
+            return (int) (stu.getTimelong()-getTimelong() );  
+        }  
+        return 0;  
+    } 
+//	@Override
+//	public int compareTo(Object another) {
+//		// TODO Auto-generated method stub
+//		MeetingInfo in = (MeetingInfo)another;
+//		//return getTimelong()>in.getTimelong()?0:(getTimelong()==in.getTimelong()?-1:0);
+//		return getTimelong()>in.getTimelong()?1:(getTimelong()==in.getTimelong()?0:-1);
+//	}
 }
