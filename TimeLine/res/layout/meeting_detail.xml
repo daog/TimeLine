@@ -163,7 +163,7 @@
                     android:id="@+id/img_join"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginLeft="20dip"
+                    android:layout_marginLeft="50dip"
                     android:src="@drawable/meeting_up" />
 
                 <TextView
@@ -195,7 +195,8 @@
 	        	android:state_enabled="false"
 	        	android:clickable="true"
         		android:onClick="col_Click"
-              	android:layout_weight="1">             
+              	android:layout_weight="1"
+              	android:visibility="gone">             
          	     	               <ImageView
          	    android:id="@+id/img_get"
     	        android:layout_width="25dp"
@@ -225,6 +226,7 @@
 	    			android:layout_gravity="center_vertical"
             		android:text="|"
             		android:textColor="@color/gray"
+            		android:visibility="gone"
             		/>  
         	 <LinearLayout
                 android:id="@+id/meeting_tab_refuse"
@@ -242,7 +244,7 @@
                 android:layout_height="25dp"
     	        android:layout_alignParentLeft="true"
     	        android:layout_centerVertical="true"
-    	        android:layout_marginLeft="20dip"
+    	        android:layout_marginLeft="50dip"
     	        android:src="@drawable/icon_meeting_reject" /> 	
                 <TextView
                     android:id="@+id/meeting_refuse"

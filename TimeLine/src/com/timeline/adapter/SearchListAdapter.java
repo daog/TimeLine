@@ -64,7 +64,10 @@ public class SearchListAdapter extends BaseAdapter {
 		//contentListItemControls.meetingImage.setBackgroundColor((Integer)data.get(position).get("splitColor"));
 		searchListItemControls.searchtitle.setText(data.get(position).getSubject().toString());
 		searchListItemControls.searchContent.setText("主办方："+data.get(position).getSponsor().toString());
-		searchListItemControls.searchtitle.setTag((String)data.get(position).getId());
+		searchListItemControls.searchtitle.setTag(data.get(position));
+		if (data.get(position).isPersonal()) {
+			searchListItemControls.searchContent.setText("个人事件");
+		}
 		return convertView;
 	}
 	

@@ -358,6 +358,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 						if (nowDescribe != null) {
 							String datestr = nowDescribe.getStart_date();
 							Date date = new Date(Long.valueOf(datestr)*1000);
+							date = DateTimeHelper.GetDateTimeNow();
 							String month = DateTimeHelper.getMonthEn(String.valueOf(DateTimeHelper.getMonth(date)));
 							String year = String.valueOf(DateTimeHelper.getYear(date));
 							dateView.setText(String.valueOf(DateTimeHelper.getDay(date)));

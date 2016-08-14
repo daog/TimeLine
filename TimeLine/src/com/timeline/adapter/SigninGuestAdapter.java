@@ -43,7 +43,7 @@ public class SigninGuestAdapter extends BaseAdapter {
 	static class ListItemView { // 自定义控件集合，与listitem_signin布局一致
 		public TextView name;
 		public TextView no;
-		public CircleImageView image;
+		public ImageView image;
 		public ImageView Noimg;
 	}
 
@@ -96,7 +96,7 @@ public class SigninGuestAdapter extends BaseAdapter {
 					.findViewById(R.id.item_signin_name);
 			listItemView.no = (TextView) convertView
 					.findViewById(R.id.item_signin_no);
-			listItemView.image = (CircleImageView)convertView
+			listItemView.image = (ImageView)convertView
 					.findViewById(R.id.item_signin_ima);
 			listItemView.Noimg= (ImageView)convertView
 					.findViewById(R.id.sort_ima);
@@ -129,30 +129,14 @@ public class SigninGuestAdapter extends BaseAdapter {
 		listItemView.name.setTag(gu);// 设置隐藏参数(实体类)
 		listItemView.no.setText(String.valueOf(position+1));
 
-		ImageRequest imageRequest = new ImageRequest(  
-				"http://event.gooddr.com/api"+gu.getAvatar(),  
-		        new Response.Listener<Bitmap>() {  
-		            @Override  
-		            public void onResponse(Bitmap response) {  
-		                  try {
-		                	  listItemView.image.setImageBitmap(response);
-		                	  listItemView.image.invalidate();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            }  
-		        }, 0, 0, Config.RGB_565, new Response.ErrorListener() {  
-		            @Override  
-		            public void onErrorResponse(VolleyError error) {  
-		            
-		            }  
-		        });  
-
-		imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-		AppContext.getInstance().mQueue.add(imageRequest);
+		   ImageOptions imageOptions = new ImageOptions.Builder()
+           .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+           .setCircular(true)
+           .setCrop(true)
+          // .setLoadingDrawableId(R.mipmap.ic_launcher)
+           //.setFailureDrawableId(R.mipmap.ic_launcher)
+           .build();
+		   x.image().bind(listItemView.image, "http://event.gooddr.com/"+gu.getAvatar(), imageOptions);
 
 
 		return convertView;

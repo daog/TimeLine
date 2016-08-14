@@ -14,7 +14,7 @@
 	<color name="lemonyellow">#FFFACD</color>
 	<color name="graywhite">#F5F5F5</color>
 	<color name="grayslate">#708090</color>
-	<color name="lightblue">#0083FF</color>
+	<color name="lightblue">#44b9f7</color>
 	
 	<color name="first">#f9c100</color>
 	<color name="second">#d1dde9</color>
@@ -48,8 +48,13 @@
     
     <color name="category_text">#0e5986</color>
     
+  <!--   <color name="day_bluetran">#e3f5fe</color>--> 
+  <color name="day_bluetran">#e1e3f5fe</color>
+   <color name="day_redtran">#e1fae7e7</color>
+    
+    <color name="week_greenno">#daf6cf</color>
     <color name="week_green">#dbf7cf</color>
-     <color name="week_red">#f7cfcf</color>
+     <color name="week_red">#f6cfcf</color>
     
     <color name="listitem_transparent">#00000000</color>
     <color name="listitem_black">#ff000000</color>

@@ -286,6 +286,72 @@ public class DayFragment extends Fragment {
 			}
 		}
 	};
+//	private void drawMeeting(MeetingInfo[] meetings) {
+//		if (meetings.length <=0) {
+//			return;
+//		}
+//		WindowManager wm = (WindowManager) getActivity()
+//                .getSystemService(Context.WINDOW_SERVICE);
+//	    int width = wm.getDefaultDisplay().getWidth();
+//	    
+//	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
+//	    
+//	    List<RectF> zones = new ArrayList<RectF>();
+//	    Arrays.sort(meetings);
+//	    int no=0; 
+//			for (final MeetingInfo info:meetings) {
+//						
+//						RectF reF = new RectF();
+//				
+//						int num = 1;
+//						int start = Integer.valueOf(info.getStart_time());
+//						int end = Integer.valueOf(info.getEnd_time());
+//						//添加事件1
+//						//开始时间：，结束时间：
+//						int[] values = new int[] { start/60,end/60 };
+//						System.out.println("values=====: "
+//								+ Arrays.toString(values));
+//						TextView tv = new TextView(getActivity());
+//						tv.setBackgroundColor(getResources().getColor(
+//								R.color.tasking));
+//						if (info.getAlertbeforetime()!=null) {
+//							tv.setBackgroundColor(getResources().getColor(R.color.week_red));
+//						}
+//						tv.setTextColor(Color.WHITE);
+//						tv.setText(info.getSubject());
+//						tv.setGravity(Gravity.CENTER); 
+//						tv.setTextSize(20);
+//						tv.setPadding(24, 0, 24, 0);
+//						RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
+//								layWidth, dip2px(getActivity(),
+//										values[1] - values[0]));
+//						p.topMargin = dip2px(getActivity(), values[0]);
+//						while (isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+//								values[0])||isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+//										values[1])) {
+//							num ++;
+//						}
+//						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
+//						tv.setTag(info);
+//						tv.setOnClickListener(new OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								// TODO Auto-generated
+//								// method stub
+//									showPopupWindow(v);
+//								
+//							}
+//						});
+//						mEventContainer.addView(tv, p);
+//						reF.top = values[0];
+//						reF.left = 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1);
+//						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
+//						reF.bottom = values[1];
+//						zones.add(reF);
+//						no++;
+//		}
+//	}
 	private void drawMeeting(MeetingInfo[] meetings) {
 		if (meetings.length <=0) {
 			return;
@@ -311,17 +377,22 @@ public class DayFragment extends Fragment {
 						int[] values = new int[] { start/60,end/60 };
 						System.out.println("values=====: "
 								+ Arrays.toString(values));
-						TextView tv = new TextView(getActivity());
-						tv.setBackgroundColor(getResources().getColor(
-								R.color.tasking));
+						LinearLayout content = (LinearLayout)LayoutInflater.from(getActivity()).inflate(
+								R.layout.item_daycontent, null);
+						LinearLayout llLayout=(LinearLayout)content.findViewById(R.id.id_split);
+						TextView title = (TextView) content.findViewById(R.id.id_title);
+						TextView time = (TextView) content.findViewById(R.id.id_Time);
+						TextView sub = (TextView) content.findViewById(R.id.id_sub);
+						title.setText(info.getSubject());
+						time.setText(DateTimeHelper.int2Time(Integer.valueOf(info.getStart_time())) + " - " 
+						+ DateTimeHelper.int2Time(Integer.valueOf(info.getEnd_time())));
+						sub.setText(info.getDescribe());
 						if (info.getAlertbeforetime()!=null) {
-							tv.setBackgroundColor(getResources().getColor(R.color.week_red));
+							llLayout.setBackgroundColor(getResources().getColor(R.color.week_red));
+							content.setBackgroundColor(getResources().getColor(R.color.day_redtran));
 						}
-						tv.setTextColor(Color.WHITE);
-						tv.setText(info.getSubject());
-						tv.setGravity(Gravity.CENTER); 
-						tv.setTextSize(20);
-						tv.setPadding(24, 0, 24, 0);
+						
+						
 						RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
 								layWidth, dip2px(getActivity(),
 										values[1] - values[0]));
@@ -332,8 +403,8 @@ public class DayFragment extends Fragment {
 							num ++;
 						}
 						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
-						tv.setTag(info);
-						tv.setOnClickListener(new OnClickListener() {
+						content.setTag(info);
+						content.setOnClickListener(new OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
@@ -343,37 +414,8 @@ public class DayFragment extends Fragment {
 								
 							}
 						});
-						mEventContainer.addView(tv, p);
-						reF.top = values[0];
-						reF.left = 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1);
-						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
-						reF.bottom = values[1];
-						zones.add(reF);
-						no++;
-		}
-	}
-//	private void drawMeeting(MeetingInfo[] meetings) {
-//		if (meetings.length <=0) {
-//			return;
-//		}
-//		CompareTime(meetings);
-//		WindowManager wm = (WindowManager) getActivity()
-//                .getSystemService(Context.WINDOW_SERVICE);
-//	    int width = wm.getDefaultDisplay().getWidth();
-//	    
-//	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
-//		
-//		for (int i = 1; i < meetings.length+1; i++) {
-//			int num  = 1;
-//			for (final MeetingInfo info:meetings) {
-//					if (info.getTimeno() == i) {
-//						int start = Integer.valueOf(info.getStart_time());
-//						int end = Integer.valueOf(info.getEnd_time());
-//						//添加事件1
-//						//开始时间：，结束时间：
-//						int[] values = new int[] { start/60,end/60 };
-//						System.out.println("values=====: "
-//								+ Arrays.toString(values));
+						mEventContainer.addView(content, p);
+						
 //						TextView tv = new TextView(getActivity());
 //						tv.setBackgroundColor(getResources().getColor(
 //								R.color.tasking));
@@ -389,6 +431,11 @@ public class DayFragment extends Fragment {
 //								layWidth, dip2px(getActivity(),
 //										values[1] - values[0]));
 //						p.topMargin = dip2px(getActivity(), values[0]);
+//						while (isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+//								values[0])||isHasView(zones, 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) ,
+//										values[1])) {
+//							num ++;
+//						}
 //						p.leftMargin = dip2px(getActivity(), 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1) );
 //						tv.setTag(info);
 //						tv.setOnClickListener(new OnClickListener() {
@@ -402,13 +449,15 @@ public class DayFragment extends Fragment {
 //							}
 //						});
 //						mEventContainer.addView(tv, p);
-//						num++;
-//					}
-//			}
-//			
-//		}
-//	}
-	
+						reF.top = values[0];
+						reF.left = 10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num-1);
+						reF.right =  10*num+DensityUtil.px2dip(getActivity(), layWidth)*(num);
+						reF.bottom = values[1];
+						zones.add(reF);
+						no++;
+		}
+	}
+
 	
 	private void getMomentsList() {
 		moments = new ArrayList<MomentBean>();

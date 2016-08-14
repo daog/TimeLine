@@ -4,6 +4,14 @@ public class MeetingSerchBean {
 	private String id;
 	private String subject;
 	private String sponsor;
+	private boolean personal=false ;
+
+	public boolean isPersonal() {
+		return personal;
+	}
+	public void setPersonal(boolean personal) {
+		this.personal = personal;
+	}
 	public String getId() {
 		return id;
 	}

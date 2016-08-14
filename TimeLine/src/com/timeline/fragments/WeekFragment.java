@@ -436,6 +436,7 @@ public class WeekFragment extends Fragment  {
 						imaSta.setImageDrawable(getResources().getDrawable(R.drawable.icon_meeeting_refyes));
 					}else if (dayMeeting.getJoin_st().equals("4")) {//无操作
 						imaSta.setVisibility(View.GONE);
+						content1.setBackgroundColor(getResources().getColor(R.color.week_greenno));
 					}
 				}else {
 					content1.setBackgroundColor(getResources().getColor(R.color.week_red));
