@@ -35,6 +35,7 @@ public class WeekPageFragment extends Fragment {
 	
 	private int lastitem;
 	
+	private int mposition = 0;
 	//日期联动Handler
 	Handler mWeekRefreshDateHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -53,6 +54,7 @@ public class WeekPageFragment extends Fragment {
 			        
 			        calendar.setTime(selectedDate);
 			        int selectedDayForWeek =  calendar.get(Calendar.DAY_OF_WEEK);
+			        mposition = selectedDayForWeek;
 			        
 			        int daysDiff = (int)((selectedDate.getTime() - currentDate.getTime())/(24*60*60*1000));
 					if(daysDiff > 0 ){
@@ -123,7 +125,7 @@ public class WeekPageFragment extends Fragment {
 				List<String> DateStrs =	CalendarUtils.getInstance().getSelectedWeek(position, currentWeekDateStrs);
 				fragmentCallBack.callbackFun3(DateStrs.get(0)+"-"+DateStrs.get(6));
 				
-				String[] firstDayStrs = DateStrs.get(0).split("-");
+				String[] firstDayStrs = DateStrs.get(mposition-1).split("-");
 				AppContext.CurrentSelectedDate.setYear(Integer.parseInt(firstDayStrs[0]) - 1900);
 				AppContext.CurrentSelectedDate.setMonth(Integer.parseInt(firstDayStrs[1]) - 1);
 				AppContext.CurrentSelectedDate.setDate(Integer.parseInt(firstDayStrs[2]));

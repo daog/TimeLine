@@ -52,9 +52,9 @@
   <color name="day_bluetran">#e1e3f5fe</color>
    <color name="day_redtran">#e1fae7e7</color>
     
-    <color name="week_greenno">#daf6cf</color>
-    <color name="week_green">#dbf7cf</color>
-     <color name="week_red">#f6cfcf</color>
+    <color name="week_greenno">#e1daf6cf</color>
+    <color name="week_green">#e1dbf7cf</color>
+     <color name="week_red">#e1f6cfcf</color>
     
     <color name="listitem_transparent">#00000000</color>
     <color name="listitem_black">#ff000000</color>

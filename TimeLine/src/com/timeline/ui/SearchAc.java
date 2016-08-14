@@ -93,6 +93,9 @@ public class SearchAc extends BaseActivity {
     					adapter.notifyDataSetChanged();
 
     				}else {
+    					list.clear();
+    					list.addAll(locallist);
+    					adapter.notifyDataSetChanged();
     					ReturnInfo info = JsonToEntityUtils.jsontoReinfo(result);
     					UIHelper.ToastMessage(SearchAc.this,info.getRe_info() );
     				}

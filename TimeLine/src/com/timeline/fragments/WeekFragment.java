@@ -215,13 +215,12 @@ public class WeekFragment extends Fragment  {
 				try {
 					JSONObject myJsonObject = new JSONObject(result);
 					String rest = myJsonObject.getString("re_st");
-	
+					periodMeetings.clear();
 					if (rest.equals("success")) {		
 						Message msg = Message.obtain();
 						MeetingInfo[] meetings
 						= JsonToEntityUtils.jsontoMeetingInfo( myJsonObject.getString("re_info"));
 						if(meetings != null){
-							periodMeetings.clear();
 							for(MeetingInfo mi : meetings){
 								periodMeetings.add(mi);
 							}
@@ -417,7 +416,7 @@ public class WeekFragment extends Fragment  {
 				param.gravity = Gravity.CENTER_HORIZONTAL;
 				// 所有组件垂直摆放
 				content1.setOrientation(LinearLayout.VERTICAL);
-				content1.setBackgroundColor(Color.parseColor("#82d9a4"));
+				content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_green));
 				
 				TextView subjectTv = (TextView)content.findViewById(R.id.id_topic);
 				TextView orginzerTv = (TextView)content.findViewById(R.id.id_orgnizer);

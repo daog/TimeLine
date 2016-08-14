@@ -56,6 +56,7 @@ public class SearchListAdapter extends BaseAdapter {
 			convertView=layoutInflater.inflate(R.layout.listitem_search, null);
 			searchListItemControls.searchtitle=(TextView)convertView.findViewById(R.id.id_meetingtitle);
 			searchListItemControls.searchContent=(TextView)convertView.findViewById(R.id.id_meetingOrgnizer);
+			searchListItemControls.searchImg = (ImageView)convertView.findViewById(R.id.id_meetingImage);
 			convertView.setTag(searchListItemControls);
 		}else{
 			searchListItemControls=(SearchListItemControls)convertView.getTag();
@@ -67,6 +68,9 @@ public class SearchListAdapter extends BaseAdapter {
 		searchListItemControls.searchtitle.setTag(data.get(position));
 		if (data.get(position).isPersonal()) {
 			searchListItemControls.searchContent.setText("个人事件");
+			searchListItemControls.searchImg.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_searchred));
+		}else {
+			searchListItemControls.searchImg.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_search));
 		}
 		return convertView;
 	}
@@ -78,6 +82,7 @@ public class SearchListAdapter extends BaseAdapter {
 	public final class SearchListItemControls{
 		public TextView searchtitle;
 		public TextView searchContent;
+		public ImageView searchImg;
 	}
 
 }
