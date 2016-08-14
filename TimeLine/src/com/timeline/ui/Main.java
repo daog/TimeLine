@@ -637,9 +637,9 @@ public class Main extends BaseActivity implements FragmentCallBack{
     		{
     		case R.id.indicator_day:	
     			HttpFactory.getMeetingjoin_list(daydate, dayvolleyListener);
-    			Message refreshMsg = Message.obtain();
-    			refreshMsg.what = 0;
-				AppContext.getInstance().mRefreshDateHandler.sendMessage(refreshMsg);
+    			Message dayRefreshMsg = Message.obtain();
+    			dayRefreshMsg.what = 0;
+				AppContext.getInstance().mDayRefreshDateHandler.sendMessage(dayRefreshMsg);
     			break;
     		case R.id.indicator_week:
     			HashMap handlers = AppContext.getInstance().mWeekHandlers;

@@ -86,7 +86,8 @@ public class AppContext  extends Application{
 	public static String fileName =Environment.getExternalStorageDirectory().getAbsolutePath()+"/TIMELINE/"+"Avatar.jpg";
 	
 	public static Date CurrentSelectedDate = new Date();//当前选择日期
-	public Handler mRefreshDateHandler;//刷新选择日期Handler
+	public Handler mDayRefreshDateHandler;//刷新选择日期Handler
+	public Handler mMonthRefreshDateHandler;//刷新选择日期Handler
 	
 	/**
 	 * 新建活动列表列表
