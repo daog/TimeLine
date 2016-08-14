@@ -226,12 +226,11 @@ public class WeekFragment extends Fragment  {
 								periodMeetings.add(mi);
 							}
 						}
-						
-						for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
-							periodMeetings.add(ele);
-						}
-						generateDayViews();
 					}
+					for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
+						periodMeetings.add(ele);
+					}
+					generateDayViews();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -405,10 +404,10 @@ public class WeekFragment extends Fragment  {
 			
 			for (MeetingInfo dayMeeting : dayMeetings) {
 				// 一个自定义的布局，作为显示的内容
-				RelativeLayout content = (RelativeLayout)LayoutInflater.from(getActivity()).inflate(
+				RelativeLayout content = (RelativeLayout)LayoutInflater.from(AppContext.getInstance()).inflate(
 						R.layout.listitem_weekdaycontent, null);
 				LinearLayout content1  = (LinearLayout) content.findViewById(R.id.id_content1);
-				WindowManager wm = (WindowManager) getActivity()
+				WindowManager wm = (WindowManager) AppContext.getInstance()
 						.getSystemService(Context.WINDOW_SERVICE);
 
 				int width = (wm.getDefaultDisplay().getWidth() - 15) / 14 * 12 / 3;
@@ -439,7 +438,7 @@ public class WeekFragment extends Fragment  {
 						content1.setBackgroundColor(getResources().getColor(R.color.week_greenno));
 					}
 				}else {
-					content1.setBackgroundColor(getResources().getColor(R.color.week_red));
+					content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_red));
 					imaSta.setVisibility(View.GONE);
 				}
 

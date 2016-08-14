@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.timeline.app.AppContext;
 import com.timeline.calendar.CalendarUtils;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.ZoomOutPageTransformer;
@@ -16,6 +17,7 @@ import com.timeline.ui.Main;
 import com.timeline.widget.DirectionalViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -33,6 +35,59 @@ public class WeekPageFragment extends Fragment {
 	
 	private int lastitem;
 	
+	//日期联动Handler
+	Handler mWeekRefreshDateHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+				//刷新日期后进行请求
+				try {
+					Date selectedDateTime = AppContext.CurrentSelectedDate;
+					Date selectedDate = DateTimeHelper.DayStringToDate(DateTimeHelper.DateToString(selectedDateTime, "yyyy-MM-dd"));
+					
+					Date currentDateTime = DateTimeHelper.GetDateTimeNow();
+					Date currentDate = DateTimeHelper.StringToDate(DateTimeHelper.DateToString(currentDateTime, "yyyy-MM-dd"));
+					
+					Calendar calendar = Calendar.getInstance();
+			        int currentDayForWeek =  calendar.get(Calendar.DAY_OF_WEEK);
+			        
+			        calendar.setTime(selectedDate);
+			        int selectedDayForWeek =  calendar.get(Calendar.DAY_OF_WEEK);
+			        
+			        int daysDiff = (int)((selectedDate.getTime() - currentDate.getTime())/(24*60*60*1000));
+					if(daysDiff > 0 ){
+						daysDiff++;
+					}
+//			        if(daysDiff < 0){
+//			        	daysDiff--;
+//			        }
+					int daysDiffWholeWeek =  daysDiff - selectedDayForWeek + currentDayForWeek ;
+					int weeksDiff = daysDiffWholeWeek/7;
+					
+					
+//					ScreenSlidePagerAdapter screenSlidePagerAdapter = new ScreenSlidePagerAdapter(
+//							getActivity().getSupportFragmentManager());
+					
+					lastitem = 500 + weeksDiff;
+//					mWeeksViewPager.removeAllViews();
+//					mWeeksViewPager.setAdapter(screenSlidePagerAdapter);
+					mWeeksViewPager.setCurrentItem(lastitem);
+					
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
 	FragmentCallBack fragmentCallBack = null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +98,7 @@ public class WeekPageFragment extends Fragment {
 		fragmentCallBack = (Main)getActivity();
 		initViews(view);
 		initData();
+		AppContext.getInstance().mWeekRefreshDateHandler = mWeekRefreshDateHandler;
 		return view;
 	}
 	private void initViews(View view) {
@@ -66,6 +122,11 @@ public class WeekPageFragment extends Fragment {
 			public void onPageSelected(int position) {
 				List<String> DateStrs =	CalendarUtils.getInstance().getSelectedWeek(position, currentWeekDateStrs);
 				fragmentCallBack.callbackFun3(DateStrs.get(0)+"-"+DateStrs.get(6));
+				
+				String[] firstDayStrs = DateStrs.get(0).split("-");
+				AppContext.CurrentSelectedDate.setYear(Integer.parseInt(firstDayStrs[0]) - 1900);
+				AppContext.CurrentSelectedDate.setMonth(Integer.parseInt(firstDayStrs[1]) - 1);
+				AppContext.CurrentSelectedDate.setDate(Integer.parseInt(firstDayStrs[2]));
 			}
 
 			@Override

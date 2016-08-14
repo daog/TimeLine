@@ -107,6 +107,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	//弹出窗口
 	PopupWindow popupWindow;
 	
+	//日期联动Handler
 	Handler mMonthRefreshDateHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {

@@ -642,6 +642,11 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				AppContext.getInstance().mDayRefreshDateHandler.sendMessage(dayRefreshMsg);
     			break;
     		case R.id.indicator_week:
+    			//刷新日期
+				Message weekRefreshmsg = Message.obtain();
+				weekRefreshmsg.what = 0;
+				AppContext.getInstance().mWeekRefreshDateHandler.sendMessage(weekRefreshmsg);
+    			
     			HashMap handlers = AppContext.getInstance().mWeekHandlers;
     			Iterator iter = handlers.entrySet().iterator();
 				while (iter.hasNext()) {
@@ -653,7 +658,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				 	msgWeek.what = 0;
 				 	handler.sendMessage(msgWeek);
 				}
-
+				
     			break;
     		case R.id.indicator_month:
     			Message msg = Message.obtain();
@@ -677,29 +682,45 @@ public class Main extends BaseActivity implements FragmentCallBack{
 				msg.what = 1;
 				msg.obj = daydate;
 				AppContext.getInstance().mDayTagGetHandler.sendMessage(msg);
+				
+				Message dayRefreshMsg = Message.obtain();
+    			dayRefreshMsg.what = 0;
+				AppContext.getInstance().mDayRefreshDateHandler.sendMessage(dayRefreshMsg);
     			break;
     		case R.id.indicator_week:
-    			HashMap handlers = AppContext.getInstance().mWeekHandlers;
-    			Iterator iter = handlers.entrySet().iterator();
-				while (iter.hasNext()) {
-					HashMap.Entry entry = (HashMap.Entry) iter.next();
-					//Object key = entry.getKey();
-					Handler handler = (Handler)entry.getValue();
-				 
-				 	Message msgWeek = Message.obtain();
-				 	msgWeek.what = 0;
-				 	handler.sendMessage(msgWeek);
-				}
+    			//刷新日期
+				Message weekRefreshmsg = Message.obtain();
+				weekRefreshmsg.what = 0;
+				AppContext.getInstance().mWeekRefreshDateHandler.sendMessage(weekRefreshmsg);
+    			
+//    			HashMap handlers = AppContext.getInstance().mWeekHandlers;
+//    			Iterator iter = handlers.entrySet().iterator();
+//				while (iter.hasNext()) {
+//					HashMap.Entry entry = (HashMap.Entry) iter.next();
+//					//Object key = entry.getKey();
+//					Handler handler = (Handler)entry.getValue();
+//				 
+//				 	Message msgWeek = Message.obtain();
+//				 	msgWeek.what = 1;
+//				 	handler.sendMessage(msgWeek);
+//				}
 //    			for(int i = 0; i < AppContext.getInstance().mWeekHandlers.size(); i++){
 //    				Message msgWeek = Message.obtain();
 //    				msgWeek.what = 0;
 //    				AppContext.getInstance().mWeekHandlers.get(i).sendMessage(msgWeek);
 //    			}
+				
+				
     			break;
     		case R.id.indicator_month:
     			Message msgMon = Message.obtain();
     			msgMon.what = 1;
 				AppContext.getInstance().mMontHandler.sendMessage(msgMon);
+				
+				//刷新日期
+				Message monthRefreshmsg = Message.obtain();
+				monthRefreshmsg.what = 0;
+				AppContext.getInstance().mMonthRefreshDateHandler.sendMessage(monthRefreshmsg);
     			break;
     		case R.id.indicator_meeting:
     			HttpFactory.MeetingNowMyJoin(meetingvolleyListener);
