@@ -269,8 +269,21 @@ public class DayFragment extends Fragment {
 			case 1:
 				String date = (String) msg.obj;
 				List<MeetingInfo> melist = new ArrayList<MeetingInfo>();
+
 				for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
-					if (ele.getStartDateStr("").equals(date)) {
+					if (DateTimeHelper.isInDate(date, ele.getStartDate(),
+							ele.getEndDate())){
+						if (ele.getStartDateStr("").equals(ele.getEndDateStr(""))) {								
+							ele.setDaystate(1);
+						}else {
+							if (ele.getStartDateStr("").equals(date)) {
+								ele.setDaystate(2);
+							}else if (ele.getEndDateStr("").equals(date)) {
+								ele.setDaystate(3);
+							}else {
+								ele.setDaystate(4);
+							}
+						}
 						melist.add(ele);
 					}
 					
@@ -404,11 +417,14 @@ public class DayFragment extends Fragment {
 //						}else {
 //							start = Integer.valueOf(info.getStart_time());
 //							end = Integer.valueOf(info.getEnd_time());
-//						}
-	
+//						}	
 						//添加事件1
 						//开始时间：，结束时间：
-						int[] values = new int[] { start/60,end/60 };
+
+						int[] values = new int[] { start/60,end/60-3 };
+						if (values[1] -values[0] <30) {
+							values[1] = values[0]+30;
+						}
 						System.out.println("values=====: "
 								+ Arrays.toString(values));
 						LinearLayout content = (LinearLayout)LayoutInflater.from(getActivity()).inflate(

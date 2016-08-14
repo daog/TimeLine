@@ -69,6 +69,7 @@
         android:layout_marginTop="25.0dip"
         android:background="@color/white"
         android:gravity="center"
+        android:inputType="textPassword"
         android:hint="密码"
         android:selectAllOnFocus="true"
         android:singleLine="true"
