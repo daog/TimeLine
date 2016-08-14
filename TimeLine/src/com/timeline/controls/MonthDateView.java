@@ -255,7 +255,7 @@ public class MonthDateView extends View {
 	}
 	
 	/**
-	 * 获取当前月的天数
+	 * 设置选择日期
 	 * @param year
 	 * @param month
 	 */
@@ -278,6 +278,10 @@ public class MonthDateView extends View {
 		if(dateClick != null){
 			dateClick.onClickOnDate();
 		}
+		
+		AppContext.CurrentSelectedDate.setYear(mSelYear - 1900);
+		AppContext.CurrentSelectedDate.setMonth(mSelMonth);
+		AppContext.CurrentSelectedDate.setDate(daysString[row][column]);
 	}
 
 	/**
@@ -298,6 +302,10 @@ public class MonthDateView extends View {
 		}
 		setSelectYearMonth(year,month,day);
 		invalidate();
+		
+		AppContext.CurrentSelectedDate.setYear(mSelYear - 1900);
+		AppContext.CurrentSelectedDate.setMonth(mSelMonth);
+		AppContext.CurrentSelectedDate.setDate(mSelDay);
 	}
 	
 	/**
@@ -319,6 +327,10 @@ public class MonthDateView extends View {
 		}
 		setSelectYearMonth(year,month,day);
 		invalidate();
+		
+		AppContext.CurrentSelectedDate.setYear(mSelYear - 1900);
+		AppContext.CurrentSelectedDate.setMonth(mSelMonth);
+		AppContext.CurrentSelectedDate.setDate(mSelDay);
 	}
 	
 	/**
@@ -468,5 +480,11 @@ public class MonthDateView extends View {
 	public class MeetingAcceptedState{
 		//是否报名该会议
 		public boolean isAccepted;
+	}
+	
+	//设置选择日期
+	public void setSelectedDate(int year, int month, int day){
+		setSelectYearMonth(year,month,day);
+		invalidate();
 	}
 }

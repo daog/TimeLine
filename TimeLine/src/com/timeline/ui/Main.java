@@ -659,6 +659,11 @@ public class Main extends BaseActivity implements FragmentCallBack{
     			Message msg = Message.obtain();
 				msg.what = 0;
 				AppContext.getInstance().mMontHandler.sendMessage(msg);
+				
+				//Ë¢ÐÂÈÕÆÚ
+				Message monthRefreshmsg = Message.obtain();
+				monthRefreshmsg.what = 0;
+				AppContext.getInstance().mMonthRefreshDateHandler.sendMessage(monthRefreshmsg);
     			break;
     		case R.id.indicator_meeting:
     			HttpFactory.MeetingNowMyJoin(meetingvolleyListener);

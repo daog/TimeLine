@@ -107,6 +107,32 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	//弹出窗口
 	PopupWindow popupWindow;
 	
+	Handler mMonthRefreshDateHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+				//刷新日期后进行请求
+				try {
+					int year = AppContext.CurrentSelectedDate.getYear() + 1900;
+					int month = AppContext.CurrentSelectedDate.getMonth();
+					int day = AppContext.CurrentSelectedDate.getDate();
+					monthDateView.setSelectedDate(year, month, day);
+//					initValues();
+//					RefreshMonthContentList(); 
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
 	/**
 	 * 绘制事件区域
 	 * */
@@ -148,6 +174,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AppContext.getInstance().mMontHandler = mMonthdrawHandler;
+		AppContext.getInstance().mMonthRefreshDateHandler = mMonthRefreshDateHandler;
 		fragmentCallBack = (Main)getActivity();
 		//初始化会议参与监听
 		hoinStatusvolleyListener= new VolleyListenerInterface(getActivity()){
@@ -222,6 +249,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 			}
 			
 		};
+		
 	}
 
 	@Override
@@ -254,6 +282,7 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 				return MonthFragment.this.gestureDetector.onTouchEvent(event);
 			}
 		});
+		monthDateView.setSelectedDate(AppContext.CurrentSelectedDate.getYear()+1900, AppContext.CurrentSelectedDate.getMonth(), AppContext.CurrentSelectedDate.getDate());
 		initValues();
 		RefreshMonthContentList(); 
 
@@ -319,7 +348,6 @@ public class MonthFragment extends Fragment implements OnGestureListener{
 	}
 	
 	private void RefreshMonthContentList() {
-		AppContext.CurrentSelectedDate = new Date(monthDateView.getmSelYear() - 1900,monthDateView.getmSelMonth(),monthDateView.getmSelDay());
 		String dateStr = monthDateView.getmSelYear() + "-" + String.format("%02d", monthDateView.getmSelMonth() + 1) + "-" + String.format("%02d", monthDateView.getmSelDay());
 		dayMeetingInfoList = new ArrayList<MeetingInfo>();
 		for(MeetingInfo mi : monthMeetingList){

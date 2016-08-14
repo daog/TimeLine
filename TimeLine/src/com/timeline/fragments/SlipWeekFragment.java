@@ -183,7 +183,7 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 		super.onCreate(savedInstanceState);
 		//Date date = new Date();
 		Date date = AppContext.CurrentSelectedDate;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		currentDate = sdf.format(date);
 		year_c = Integer.parseInt(currentDate.split("-")[0]);
 		month_c = Integer.parseInt(currentDate.split("-")[1]);
@@ -274,6 +274,10 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 				fragmentCallBack.callbackFun1(dateAdapter.getCurrentYear(selectPostion) + "-"
 						+ dateAdapter.getCurrentMonth(selectPostion) + "-"
 						+ dayNumbers[position] );
+				AppContext.CurrentSelectedDate.setYear(dateAdapter.getCurrentYear(selectPostion) - 1900);
+				AppContext.CurrentSelectedDate.setMonth(dateAdapter.getCurrentMonth(selectPostion) - 1);
+				AppContext.CurrentSelectedDate.setDate(Integer.parseInt(dayNumbers[position]));
+				
 			}
 		});
 		gridView.setLayoutParams(params);
@@ -383,6 +387,11 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 					R.anim.push_left_out));
 			this.flipper1.showNext();
 			flipper1.removeViewAt(0);
+			
+			//设置联动日期
+			AppContext.CurrentSelectedDate.setYear(dateAdapter.getCurrentYear(selectPostion) - 1900);
+			AppContext.CurrentSelectedDate.setMonth(dateAdapter.getCurrentMonth(selectPostion) - 1);
+			AppContext.CurrentSelectedDate.setDate(Integer.parseInt(dayNumbers[selectPostion]));
 			return true;
 
 		} else if (e1.getX() - e2.getX() < -80) {
@@ -404,6 +413,12 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 			fragmentCallBack.callbackFun1(dateAdapter.getCurrentYear(selectPostion) + "-"
 					+ dateAdapter.getCurrentMonth(selectPostion) + "-"
 					+ dayNumbers[selectPostion] );
+			
+			//设置联动日期
+			AppContext.CurrentSelectedDate.setYear(dateAdapter.getCurrentYear(selectPostion) - 1900);
+			AppContext.CurrentSelectedDate.setMonth(dateAdapter.getCurrentMonth(selectPostion) - 1);
+			AppContext.CurrentSelectedDate.setDate(Integer.parseInt(dayNumbers[selectPostion]));
+			
 			gvFlag++;
 			flipper1.addView(gridView, gvFlag);
 			dateAdapter.setSeclection(selectPostion);
