@@ -212,7 +212,7 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 		getCurrent();
 		
 		//Ë¢ÐÂÈÕÆÚ
-		AppContext.getInstance().mRefreshDateHandler = mRefreshDateHandler;
+		AppContext.getInstance().mDayRefreshDateHandler = mRefreshDateHandler;
 		
 	}
     @Override
