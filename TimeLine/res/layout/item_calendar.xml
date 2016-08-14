@@ -6,9 +6,9 @@
 
     <LinearLayout
         android:id="@+id/ll_calendar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:textSize="@dimen/text_size_17"
+            android:textSize="@dimen/text_size_15"
             android:text="22"
             android:gravity="center" />
         <TextView
             android:id="@+id/tv_calendar_Lunar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_9"
+            android:textSize="@dimen/text_size_8"
             android:text="初三" />
     </LinearLayout>
 
