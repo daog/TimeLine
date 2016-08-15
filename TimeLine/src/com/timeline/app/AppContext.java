@@ -90,6 +90,7 @@ public class AppContext  extends Application{
 	public Handler mDayRefreshDateHandler;//刷新选择日期Handler
 	public Handler mMonthRefreshDateHandler;//刷新选择日期Handler
 	public Handler mWeekRefreshDateHandler;//刷新选择日期Handler
+
 	
 	/**
 	 * 新建活动列表列表

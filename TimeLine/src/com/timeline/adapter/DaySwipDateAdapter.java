@@ -2,29 +2,41 @@ package com.timeline.adapter;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import org.json.JSONObject;
+import com.android.volley.VolleyError;
+import com.timeline.interf.VolleyListenerInterface;
 import com.timeline.main.R;
+import com.timeline.webapi.HttpFactory;
+import com.timeline.widget.Dot;
+import com.timeline.adapter.SigninGuestAdapter.ListItemView;
+import com.timeline.app.AppContext;
+import com.timeline.bean.MeetingInfo;
 import com.timeline.calendar.SpecialCalendar;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.DensityUtil;
+import com.timeline.common.JsonToEntityUtils;
 import com.timeline.common.LunarCalendar;
-
 import android.R.integer;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+@SuppressLint("InflateParams")
 public class DaySwipDateAdapter extends BaseAdapter {
 	private static String TAG = "ZzL";
 	private boolean isLeapyear = false; // 是否为闰年
@@ -63,6 +75,11 @@ public class DaySwipDateAdapter extends BaseAdapter {
 	private boolean isStart;
 	
 	private LunarCalendar lc = null;
+	
+	//一段时期内会议搜索监听
+	private VolleyListenerInterface periodvolleyListener;
+	//一段时期内的所有会议
+	private List<MeetingInfo> periodMeetings = new ArrayList<MeetingInfo>();
 
 	// 标识选择的Item
 	public void setSeclection(int position) {
@@ -79,6 +96,14 @@ public class DaySwipDateAdapter extends BaseAdapter {
 		lc = new LunarCalendar();
 	}
 
+	static class ListItemView { // 自定义控件集合，与listitem_signin布局一致
+		public TextView tvCalendar;
+		public TextView tvCalendarLunar;
+		public LinearLayout llcan;
+		public Dot doview;
+	}
+
+	
 	public DaySwipDateAdapter(Context context, Resources rs, int year_c, int month_c,
 			int week_c, int week_num, int default_postion, boolean isStart) {
 		this();
@@ -102,7 +127,70 @@ public class DaySwipDateAdapter extends BaseAdapter {
 		currentWeek = String.valueOf(week_c);
 		getWeek(Integer.parseInt(currentYear), Integer.parseInt(currentMonth),
 				Integer.parseInt(currentWeek));
+		//初始化获取一段时间的会议的监听
+				periodvolleyListener = new VolleyListenerInterface(context){
+					@Override
+					public void onMySuccess(String result) {
+						// TODO Auto-generated method stub
+						try {
+							JSONObject myJsonObject = new JSONObject(result);
+							String rest = myJsonObject.getString("re_st");
+							periodMeetings.clear();
+							if (rest.equals("success")) {		
+								Message msg = Message.obtain();
+								MeetingInfo[] meetings
+								= JsonToEntityUtils.jsontoMeetingInfo( myJsonObject.getString("re_info"));
+								if(meetings != null){
+									for(MeetingInfo mi : meetings){
+										periodMeetings.add(mi);
+									}
+								}
+							}
+							for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
+								periodMeetings.add(ele);
+							}
+							notifyDataSetChanged();
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
 
+					@Override
+					public void onMyError(VolleyError error) {
+						// TODO Auto-generated method stub
+						periodMeetings.clear();
+						for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
+							periodMeetings.add(ele);
+						}
+						notifyDataSetChanged();
+					}
+					
+				};
+
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					// 这里写入子线程需要做的工作
+					Thread.sleep(1000);
+					DecimalFormat df = new DecimalFormat("00");
+					String mmonth = df.format(getCurrentMonth(0));
+					String mmday = df.format(Integer.parseInt(dayNumber[0]
+							.toString()));
+					String startDate = String.valueOf(currentYear) + "-"
+							+ mmonth + "-" + mmday;
+					String endDate = DateTimeHelper.DateToString(DateTimeHelper
+							.AddDays(DateTimeHelper.DayStringToDate(startDate),
+									6), "yyyy-MM-dd");
+					HttpFactory.getMeetingjoin_list_period(startDate, endDate,
+							periodvolleyListener);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			}
+		}.start();
+			
 	}
 
 	public int getTodayPosition() {
@@ -222,58 +310,77 @@ public class DaySwipDateAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return 0;
 	}
-
+	ListItemView listItemView = null;
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		// 自定义视图
+		listItemView = null;
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.item_calendar, null);
+			listItemView = new ListItemView();
+			// 获取控件对象
+			listItemView.doview = (Dot)convertView.findViewById(R.id.dot);
+			listItemView.tvCalendar = (TextView) convertView
+					.findViewById(R.id.tv_calendar);	
+			listItemView.tvCalendarLunar = (TextView) convertView
+					.findViewById(R.id.tv_calendar_Lunar);
+			listItemView.llcan = (LinearLayout)convertView.findViewById(R.id.ll_calendar);
+			// 设置控件集到convertView
+			convertView.setTag(listItemView);
+		}else {
+			listItemView = (ListItemView) convertView.getTag();
 		}
-		TextView tvCalendar = (TextView) convertView
-				.findViewById(R.id.tv_calendar);
-		tvCalendar.setText(dayNumber[position]);
-		TextView tvCalendarLunar = (TextView) convertView
-				.findViewById(R.id.tv_calendar_Lunar);
-		LinearLayout llcan = (LinearLayout)convertView.findViewById(R.id.ll_calendar);
+		listItemView.tvCalendar.setText(dayNumber[position]);
 		String scheduleLunarDay = getLunarDay(Integer.parseInt(currentYear),
 				Integer.parseInt(currentMonth), Integer.parseInt(dayNumber[position].toString()));
-		tvCalendarLunar.setText(scheduleLunarDay);
+		listItemView.tvCalendarLunar.setText(scheduleLunarDay);
 		if (position ==0||position == 6 ) {
-			tvCalendar.setTextColor(Color.parseColor("#db4043"));
+			listItemView.tvCalendar.setTextColor(Color.parseColor("#db4043"));
 		}
 		if (clickTemp == position) {
-			tvCalendar.setSelected(true);
-			tvCalendar.setTextColor(Color.WHITE);
-			tvCalendarLunar.setTextColor(Color.WHITE);
-			llcan.setBackgroundResource(R.drawable.circle_message);
+			listItemView.tvCalendar.setSelected(true);
+			listItemView.tvCalendar.setTextColor(Color.WHITE);
+			listItemView.tvCalendarLunar.setTextColor(Color.WHITE);
+			listItemView.llcan.setBackgroundResource(R.drawable.circle_message);
 			//tvCalendar.setBackgroundResource(R.drawable.circle_message);
 		} else {
-			tvCalendar.setSelected(false);
-			tvCalendar.setTextColor(Color.BLACK);
-			tvCalendarLunar.setTextColor(Color.BLACK);
-			llcan.setBackgroundColor(Color.TRANSPARENT);
+			listItemView.tvCalendar.setSelected(false);
+			listItemView.tvCalendar.setTextColor(Color.BLACK);
+			listItemView.tvCalendarLunar.setTextColor(Color.BLACK);
+			listItemView.llcan.setBackgroundColor(Color.TRANSPARENT);
 			//tvCalendar.setBackgroundColor(Color.TRANSPARENT);
 		}
 		if (position ==0||position == 6 ) {
-			tvCalendar.setTextColor(Color.parseColor("#db4043"));
-			tvCalendarLunar.setTextColor(Color.parseColor("#db4043"));
+			listItemView.tvCalendar.setTextColor(Color.parseColor("#db4043"));
+			listItemView.tvCalendarLunar.setTextColor(Color.parseColor("#db4043"));
 		}
 		DecimalFormat df = new DecimalFormat("00");
-		String mmonth = df.format(Integer.parseInt(currentMonth));
+		String mmonth = df.format(getCurrentMonth(position));
 		String mmday = df.format(Integer.parseInt(dayNumber[position].toString()));
 		String dateStr =String.valueOf(currentYear)+"-"+mmonth
 				+"-"+mmday;
 		if (dateStr.equals(DateTimeHelper.getDateNow())) {
-			tvCalendar.setTextColor(Color.RED);
-			tvCalendarLunar.setTextColor(Color.RED);
+			listItemView.tvCalendar.setTextColor(Color.RED);
+			listItemView.tvCalendarLunar.setTextColor(Color.RED);
+		}
+		listItemView.doview.setColor(context.getResources().getColor(R.color.white));
+		listItemView.doview.invalidate();
+		for (MeetingInfo info:periodMeetings) {
+			if (DateTimeHelper.isInDate(dateStr, info.getStartDateStr(""), info.getEndDateStr(""))) {
+				if (info.getAlertbeforetime()!=null||info.getJoin_st().equals("1")) {
+					listItemView.doview.setColor(context.getResources().getColor(R.color.gray));
+					listItemView.doview.invalidate();
+				}			
+			}
 		}
 		return convertView;
 	}

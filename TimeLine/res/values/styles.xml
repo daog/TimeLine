@@ -383,4 +383,32 @@
     <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
  <!-- 指定消失的动画xml -->
   </style>
+  
+  
+  <declare-styleable name="AbSlidingButtonStyle">
+    <attr name="btn_bottom" format="integer|reference" />
+    <attr name="btn_frame" format="integer|reference" />
+    <attr name="btn_mask" format="integer|reference" />
+    <attr name="btn_unpressed" format="integer|reference" />
+    <attr name="btn_pressed" format="integer|reference" />
+</declare-styleable>
+
+<declare-styleable name="BaseDoT">
+    <attr name="circleColor" format="color|reference" />
+</declare-styleable>
+
+<declare-styleable name="BaseDoTView">
+    <attr name="slideCount" format="integer|reference" />
+    <attr name="selectPosition" format="integer|reference" />
+    <attr name="selectedIndicatorColor" format="color|reference" />
+    <attr name="unselectedIndicatorColor" format="color|reference" />
+    <attr name="circleRadius" format="dimension|reference" />
+</declare-styleable>
+
+<declare-styleable name="BaseTopBackCenterHeader">
+    <attr name="headerTitle" format="reference|string" />
+    <attr name="headerTitleColor" format="color|reference" />
+    <attr name="headerShowLeft" format="boolean" />
+    <attr name="headerLeftTitle" format="reference|string" />
+</declare-styleable>
 </resources>

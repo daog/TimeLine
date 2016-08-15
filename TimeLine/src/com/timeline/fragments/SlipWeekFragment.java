@@ -158,6 +158,7 @@ public class SlipWeekFragment extends Fragment implements OnGestureListener{
 					dayNumbers = dateAdapter.getDayNumbers();
 					gridView.setAdapter(dateAdapter);
 					
+					currentMonth=dateAdapter.getCurrentMonth(selectPostion);
 					fragmentCallBack.callbackFun1(currentYear + "-"
 							+ currentMonth + "-"
 							+ currentDay );

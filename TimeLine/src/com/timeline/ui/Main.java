@@ -610,7 +610,8 @@ public class Main extends BaseActivity implements FragmentCallBack{
 			case R.id.indicator_month:
 				mTabIndicators.get(2).SetIconAlpha(1.0f);
 				mViewPager.setCurrentItem(2,false);
-				rlhead.setVisibility(View.GONE);
+				rlhead.setVisibility(View.VISIBLE);
+				headView.setText("");
 				refreshData(v.getId());
 				currIndex = 2;
 				AppContext.getInstance().savePage(currIndex);
@@ -639,6 +640,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
     			HttpFactory.getMeetingjoin_list(daydate, dayvolleyListener);
     			Message dayRefreshMsg = Message.obtain();
     			dayRefreshMsg.what = 0;
+    			
 				AppContext.getInstance().mDayRefreshDateHandler.sendMessage(dayRefreshMsg);
     			break;
     		case R.id.indicator_week:

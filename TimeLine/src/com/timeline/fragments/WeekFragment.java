@@ -242,7 +242,6 @@ public class WeekFragment extends Fragment  {
 				for (MeetingInfo ele : AppContext.getInstance().getEventmeetingBuffer()) {
 					periodMeetings.add(ele);
 				}
-				
 				generateDayViews();
 			}
 			
