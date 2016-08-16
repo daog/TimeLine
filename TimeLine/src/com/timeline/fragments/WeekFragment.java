@@ -861,8 +861,35 @@ public class WeekFragment extends Fragment  {
 
 		//报名会议
 		private void enrollMeeting(final MeetingInfo mi) {
-			new MyDialog(getActivity(), R.style.MyDialog, "您确定要报名?", "确定", "取消",
-					new MyDialog.DialogClickListener() {
+			for(MeetingInfo m : periodMeetings){
+				if(m.getAlertbeforetime() == null){
+					continue;
+				}
+				//当前日期（单位：秒）
+				String nowDateStr = DateTimeHelper.getDateNow();
+				Date nowDate = DateTimeHelper.DayStringToDate(nowDateStr);
+//				Calendar cal = Calendar.getInstance(); 
+//				cal.set(nowDate.getYear(), nowDate.getMonth(), nowDate.getDay(),0,0,0);
+				long nowDateSeconds = nowDate.getTime()/1000L;
+				//当前时间（单位：秒）
+				int nowTimeSeconds = nowDate.getHours() * 24 * 60 * 60 + nowDate.getMinutes() * 60 + nowDate.getSeconds();
+				
+				//个人事件结束日期
+				long personalEventEndDate = Long.parseLong(m.getEnd_date());
+				//个人事件结束时间 
+				int persongalEventEndTime = Integer.parseInt(m.getEnd_time());
+				
+				//会议开始日期
+				long eventStartDate = Long.parseLong(mi.getStart_date());
+				//会议开始时间
+				int eventStartTime = Integer.parseInt(mi.getStart_time());
+				//会议结束日期
+				long eventEndDate = Long.parseLong(mi.getEnd_date());
+				//会议结束时间
+				int eventEndTime = Integer.parseInt(mi.getEnd_time());
+				
+				if(nowDateSeconds <= eventEndDate && personalEventEndDate >= eventStartDate && nowTimeSeconds <= eventEndTime && persongalEventEndTime >= eventStartTime){
+					new MyDialog(getActivity(), R.style.MyDialog, "有个人事件与该会议事件重叠，您确定要报名?", "确定", "取消",new MyDialog.DialogClickListener() {
 
 						@Override
 						public void onRightBtnClick(Dialog dialog) {
@@ -872,11 +899,30 @@ public class WeekFragment extends Fragment  {
 
 						@Override
 						public void onLeftBtnClick(Dialog dialog) {
-							// TODO Auto-generated method stub
 							HttpFactory.Set_Join_Status(mi.getId(), "1", hoinStatusvolleyListener);
 							dialog.dismiss();
 						}
 					}).show();
+					break;
+				}
+			}
+		
+//			new MyDialog(getActivity(), R.style.MyDialog, "您确定要报名?", "确定", "取消",
+//					new MyDialog.DialogClickListener() {
+//
+//						@Override
+//						public void onRightBtnClick(Dialog dialog) {
+//							// TODO Auto-generated method stub
+//							dialog.dismiss();
+//						}
+//
+//						@Override
+//						public void onLeftBtnClick(Dialog dialog) {
+//							// TODO Auto-generated method stub
+//								
+//							dialog.dismiss();
+//						}
+//					}).show();
 			
 		}
 		
