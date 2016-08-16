@@ -25,8 +25,10 @@ import com.timeline.adapter.MonthContentListAdapter;
 import com.timeline.adapter.PastMeetingAdapter;
 import com.timeline.app.AppContext;
 import com.timeline.bean.MeetingHisBean;
+import com.timeline.bean.MeetingInfo;
 import com.timeline.bean.ReturnInfo;
 import com.timeline.bean.User;
+import com.timeline.common.DateTimeHelper;
 import com.timeline.common.JsonToEntityUtils;
 import com.timeline.common.UIHelper;
 import com.timeline.interf.VolleyListenerInterface;
@@ -77,7 +79,7 @@ public class PastMeetingsAc extends BaseActivity {
 					JSONObject myJsonObject = new JSONObject(result);
 					String rest = myJsonObject.getString("re_st");
 					if (rest.equals("success")) {
-						MeetingHisBean[] hismeetings = JsonToEntityUtils.jsontoMeetingHises(myJsonObject.getString("re_info"));
+						MeetingInfo[] hismeetings = JsonToEntityUtils.jsontoMeetingInfo(myJsonObject.getString("re_info"));
 						getData(hismeetings);
 					}else {
 						ReturnInfo info = JsonToEntityUtils.jsontoReinfo(result);
@@ -98,13 +100,15 @@ public class PastMeetingsAc extends BaseActivity {
 
 		};
 		headText  = (TextView)findViewById(R.id.id_pastMeetingshead);
-		if (type.equals("history")) {
-			HttpFactory.MeetingHistory("10", volleyListener);
+		if (type.equals("1")) {
+			headText.setText("报名");
+		}else if(type.equals("2")) {
+			headText.setText("待定");
 		}else {
-			headText.setText("我的收藏");
-			HttpFactory.MeetingCollect(volleyListener);
+			headText.setText("拒绝");
 		}
-		
+		String sdate = DateTimeHelper.getDateNow();
+		HttpFactory.getMeeting_list_periodby_st(type,sdate,"",volleyListener);
 		lv_pastMeetings.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -129,15 +133,15 @@ public class PastMeetingsAc extends BaseActivity {
 		});
 	}
 	
-	private void getData(MeetingHisBean[] hismeetings) {
+	private void getData(MeetingInfo[] hismeetings) {
 		// TODO Auto-generated method stub
-        for (MeetingHisBean bean :hismeetings) {  
+        for (MeetingInfo bean :hismeetings) {  
             Map<String, Object> map=new HashMap<String, Object>();  
             map.put("meetingImage", null);  
             map.put("meetingOrgnizer", bean.getSponsor());  
             map.put("meetingTitle",bean.getSubject());  
-            map.put("meetingDate",bean.getStart_date()); 
-            map.put("meetingId",bean.getMeeting_id()); 
+            map.put("meetingDate",bean.getStartDateStr("")); 
+            map.put("meetingId",bean.getId()); 
             pastMeetingsList.add(map);  
         }  
         adapter.notifyDataSetChanged();

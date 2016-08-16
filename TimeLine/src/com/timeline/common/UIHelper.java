@@ -26,6 +26,7 @@ import com.timeline.app.AppManager;
 import com.timeline.bean.MeetingInfo;
 import com.timeline.main.R;
 import com.timeline.ui.AdviceAc;
+import com.timeline.ui.ClassifyMeeting;
 import com.timeline.ui.EventAddAc;
 import com.timeline.ui.EventDeAc;
 import com.timeline.ui.GuestSigninAc;
@@ -278,6 +279,16 @@ private final static String TAG = "UIHelper";
 	public static void showHistory(String type,Activity activity) {
 		Intent intent = new Intent(activity, PastMeetingsAc.class);
 		intent.putExtra("type", type);
+		activity.startActivity(intent);
+	}
+	
+	/**
+	 * 显示会议中心界面
+	 * 
+	 * @param activity
+	 */
+	public static void showMeetingClassify(Activity activity) {
+		Intent intent = new Intent(activity, ClassifyMeeting.class);
 		activity.startActivity(intent);
 	}
 	

@@ -650,6 +650,34 @@ public class HttpFactory {
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		AppContext.getInstance().mQueue.add(request);
 	}
+	/**
+	 *获取指定时间段特定会议列表
+	 * @param startDate
+	 * @param endDate
+	 * @param volleyListenerInterface
+	 */
+	public static void getMeeting_list_periodby_st(final String st,final String startDate, final String endDate, VolleyListenerInterface volleyListenerInterface){
+		String url = "http://event.gooddr.com/api/meeting/get_meeting_list_by_st";
+		StringRequest request = new StringRequest(Method.POST, url,volleyListenerInterface.responseListener(), 
+			volleyListenerInterface.errorListener())
+			{  
+			  @Override  
+			  protected Map<String, String> getParams() throws AuthFailureError {  
+			    Map<String, String> map = new HashMap<String, String>();  
+			    map.put("user_id",AppContext.getUser().getId());  
+			    map.put("login_token", AppContext.getUser().getLogin_token());  
+			    map.put("start_day",startDate); 
+			    map.put("end_day",endDate);
+			    map.put("st",st);
+			    return map;  
+			  }  
+			};  
+
+		request.setRetryPolicy(new DefaultRetryPolicy(5000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+		AppContext.getInstance().mQueue.add(request);
+	}
 	
 	public static void Set_Join_Status(final String id, final String status, VolleyListenerInterface volleyListenerInterface){
 		String url = "http://event.gooddr.com/api/meeting/set_meeting_join_status";

@@ -63,7 +63,8 @@ public class MySigninReadyAc extends BaseActivity{
 		  UIHelper.showMyInfo(this,"","");
 	  }
 	  public void btn_Collect(View v){
-		  UIHelper.showHistory("collect", MySigninReadyAc.this);
+		  UIHelper.showMeetingClassify(MySigninReadyAc.this);
+		  //UIHelper.showHistory("collect", MySigninReadyAc.this);
 	  }
 	  
 	  public void close_Click(View v){

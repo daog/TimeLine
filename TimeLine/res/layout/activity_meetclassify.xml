@@ -48,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
                 android:padding="4dp"
                 android:text="已报名的会议"
                 android:textSize="@dimen/text_size_15" />
@@ -92,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
                 android:padding="4dp"
                 android:text="待定的会议"
                 android:textSize="@dimen/text_size_15" />
@@ -137,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
                 android:padding="4dp"
                 android:text="已拒绝的会议"
                 android:textSize="@dimen/text_size_15" />
