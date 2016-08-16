@@ -861,7 +861,8 @@ public class WeekFragment extends Fragment  {
 
 		//报名会议
 		private void enrollMeeting(final MeetingInfo mi) {
-			for(MeetingInfo m : periodMeetings){
+			Boolean hasConflict = false;
+			for(MeetingInfo m : AppContext.getInstance().getEventmeetingBuffer()){
 				if(m.getAlertbeforetime() == null){
 					continue;
 				}
@@ -889,6 +890,7 @@ public class WeekFragment extends Fragment  {
 				int eventEndTime = Integer.parseInt(mi.getEnd_time());
 				
 				if(nowDateSeconds <= eventEndDate && personalEventEndDate >= eventStartDate && nowTimeSeconds <= eventEndTime && persongalEventEndTime >= eventStartTime){
+					hasConflict = true;
 					new MyDialog(getActivity(), R.style.MyDialog, "有个人事件与该会议事件重叠，您确定要报名?", "确定", "取消",new MyDialog.DialogClickListener() {
 
 						@Override
@@ -903,8 +905,13 @@ public class WeekFragment extends Fragment  {
 							dialog.dismiss();
 						}
 					}).show();
+				}
+				if(hasConflict){
 					break;
 				}
+			}
+			if(!hasConflict){
+				HttpFactory.Set_Join_Status(mi.getId(), "1", hoinStatusvolleyListener);
 			}
 		
 //			new MyDialog(getActivity(), R.style.MyDialog, "您确定要报名?", "确定", "取消",
