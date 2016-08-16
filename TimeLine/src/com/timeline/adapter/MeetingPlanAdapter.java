@@ -144,14 +144,19 @@ public class MeetingPlanAdapter extends BaseExpandableListAdapter{
 		} else {
 			listItemView = (chListItemView) convertView.getTag();
 		}
+		listItemView.chLayout.removeAllViews();
 		
 		MeetingDetailPlanBean deplan = falistItems.get(groupPosition).getDetails().get(childPosition);
-		listItemView.chtime.setText(deplan.getDetime());
-		for (int i = 0; i < deplan.getPlans().size(); i++) {
-			TextView tv = new TextView(context);
-			tv.setText(deplan.getPlans().get(i));
-			listItemView.chLayout.addView(tv);
-		}
+		listItemView.chtime.setText(deplan.getTime());
+		TextView tv = new TextView(context);
+		tv.setTextColor(context.getResources().getColor(R.color.black));
+		tv.setText(deplan.getSubject());
+		listItemView.chLayout.addView(tv);
+//		for (int i = 0; i < deplan.getPlans().size(); i++) {
+//			TextView tv = new TextView(context);
+//			tv.setText(deplan.getPlans().get(i));
+//			listItemView.chLayout.addView(tv);
+//		}
 		
 		return convertView;
 	}

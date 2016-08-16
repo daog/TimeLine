@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.timeline.bean.JobBase;
 import com.timeline.bean.MeetingDescribe;
+import com.timeline.bean.MeetingDetailPlanBean;
 import com.timeline.bean.MeetingHisBean;
 import com.timeline.bean.MeetingInfo;
 import com.timeline.bean.MeetingPlanBean;
@@ -114,6 +115,17 @@ public class JsonToEntityUtils {
 		Type listType = new TypeToken<LinkedList<MeetingPlanBean>>(){}.getType(); 
 		LinkedList<MeetingSerchBean> list = gson.fromJson(json, listType); 
 		MeetingPlanBean[] info = gson.fromJson(json, MeetingPlanBean[].class); 
+		if (info.length == 0) {
+			return null;
+		}
+		return info;
+	}
+	
+	public static MeetingDetailPlanBean[] jsontoMeetingDetailPlanBean(String json) {
+		Gson gson = new Gson();  
+		Type listType = new TypeToken<LinkedList<MeetingDetailPlanBean>>(){}.getType(); 
+		LinkedList<MeetingDetailPlanBean> list = gson.fromJson(json, listType); 
+		MeetingDetailPlanBean[] info = gson.fromJson(json, MeetingDetailPlanBean[].class); 
 		if (info.length == 0) {
 			return null;
 		}

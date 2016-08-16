@@ -155,12 +155,12 @@ public class MyInfoAc extends BaseActivity {
 			sexualView.setText("Ů");
 		  }
 
-			  departmentView.setText(AppContext.getUser().getDepartment()!=null?AppContext.getUser().getDepartment():"");
-			  dutyView.setText(AppContext.getUser().getPosition()!=null?AppContext.getInstance().jonbase.getPosition().get(AppContext.getUser().getPosition()):"" );
+			  departmentView.setText(AppContext.getUser().getDepartment()!=null?AppContext.getUser().getDepartment():"(δ��д)");
+			  dutyView.setText(AppContext.getUser().getPosition()!=null?AppContext.getInstance().jonbase.getPosition().get(AppContext.getUser().getPosition()):"(δ��д)" );
 		  
 		  
-		  jobtitleView.setText(AppContext.getUser().getJob_title()!=null?AppContext.getInstance().jonbase.getJob_title().get(AppContext.getUser().getJob_title()):"");
-		  hospitalView.setText(AppContext.getUser().getInstitution()!=null?AppContext.getUser().getInstitution():"");
+		  jobtitleView.setText(AppContext.getUser().getJob_title()!=null?AppContext.getInstance().jonbase.getJob_title().get(AppContext.getUser().getJob_title()):"(δ��д)");
+		  hospitalView.setText(AppContext.getUser().getInstitution()!=null?AppContext.getUser().getInstitution():"(δ��д)");
 	}
 	
 	private void InitView() {

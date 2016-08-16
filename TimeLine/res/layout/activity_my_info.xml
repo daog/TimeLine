@@ -364,6 +364,6 @@
         android:layout_alignParentBottom = "true"
         android:background="@drawable/selector_red_button"
         android:text="编辑"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_20" />
+        android:textColor="@color/head_text"
+        android:textSize="@dimen/text_size_19" />
 </RelativeLayout>

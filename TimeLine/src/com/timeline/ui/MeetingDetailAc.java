@@ -1,6 +1,7 @@
 package com.timeline.ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -108,9 +109,25 @@ public class MeetingDetailAc extends BaseActivity{
 					JSONObject infoJsonObject = new JSONObject(infosult);
 					String meetStr = infoJsonObject.getString("meeting_info");
 					String planStr = infoJsonObject.getString("detail");
+					JSONObject planJsonObject = new JSONObject(planStr);
+					//父列表
+					String parent = planJsonObject.getString("parent");
+					MeetingPlanBean[] planbeans = JsonToEntityUtils.jsontoMeetingPlanBean(parent);
+					//子列表
+					String subchild =  planJsonObject.getString("sub");
+					JSONObject childJsonObject = new JSONObject(subchild);
+					for (int i = 0; i < planbeans.length; i++) {
+						String subCh = childJsonObject.getString(planbeans[i].getId().toString());
+						MeetingDetailPlanBean[] childbeans = JsonToEntityUtils.jsontoMeetingDetailPlanBean(subCh);
+						List<MeetingDetailPlanBean> List = new ArrayList<MeetingDetailPlanBean>();
+						for (MeetingDetailPlanBean chPlanBean : childbeans) {
+							List.add(chPlanBean);
+						}
+						planbeans[i].setDetails(List);
+					}
+					
 					String guestStr = infoJsonObject.getString("honored_guest");
-					guest[] gus = JsonToEntityUtils.jsontoguest(guestStr);
-					MeetingPlanBean[] planbeans = JsonToEntityUtils.jsontoMeetingPlanBean(planStr);
+					guest[] gus = JsonToEntityUtils.jsontoguest(guestStr);	
 					MeetingDescribe meets = JsonToEntityUtils.jsontoMeetingDes(meetStr);
 //					
 					String status = meets.getIs_join();

@@ -23,8 +23,6 @@ public class MeetingPlanBean {
 		this.subject = subject;
 	}
 
-	private List<MeetingDetailPlanBean> details = new ArrayList<MeetingDetailPlanBean>();
-
 	public String getTime() {
 		return time;
 	}
@@ -33,6 +31,7 @@ public class MeetingPlanBean {
 		this.time = timeString;
 	}
 
+	private List<MeetingDetailPlanBean> details = new ArrayList<MeetingDetailPlanBean>();
 	public List<MeetingDetailPlanBean> getDetails() {
 		return details;
 	}

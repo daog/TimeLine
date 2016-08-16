@@ -758,7 +758,7 @@ public class Main extends BaseActivity implements FragmentCallBack{
 	@Override
 	public void callbackFun2(int arg) {
 		// TODO Auto-generated method stub
-		headView.setText(Numeric2ChineseStr.getmSelMonthText(Integer.valueOf(arg)));
+		//headView.setText(Numeric2ChineseStr.getmSelMonthText(Integer.valueOf(arg)));
 	}
 	
 	@Override
