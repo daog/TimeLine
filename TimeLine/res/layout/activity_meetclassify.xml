@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffffffff">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/red">
+        <ImageButton
+            android:id="@+id/id_classifyMeetingsback"
+    	    android:layout_width="60dp"
+    	    android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/full_transparent"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="15.0dip"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/back">           
+        </ImageButton>
+        <TextView
+            android:id="@+id/id_classifyMeetingshead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textColor="#ffffffff"
+            android:text="会议中心">
+        </TextView>
+    </RelativeLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+       <RelativeLayout
+            style="@style/widget_listview_Item"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="btn_up" >
+
+            <TextView
+                style="@style/widget_listview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:text="已报名的会议"
+                android:textSize="@dimen/text_size_15" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/myinfo_name"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginLeft"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_cli" />
+
+                <TextView
+                    android:id="@+id/myinfo_name_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginRight"
+                    android:layout_toLeftOf="@id/myinfo_name"
+                    android:padding="4dp"
+                    android:text=""
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>
+ 		<RelativeLayout
+            style="@style/widget_listview_Item"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="btn_undeside" >
+
+            <TextView
+                style="@style/widget_listview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:text="待定的会议"
+                android:textSize="@dimen/text_size_15" />
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/myinfo_sexual"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginLeft"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_cli" />
+
+                <TextView
+                    android:id="@+id/myinfo_sexual_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginRight"
+                    android:layout_toLeftOf="@id/myinfo_sexual"
+                    android:padding="4dp"
+                    android:text=""
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>
+      		<RelativeLayout
+            style="@style/widget_listview_Item"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="btn_refuses" >
+
+            <TextView
+                style="@style/widget_listview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:text="已拒绝的会议"
+                android:textSize="@dimen/text_size_15" />
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/texttoimage_marginLeft"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mclassify_refuse"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginLeft"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_cli" />
+
+                <TextView
+                    android:id="@+id/mclassify_refuse_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/image_marginRight"
+                    android:layout_toLeftOf="@id/mclassify_refuse"
+                    android:padding="4dp"
+                    android:text=""
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+        </RelativeLayout>   
+ 		</LinearLayout>
+</LinearLayout>
