@@ -116,18 +116,22 @@ public class MeetingDetailAc extends BaseActivity{
 					String parent = planJsonObject.getString("parent");
 					MeetingPlanBean[] planbeans = JsonToEntityUtils.jsontoMeetingPlanBean(parent);
 					//子列表
-					String subchild =  planJsonObject.getString("sub");
-					JSONObject childJsonObject = new JSONObject(subchild);
-					for (int i = 0; i < planbeans.length; i++) {
-						String subCh = childJsonObject.getString(planbeans[i].getId().toString());
-						MeetingDetailPlanBean[] childbeans = JsonToEntityUtils.jsontoMeetingDetailPlanBean(subCh);
-						List<MeetingDetailPlanBean> List = new ArrayList<MeetingDetailPlanBean>();
-						for (MeetingDetailPlanBean chPlanBean : childbeans) {
-							List.add(chPlanBean);
-						}
-						planbeans[i].setDetails(List);
-					}
 					
+					if (!planJsonObject.isNull("sub") ) {
+						String subchild = planJsonObject.getString("sub");
+						JSONObject childJsonObject = new JSONObject(subchild);
+						for (int i = 0; i < planbeans.length; i++) {
+							String subCh = childJsonObject
+									.getString(planbeans[i].getId().toString());
+							MeetingDetailPlanBean[] childbeans = JsonToEntityUtils
+									.jsontoMeetingDetailPlanBean(subCh);
+							List<MeetingDetailPlanBean> List = new ArrayList<MeetingDetailPlanBean>();
+							for (MeetingDetailPlanBean chPlanBean : childbeans) {
+								List.add(chPlanBean);
+							}
+							planbeans[i].setDetails(List);
+						}
+					}
 					String guestStr = infoJsonObject.getString("honored_guest");
 					guest[] gus = JsonToEntityUtils.jsontoguest(guestStr);	
 					MeetingDescribe meets = JsonToEntityUtils.jsontoMeetingDes(meetStr);

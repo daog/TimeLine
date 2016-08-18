@@ -63,8 +63,8 @@ public class PastMeetingAdapter extends BaseAdapter {
 		}
 		//绑定数据
 		//contentListItemControls.meetingImage.setBackgroundColor((Integer)data.get(position).get("splitColor")); 
-		pastMeetingListItemControls.meetingOrgnizer.setText((String)data.get(position).get("meetingOrgnizer"));
-		pastMeetingListItemControls.meetingTitle.setText((String)data.get(position).get("meetingTitle"));
+		pastMeetingListItemControls.meetingOrgnizer.setText((String)data.get(position).get("meetingTitle"));
+		pastMeetingListItemControls.meetingTitle.setText((String)data.get(position).get("meetingOrgnizer"));
 		pastMeetingListItemControls.meetingDate.setText((String)data.get(position).get("meetingDate"));
 		
 		pastMeetingListItemControls.meetingTitle.setTag((String)data.get(position).get("meetingId"));

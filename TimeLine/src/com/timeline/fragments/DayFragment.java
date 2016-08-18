@@ -375,6 +375,9 @@ public class DayFragment extends Fragment {
 	    int width = wm.getDefaultDisplay().getWidth();
 	    
 	    int layWidth=(int) ((width-dip2px(getActivity(), 70))/2.5);
+	    if (meetings.length ==1) {
+	    	 layWidth=(int)(width-dip2px(getActivity(), 70));
+		}
 	    for (MeetingInfo info:meetings) {
 			int start = 0;
 			int end = 0;

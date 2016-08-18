@@ -28,6 +28,7 @@ public class Register1Ac  extends BaseActivity{
 	private EditText phoneText;
 	private Button btnOK;
 	private TextView cancelText;
+	private TextView headView;
 	
 	private String phoneNum;
 	
@@ -67,6 +68,10 @@ public class Register1Ac  extends BaseActivity{
 		   phoneText = (EditText)findViewById(R.id.register_phone);
 		   btnOK = (Button)findViewById(R.id.register_btn_login);
 		   cancelText = (TextView)findViewById(R.id.login_head_cancel);
+		   headView =  (TextView)findViewById(R.id.login_head_title);
+		   if (type.equals("2")) {
+			   headView.setText("重设密码");
+		   }
 		   btnOK.setOnClickListener(new OnClickListener() {
 			
 			@Override

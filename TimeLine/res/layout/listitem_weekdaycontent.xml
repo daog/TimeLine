@@ -5,17 +5,23 @@
     android:layout_height="fill_parent">  --> 
  <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" 
-    
 	android:layout_width="200dp" 
 	android:layout_height="fill_parent"> 
 	<LinearLayout 
 	    android:id="@+id/id_content1"
 	    android:layout_width="200dp"
 	    android:layout_height="match_parent"
-	    android:background="@color/week_green"
+	    android:background="@color/day_bluetran"
 	    android:layout_marginLeft="5dp"
 	    android:orientation="vertical">
-	    
+	        <LinearLayout
+        android:id="@+id/id_split"
+        android:layout_height="5dp"
+        android:layout_width="match_parent"
+       android:background="@color/lightblue"
+        android:orientation="horizontal"
+        android:layout_marginBottom="3dp"> 
+          </LinearLayout>  
 	    <TextView android:id="@+id/id_topic" 
 			    android:layout_width="fill_parent"
 				android:layout_height="0dp" 
@@ -25,7 +31,7 @@
 				android:singleLine="false"
 				android:maxEms="14"
 				android:ellipsize="end"
-				android:textSize="12sp"
+				android:textSize="10sp"
 				android:text="会议主题1" />
 	    
 	    <TextView android:id="@+id/id_orgnizer" 

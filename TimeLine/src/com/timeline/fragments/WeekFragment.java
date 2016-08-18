@@ -407,15 +407,15 @@ public class WeekFragment extends Fragment  {
 				LinearLayout content1  = (LinearLayout) content.findViewById(R.id.id_content1);
 				WindowManager wm = (WindowManager) AppContext.getInstance()
 						.getSystemService(Context.WINDOW_SERVICE);
-
-				int width = (wm.getDefaultDisplay().getWidth() - 15) / 14 * 12 / 3;
+				LinearLayout llspilt  = (LinearLayout) content.findViewById(R.id.id_split);
+				int width = (wm.getDefaultDisplay().getWidth() - 15) / 14 * 12 / 4;
 				LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
 						width, ViewGroup.LayoutParams.MATCH_PARENT);
 				param.setMargins(8, 0, 0, 0);
 				param.gravity = Gravity.CENTER_HORIZONTAL;
 				// 所有组件垂直摆放
 				content1.setOrientation(LinearLayout.VERTICAL);
-				content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_green));
+				content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_greenno));
 				
 				TextView subjectTv = (TextView)content.findViewById(R.id.id_topic);
 				TextView orginzerTv = (TextView)content.findViewById(R.id.id_orgnizer);
@@ -425,18 +425,23 @@ public class WeekFragment extends Fragment  {
 				if (dayMeeting.getJoin_st()!=null) {
 					if (dayMeeting.getJoin_st().equals("1")) {//已报名
 						imaSta.setImageDrawable(getResources().getDrawable(R.drawable.icon_meeting_upyes));
+						content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.day_bluetran));
 						
 					}else if (dayMeeting.getJoin_st().equals("2")) {//待定
+						llspilt.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_green));
 						imaSta.setImageDrawable(getResources().getDrawable(R.drawable.icon_meeting_underyes));
 						
 					}else if (dayMeeting.getJoin_st().equals("3")) {//拒绝
+						llspilt.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_green));
 						imaSta.setImageDrawable(getResources().getDrawable(R.drawable.icon_meeeting_refyes));
 					}else if (dayMeeting.getJoin_st().equals("4")) {//无操作
 						imaSta.setVisibility(View.GONE);
+						llspilt.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_green));
 						content1.setBackgroundColor(getResources().getColor(R.color.week_greenno));
 					}
 				}else {
-					content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_red));
+					llspilt.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.week_red));
+					content1.setBackgroundColor(AppContext.getInstance().getResources().getColor(R.color.day_redtran));
 					imaSta.setVisibility(View.GONE);
 				}
 
