@@ -42,7 +42,7 @@ public class AlertService extends Service{
 	public void onCreate() {
 		super.onCreate();
 		nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		uploadLamp();
+		//uploadLamp();
 	}
 
 	private void uploadLamp() {

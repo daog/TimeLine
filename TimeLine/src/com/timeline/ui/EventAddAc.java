@@ -28,6 +28,7 @@ import com.timeline.app.AppContext;
 import com.timeline.bean.MeetingInfo;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.StringUtils;
+import com.timeline.common.SynCanlender;
 import com.timeline.common.UIHelper;
 import com.timeline.main.R;
 import com.timeline.slidedatetimepicker.SlideDateTimeListener;
@@ -280,6 +281,9 @@ public class EventAddAc extends BaseActivity{
 			
         	infohelper.insertInfo(EventAddAc.this, info);
         	UIHelper.ToastMessage(EventAddAc.this, "保存成功！");
+        	
+        	SynCanlender.insertEvent(EventAddAc.this, info);
+        	
         	finish();
     	}
     	else{

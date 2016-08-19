@@ -4,6 +4,7 @@ package com.timeline.sqlite;
 import java.util.List;
 
 import com.timeline.bean.MeetingInfo;
+import com.timeline.common.SynCanlender;
 import com.timeline.sqlite.DaoMaster.DevOpenHelper;
 
 import android.content.Context;
@@ -63,6 +64,7 @@ public class InfoHelper {
 			daoSession = InitDAOSession(context);
 			meetingInfodao  = daoSession.getMeetingInfoDao();
 			meetingInfodao.delete(entity);
+			SynCanlender.deleteCalendars(context, entity);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

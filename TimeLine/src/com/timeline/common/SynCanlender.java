@@ -7,8 +7,10 @@ import java.util.TimeZone;
 
 import com.timeline.app.AppContext;
 import com.timeline.bean.MeetingInfo;
+import com.timeline.sqlite.InfoHelper;
 
 import android.R.integer;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,6 +26,7 @@ public class SynCanlender {
     private static String calanderRemiderURL = "content://com.android.calendar/reminders";
     
     private static int CalID ;
+    InfoHelper infohelper = new InfoHelper();
 	
     /**
      * 读取事件
@@ -63,7 +66,11 @@ public class SynCanlender {
             	
             	info.setSubject(eventTitle);
             	info.setAlertbeforetime("1111");
-            	AppContext.EventmeetingBuffer.add(info);
+            	info.setId(eventCursor.getString(eventCursor.getColumnIndex(Events._ID)));
+            	
+            	InfoHelper infohelper = new InfoHelper();
+        		infohelper.insertInfo(context, info);
+            	//AppContext.EventmeetingBuffer.add(info);
             	
                 //UIHelper.ToastMessage(context, "NAME: " + eventTitle);
                 //System.out.print(aString);
@@ -101,7 +108,7 @@ public class SynCanlender {
        // int rownum = context.getContentResolver().delete(Uri.parse(calanderURL), "_id==5", null);  //注意：会全部删除所有账户，新添加的账户一般从id=1开始，
 	}
 	
-	public static void insertEvent(Context context) {
+	public static void insertEvent(Context context,MeetingInfo info) {
 			
 		long calID = CalID;// 添加的账户ID
 		long startMillis = 0; 
@@ -109,9 +116,13 @@ public class SynCanlender {
 		Calendar beginTime = Calendar.getInstance();
 		beginTime.set(2016, 7, 19, 7, 30);	//注意，月份的下标是从0开始的
 		startMillis = beginTime.getTimeInMillis();	//插入日历时要取毫秒计时
+		startMillis = info.getStartDateTime().getTime();
+		
+		
 		Calendar endTime = Calendar.getInstance();
 		endTime.set(2016, 7, 19, 10, 30);
 		endMillis = endTime.getTimeInMillis();
+		endMillis = info.getEndDateTime().getTime();
 				
 		ContentValues eValues = new ContentValues();  //插入事件
 		ContentValues rValues = new ContentValues();  //插入提醒，与事件配合起来才有效
@@ -120,8 +131,8 @@ public class SynCanlender {
 		//插入日程
 		eValues.put(Events.DTSTART, startMillis);
 		eValues.put(Events.DTEND, endMillis);
-		eValues.put(Events.TITLE, "见导师");
-		eValues.put(Events.DESCRIPTION, "去实验室见研究生导师");
+		eValues.put(Events.TITLE, info.getSubject());
+		eValues.put(Events.DESCRIPTION, info.getDescribe());
 		eValues.put(Events.CALENDAR_ID, calID);
 		eValues.put(Events.EVENT_LOCATION, "计算机学院");
 		eValues.put(Events.EVENT_TIMEZONE, tz.getID()); 
@@ -133,9 +144,24 @@ public class SynCanlender {
 		rValues.put("minutes", 10);	//提前10分钟提醒
 		rValues.put("method", 1);	//如果需要有提醒,必须要有这一行
 		context.getContentResolver().insert(Uri.parse(calanderRemiderURL),rValues);
+		
+		info.setEdit_TX2(myEventsId);
+		InfoHelper infohelper = new InfoHelper();
+		infohelper.updateInfo(context, info);
 
 	}
-	
+	  //删除事件
+    public static void deleteCalendars(Context context,MeetingInfo info) {
+    	 //用rows保存删除的行数，以备有用
+//    	ContentValues updateValues = new ContentValues();
+//
+//    	Uri deleteUri = null;
+//
+//    	deleteUri  = ContentUris.withAppendedId(Uri.parse(calanderEventURL),Long.valueOf(info.getEdit_TX2()));
+//
+//    	context.getContentResolver().delete(deleteUri,null,null);
+        int rows = context.getContentResolver().delete(Events.CONTENT_URI, Events.TITLE+"=?", new String[]{info.getSubject()});
+    }
 	  //添加账户
     public static void initCalendars(Context context) {
 

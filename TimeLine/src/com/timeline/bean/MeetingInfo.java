@@ -218,6 +218,20 @@ public class MeetingInfo implements Serializable ,Comparable {
 	}
 	
 	/**
+	 * 获取开始日期时间
+	 * @return开始日期
+	 */
+	public Date getStartDateTime(){
+		if(StringUtils.isEmpty(start_date)||StringUtils.isEmpty(start_time)){
+			return null;
+		}
+			Long dateLong = (Long.valueOf(start_date)+Long.valueOf(start_time))*1000;
+			Date date = new Date(dateLong);
+			return date;
+
+	}
+	
+	/**
 	 * 获取结束日期格式化字符串（yyyy-MM-dd）
 	 * @return结束日期格式化字符串
 	 */
@@ -246,6 +260,19 @@ public class MeetingInfo implements Serializable ,Comparable {
 		return date;
 	}
 
+	/**
+	 * 获取结束日期时间
+	 * @return开始日期
+	 */
+	public Date getEndDateTime(){
+		if(StringUtils.isEmpty(end_date)||StringUtils.isEmpty(end_time)){
+			return null;
+		}
+			Long dateLong = (Long.valueOf(end_date)+Long.valueOf(end_time))*1000;
+			Date date = new Date(dateLong);
+			return date;
+
+	}
 	public String getIncludeDayStr() {
 		return IncludeDayStr;
 	}
@@ -264,7 +291,7 @@ public class MeetingInfo implements Serializable ,Comparable {
 
 
 	private String Edit_TX1;
-    private String Edit_TX2;
+    private String Edit_TX2;//插入日历事件表ID
     private String Edit_TX3;
     public String getEdit_TX1() {
         return Edit_TX1;
