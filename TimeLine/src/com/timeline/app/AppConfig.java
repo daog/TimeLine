@@ -16,7 +16,7 @@ import android.preference.PreferenceManager;
 /**
  * 应用程序配置类：用于保存用户相关信息及设置
  * 
- * @author gaojun
+ * @author sx
  * @version 1.0
  * @created 2014-10-16
  */
