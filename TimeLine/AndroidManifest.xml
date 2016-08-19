@@ -41,6 +41,8 @@
     </uses-permission>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.READ_CALENDAR"/>   
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/> 
     <application
          android:name="com.timeline.app.AppContext"
         android:allowBackup="true"

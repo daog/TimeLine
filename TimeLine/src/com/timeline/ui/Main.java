@@ -30,6 +30,7 @@ import com.timeline.bean.User;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.JsonToEntityUtils;
 import com.timeline.common.Numeric2ChineseStr;
+import com.timeline.common.SynCanlender;
 import com.timeline.common.UIHelper;
 import com.timeline.controls.ChangeColorIconWithText;
 
@@ -177,6 +178,10 @@ public class Main extends BaseActivity implements FragmentCallBack{
 		instance = this;	
         BinderService();
         week.performClick();
+
+        SynCanlender.readAccount(Main.this);
+ //       SynCanlender.insertEvent(Main.this);
+      SynCanlender.readEvent(Main.this);
 //        if (currIndex == 1) {
 //        	week.performClick();
 //		}else if (currIndex == 2) {
