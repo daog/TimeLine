@@ -28,6 +28,7 @@ import com.timeline.bean.MeetingInfo;
 import com.timeline.bean.User;
 import com.timeline.common.DateTimeHelper;
 import com.timeline.common.StringUtils;
+import com.timeline.common.SynCanlender;
 import com.timeline.common.UIHelper;
 import com.timeline.main.R;
 import com.timeline.service.AlertService;
@@ -100,6 +101,7 @@ public class AppContext  extends Application{
 	
 	public  List<MeetingInfo> getEventmeetingBuffer() {
 		EventmeetingBuffer = infohelper.loadInfo(this);
+		//SynCanlender.readEvent(this);
 		return EventmeetingBuffer;
 	}
 

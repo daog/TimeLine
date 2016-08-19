@@ -1,7 +1,12 @@
 package com.timeline.common;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
+
+import com.timeline.app.AppContext;
+import com.timeline.bean.MeetingInfo;
 
 import android.R.integer;
 import android.content.ContentValues;
@@ -33,8 +38,34 @@ public class SynCanlender {
             String eventTitle = eventCursor.getString(eventCursor.getColumnIndex("title"));
             String Calid= eventCursor.getString(eventCursor.getColumnIndex(Events.CALENDAR_ID));
             if (Calid.equals(String.valueOf(CalID))) {
-                String startStr = eventCursor.getString(eventCursor.getColumnIndex(Events.DTSTART));
-                String endStr = eventCursor.getString(eventCursor.getColumnIndex(Events.DTEND));
+            	 MeetingInfo info = new MeetingInfo();
+                String mstartStr = eventCursor.getString(eventCursor.getColumnIndex(Events.DTSTART));
+                String mendStr = eventCursor.getString(eventCursor.getColumnIndex(Events.DTEND));
+                Date sdate = new Date(Long.valueOf(mstartStr));
+                Date edate = new Date(Long.valueOf(mendStr));
+                //开始时间
+                SimpleDateFormat tformat=new SimpleDateFormat("HH:mm:ss");
+            	String startSt = DateTimeHelper.DateToString(sdate,"yyyy-MM-dd");
+            	String startStr = String.valueOf(DateTimeHelper.DayStringToDate(startSt).getTime()/1000);
+            	info.setStart_date(startStr);
+            	String time = tformat.format(sdate);
+            	String[] times = time.split(":");
+            	int Itime = Integer.valueOf(times[0])*3600+Integer.valueOf(times[1])*60+Integer.valueOf(times[2]);
+            	info.setStart_time(String.valueOf(Itime));
+                //结束时间
+            	String endSt = DateTimeHelper.DateToString(edate,"yyyy-MM-dd");
+            	String endStr = String.valueOf(DateTimeHelper.DayStringToDate(endSt).getTime()/1000);
+            	info.setEnd_date(endStr);
+            	String etime = tformat.format(edate);
+            	String[] etimes = etime.split(":");
+            	int eItime = Integer.valueOf(etimes[0])*3600+Integer.valueOf(etimes[1])*60+Integer.valueOf(etimes[2]);
+            	info.setEnd_time(String.valueOf(eItime));
+            	
+            	info.setSubject(eventTitle);
+            	info.setAlertbeforetime("1111");
+            	AppContext.EventmeetingBuffer.add(info);
+            	
+                //UIHelper.ToastMessage(context, "NAME: " + eventTitle);
                 //System.out.print(aString);
 			}
         }
