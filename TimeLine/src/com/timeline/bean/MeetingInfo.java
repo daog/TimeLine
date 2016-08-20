@@ -80,6 +80,9 @@ public class MeetingInfo implements Serializable ,Comparable {
         this.end_date = end_date;
         this.repeate = repeate;
         this.alertbeforetime = alertbeforetime;
+        this.Edit_TX1 = Edit_TX1;
+        this.Edit_TX2 = Edit_TX2;
+        this.Edit_TX3 = Edit_TX3;
     }
     
     public String getSponsor() {

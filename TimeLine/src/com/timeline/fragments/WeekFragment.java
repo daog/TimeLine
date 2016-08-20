@@ -390,7 +390,9 @@ public class WeekFragment extends Fragment  {
 							miClone.setAlertbeforetime(mi.getAlertbeforetime());
 							miClone.setSponsor(mi.getSponsor());
 							miClone.setJoin_st(mi.getJoin_st());
-
+							miClone.setEdit_TX1(mi.getEdit_TX1());
+							miClone.setEdit_TX2(mi.getEdit_TX2());
+							
 							miClone.setIncludeDayStr(DateTimeHelper
 									.DateToString(currentdate, "MM月dd日"));
 							dayMeetings.add(miClone);

@@ -327,9 +327,10 @@ public class EventAddAc extends BaseActivity{
 					.DateToString(alertbetime));
 			
 			infohelper.updateInfo(EventAddAc.this, editMeetingInfo);
+			SynCanlender.updateCalendars(EventAddAc.this, editMeetingInfo);
         	UIHelper.ToastMessage(EventAddAc.this, "保存成功！");
     	}
-    	AppContext.getInstance().getEventmeetingBuffer();
+//    	AppContext.getInstance().getEventmeetingBuffer();
     	finish();
     }
     

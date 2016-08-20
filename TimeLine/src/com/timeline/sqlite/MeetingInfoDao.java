@@ -36,9 +36,9 @@ public class MeetingInfoDao extends AbstractDao<MeetingInfo, String> {
         public final static Property End_date = new Property(9, String.class, "end_date", false, "END_DATE");
         public final static Property Repeate = new Property(10, String.class, "repeate", false, "REPEATE");
         public final static Property Alertbeforetime = new Property(11, String.class, "alertbeforetime", false, "ALERTBEFORETIME");
-        public final static Property Edit_TX1 = new Property(12, String.class, "Edit_TX1", false, "EDIT__TX1");
-        public final static Property Edit_TX2 = new Property(13, String.class, "Edit_TX2", false, "EDIT__TX2");
-        public final static Property Edit_TX3 = new Property(14, String.class, "Edit_TX3", false, "EDIT__TX3");
+        public final static Property Edit_TX1 = new Property(12, String.class, "Edit_TX1", false, "EDIT_TX1");
+        public final static Property Edit_TX2 = new Property(13, String.class, "Edit_TX2", false, "EDIT_TX2");
+        public final static Property Edit_TX3 = new Property(14, String.class, "Edit_TX3", false, "EDIT_TX3");
     };
 
 
@@ -66,9 +66,9 @@ public class MeetingInfoDao extends AbstractDao<MeetingInfo, String> {
                 "'END_DATE' TEXT," + // 9: end_date
                 "'REPEATE' TEXT," + // 10: repeate
                 "'ALERTBEFORETIME' TEXT," + // 11: alertbeforetime
-                "'EDIT__TX1' TEXT," + // 12: Edit_TX1
-                "'EDIT__TX2' TEXT," + // 13: Edit_TX2
-                "'EDIT__TX3' TEXT);"); // 14: Edit_TX3
+                "'EDIT_TX1' TEXT," + // 12: Edit_TX1
+                "'EDIT_TX2' TEXT," + // 13: Edit_TX2
+                "'EDIT_TX3' TEXT);"); // 14: Edit_TX3
     }
 
     /** Drops the underlying database table. */

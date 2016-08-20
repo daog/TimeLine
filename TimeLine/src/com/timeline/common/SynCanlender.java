@@ -69,7 +69,18 @@ public class SynCanlender {
             	info.setId(eventCursor.getString(eventCursor.getColumnIndex(Events._ID)));
             	
             	InfoHelper infohelper = new InfoHelper();
-        		infohelper.insertInfo(context, info);
+            	AppContext.getInstance().getEventmeetingBuffer();
+                boolean isIN = true;
+            	for (MeetingInfo mi:AppContext.EventmeetingBuffer) {
+					if (info.getId().equals(mi.getEdit_TX2())) {
+						isIN = false;
+						continue;
+					}
+				}
+            	if (isIN) {
+            		infohelper.insertInfo(context, info);
+				}
+        		
             	//AppContext.EventmeetingBuffer.add(info);
             	
                 //UIHelper.ToastMessage(context, "NAME: " + eventTitle);
@@ -134,14 +145,16 @@ public class SynCanlender {
 		eValues.put(Events.TITLE, info.getSubject());
 		eValues.put(Events.DESCRIPTION, info.getDescribe());
 		eValues.put(Events.CALENDAR_ID, calID);
-		eValues.put(Events.EVENT_LOCATION, "计算机学院");
+		eValues.put(Events.EVENT_LOCATION, info.getAddress());
 		eValues.put(Events.EVENT_TIMEZONE, tz.getID()); 
 		Uri uri = context.getContentResolver().insert(CalendarContract.Events.CONTENT_URI, eValues);
 					
 		//插完日程之后必须再插入以下代码段才能实现提醒功能	
+		int min = getAlertBeforeMinutes(info.getEdit_TX1().toString());
+		
 		String myEventsId = uri.getLastPathSegment(); // 得到当前表的_id
 		rValues.put("event_id", myEventsId);
-		rValues.put("minutes", 10);	//提前10分钟提醒
+		rValues.put("minutes", min);	//提前10分钟提醒
 		rValues.put("method", 1);	//如果需要有提醒,必须要有这一行
 		context.getContentResolver().insert(Uri.parse(calanderRemiderURL),rValues);
 		
@@ -153,14 +166,39 @@ public class SynCanlender {
 	  //删除事件
     public static void deleteCalendars(Context context,MeetingInfo info) {
     	 //用rows保存删除的行数，以备有用
-//    	ContentValues updateValues = new ContentValues();
-//
-//    	Uri deleteUri = null;
-//
-//    	deleteUri  = ContentUris.withAppendedId(Uri.parse(calanderEventURL),Long.valueOf(info.getEdit_TX2()));
-//
-//    	context.getContentResolver().delete(deleteUri,null,null);
-        int rows = context.getContentResolver().delete(Events.CONTENT_URI, Events.TITLE+"=?", new String[]{info.getSubject()});
+    	ContentValues updateValues = new ContentValues();
+
+    	Uri deleteUri = null;
+
+    	deleteUri  = ContentUris.withAppendedId(Uri.parse(calanderEventURL),Long.valueOf(info.getEdit_TX2()));
+
+    	context.getContentResolver().delete(deleteUri,null,null);
+     //   int rows = context.getContentResolver().delete(Events.CONTENT_URI, Events.TITLE+"=?", new String[]{info.getSubject()});
+    }
+    
+	  //更新事件
+    public static void updateCalendars(Context context,MeetingInfo info) {
+    	try {
+			long startMillis = info.getStartDateTime().getTime();
+			long endMillis = info.getEndDateTime().getTime();
+			
+			
+			ContentValues updateValues = new ContentValues();
+			updateValues.put(Events.TITLE,info.getSubject());
+			updateValues.put(Events.DESCRIPTION,info.getDescribe());
+			updateValues.put(Events.EVENT_LOCATION,info.getAddress());
+			updateValues.put(Events.DTSTART,startMillis);
+			updateValues.put(Events.DTEND,endMillis);
+			Uri updateUri = null;
+
+			updateUri  = ContentUris.withAppendedId(Uri.parse(calanderEventURL),Long.valueOf(info.getEdit_TX2()));
+
+			context.getContentResolver().update(updateUri,updateValues,null,null);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
 	  //添加账户
     public static void initCalendars(Context context) {
@@ -188,5 +226,28 @@ public class SynCanlender {
                 .build();
 
         context.getContentResolver().insert(calendarUri, value);
+    }
+    
+    //获取提前提醒的分钟数
+    private static int getAlertBeforeMinutes(String alertTime){
+    	if(alertTime.equals("不提前")){
+    		return 0;
+    	}
+    	else if(alertTime.equals("提前5分钟")){
+    		return 5;
+    	}
+    	else if(alertTime.equals("提前15分钟")){
+    		return 15;
+    	}
+    	else if(alertTime.equals("提前30分钟")){
+    		return 30;
+    	}
+    	else if(alertTime.equals("提前1小时")){
+    		return 60;
+    	}
+    	else if(alertTime.equals("提前1天")){
+    		return 24*60;
+    	}
+    	return 0;
     }
 }
