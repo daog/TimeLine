@@ -31,7 +31,8 @@
             android:id="@+id/id_meetingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="3dp"
+            android:textSize="@dimen/text_size_12"
             android:textColor="@color/black"
             android:text="2016年第68届美国神经学会年会">
         </TextView>
