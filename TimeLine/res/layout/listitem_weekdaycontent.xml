@@ -65,7 +65,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
-                android:src="@drawable/icon_event_pos" />
+                android:src="@drawable/icon_event_pos"
+                android:visibility="gone" />
 	
 	<!-- <LinearLayout 
 	    android:id="@+id/id_content2"

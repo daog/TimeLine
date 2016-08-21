@@ -113,7 +113,7 @@ public class SettingPawAc extends BaseActivity {
 		});
 			backimg = (ImageView)findViewById(R.id.main_head_logo);
 			headText = (TextView)findViewById(R.id.main_head_title);
-			headText.setText("ÉèÖÃÃÜÂë");
+			headText.setText("ÖØÖÃÃÜÂë");
 			backimg.setOnClickListener(new OnClickListener() {
 				
 				@Override

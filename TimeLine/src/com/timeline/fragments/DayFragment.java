@@ -579,9 +579,13 @@ public class DayFragment extends Fragment {
 
 			if (meetingInfo.getJoin_st().equals("1")) {//已报名
 				enrollBtn.setBackground(getResources().getDrawable(R.drawable.icon_meeting_upyes));
+				enrollBtn.setEnabled(false);
+				llenroll.setEnabled(false);
 				enrollTv.setText("已报名");
 				
 			}else if (meetingInfo.getJoin_st().equals("2")) {//待定
+				undeterminedBtn.setEnabled(false);
+				llundetermined.setEnabled(false);
 				undeterminedBtn.setBackground(getResources().getDrawable(R.drawable.icon_meeting_underyes));
 				
 			}else if (meetingInfo.getJoin_st().equals("3")) {//拒绝

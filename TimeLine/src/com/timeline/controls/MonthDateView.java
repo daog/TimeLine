@@ -48,7 +48,7 @@ public class MonthDateView extends View {
 	private TextView tv_month;
 	private int weekRow;
 	private int [][] daysString;
-	private int mCircleRadius = 6;
+	private int mCircleRadius = 10;
 	private DateClick dateClick;
 	private int mCircleColor = R.color.blue;;
 	private int widthMeasure, heightMeasure;
@@ -123,7 +123,7 @@ public class MonthDateView extends View {
 				weekRow = row + 1;
 			}
 
-			setmCircleRadius(mRowSize/20);
+			setmCircleRadius(mRowSize/20+1);
 			
 			String dateStr = mSelYear + "-" + String.format("%02d", mSelMonth + 1) + "-" + String.format("%02d", day +1);
 			drawCircle(row,column,dateStr,canvas);
@@ -203,18 +203,25 @@ public class MonthDateView extends View {
 			}
 			
 			int i = 1;
-			for (MeetingInfo mi : drawDayMeetingInfos) {
-				if (mi.getAlertbeforetime()!=null) {
-					mPaint.setColor(getResources().getColor(R.color.week_red));
-				} else {
-					mPaint.setColor(getResources().getColor(R.color.tasking));
-				}
-				
-				float circleX = (float) (mColumnSize * column +	i * mColumnSize/(drawDayMeetingInfos.size()+1));
-				float circley = (float) (mRowSize * row + mRowSize*0.88);
-				canvas.drawCircle(circleX, circley, mCircleRadius, mPaint);
-				i++;
+			if (drawDayMeetingInfos.size()>0) {
+			mPaint.setColor(getResources().getColor(R.color.gray));
+			
+			float circleX = (float) (mColumnSize * column+3 +	i * mColumnSize/(1+1));
+			float circley = (float) (mRowSize * row + mRowSize*0.88);
+			canvas.drawCircle(circleX, circley, mCircleRadius, mPaint);
 			}
+//			for (MeetingInfo mi : drawDayMeetingInfos) {
+//				if (mi.getAlertbeforetime()!=null) {
+//					mPaint.setColor(getResources().getColor(R.color.week_red));
+//				} else {
+//					mPaint.setColor(getResources().getColor(R.color.tasking));
+//				}
+//				
+//				float circleX = (float) (mColumnSize * column +	i * mColumnSize/(drawDayMeetingInfos.size()+1));
+//				float circley = (float) (mRowSize * row + mRowSize*0.88);
+//				canvas.drawCircle(circleX, circley, mCircleRadius, mPaint);
+//				i++;
+//			}
 		}
 		
 	}

@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="4dp"
-                    android:text="设置密码"
+                    android:text="重置密码"
                     android:textSize="@dimen/text_size_15" />
 
                 <ImageView

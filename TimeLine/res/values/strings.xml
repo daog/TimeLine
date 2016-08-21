@@ -10,10 +10,10 @@
     <string name="home_head_title">MOONS\' LED</string>    
     
 	<!-- 主菜单 -->
-    <string name="main_menu_day">Day</string>
-	<string name="main_menu_week">Week</string>
-	<string name="main_menu_month">Month</string>
-	<string name="main_menu_meeting">Meeting</string>
+    <string name="main_menu_day">日</string>
+	<string name="main_menu_week">周</string>
+	<string name="main_menu_month">月</string>
+	<string name="main_menu_meeting">会议</string>
 
 	    
     <drawable name="btn_normal">#db4043</drawable>
